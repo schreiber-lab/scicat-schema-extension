@@ -1,0 +1,13 @@
+name: addon_api_env
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python <= 3.9
+  - flask
+  - gunicorn
+  - apispec 
+  - flask-apispec 
+  - cerberus
+  - flask-pymongo
+  - flask-cors   #should only be there for dev.

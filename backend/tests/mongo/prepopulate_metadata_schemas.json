@@ -1,0 +1,188 @@
+[
+  {
+    "keys": [
+      {
+        "changes_likely": false,
+        "key_name": "instrument_id",
+        "required": true,
+        "scan_ref": false,
+        "type": "string",
+        "unit": null
+      },
+      {
+        "allowed": [
+          "beamtime",
+          "lab"
+        ],
+        "changes_likely": false,
+        "key_name": "measurement_type",
+        "required": true,
+        "scan_ref": false,
+        "type": "string",
+        "unit": null
+      }
+    ],
+    "fixed_value_entries": false,
+    "schema_name": "measurement",
+    "schema_type": "dataset"
+  },
+  {
+    "keys": [
+      {
+        "changes_likely": false,
+        "key_name": "facility",
+        "required": true,
+        "scan_ref": false,
+        "type": "string",
+        "unit": null
+      },
+      {
+        "changes_likely": false,
+        "key_name": "beamline",
+        "required": true,
+        "scan_ref": false,
+        "type": "string",
+        "unit": null
+      },
+      {
+        "changes_likely": false,
+        "key_name": "date_start",
+        "required": true,
+        "scan_ref": false,
+        "type": "string",
+        "unit": null
+      },
+      {
+        "changes_likely": false,
+        "key_name": "date_end",
+        "required": false,
+        "scan_ref": false,
+        "type": "string",
+        "unit": null
+      },
+      {
+        "changes_likely": false,
+        "key_name": "title",
+        "required": false,
+        "scan_ref": false,
+        "type": "string",
+        "unit": null
+      },
+      {
+        "changes_likely": false,
+        "key_name": "participants",
+        "required": false,
+        "scan_ref": false,
+        "schema": {
+          "type": "string"
+        },
+        "type": "list",
+        "unit": null
+      }
+    ],
+    "fixed_value_entries": false,
+    "schema_name": "beamtime",
+    "schema_type": "dataset"
+  },
+  {
+    "keys": [
+      {
+        "changes_likely": false,
+        "key_name": "logbook_file",
+        "required": false,
+        "scan_ref": false,
+        "type": "string",
+        "unit": null
+      },
+      {
+        "changes_likely": true,
+        "key_name": "logbook_pages",
+        "required": false,
+        "scan_ref": false,
+        "type": "string",
+        "unit": null
+      }
+    ],
+    "fixed_value_entries": false,
+    "schema_name": "logbook",
+    "schema_type": "dataset"
+  },
+  {
+    "keys": [
+      {
+        "changes_likely": false,
+        "key_name": "central_pixel",
+        "required": true,
+        "scan_ref": false,
+        "type": "list",
+        "schema":{
+                  "type":"number"
+               },
+        "unit": null
+      },
+            {
+        "changes_likely": false,
+        "key_name": "sample_detector_distance",
+        "required": true,
+        "scan_ref": false,
+        "type": "number",
+        "unit": "mm"
+      }
+      
+    ],
+    "fixed_value_entries": false,
+    "schema_name": "GIWAXS",
+    "schema_type": "dataset"
+  },
+  {
+    "keys": [
+      {
+        "changes_likely": false,
+        "key_name": "central_pixel",
+        "required": true,
+        "scan_ref": false,
+        "type": "list",
+        "schema":{
+                  "type":"number"
+               },
+        "unit": null
+      },
+            {
+        "changes_likely": false,
+        "key_name": "sample_detector_distance",
+        "required": true,
+        "scan_ref": false,
+        "type": "number",
+        "unit": null
+      }
+      
+    ],
+    "fixed_value_entries": false,
+    "schema_name": "GIWAXS_no_unit",
+    "schema_type": "dataset"
+  },
+  {
+    "keys": [
+        {
+            "key_name": "test key",
+            "type": "number",
+            "unit": "mm",
+            "required": true,
+            "scan_ref": false,
+            "changes_likely": true
+        },
+        {
+            "key_name": "test key56",
+            "type": "string",
+            "required": true,
+            "scan_ref": false,
+            "changes_likely": true,
+            "unit": null
+        }
+    ],
+    "id_key": "test key56",
+    "schema_name": "test schema200",
+    "fixed_value_entries": true,
+    "schema_type": "dataset"
+  }
+]
