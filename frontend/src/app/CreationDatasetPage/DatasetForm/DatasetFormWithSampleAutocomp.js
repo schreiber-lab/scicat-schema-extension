@@ -5,10 +5,10 @@ import { WarningBox } from "../../../components/WarningBox";
 import { KeywordsAutocomplete } from "./KeywordsAutocomplete";
 import { TechniquesAutocomplete } from "../../../modules/techniques/AddTechniqueModal/TechniquesAutocomplete/TechniquesAutocomplete";
 import { InstrumentsAutocomplete } from "./InstrumentsAutocomplete";
-// import { SamplesAutocomplete } from "./SamplesAutocomplete";
+import { SamplesAutocomplete } from "./SamplesAutocomplete";
 import { ProposalsAutocomplete } from "./ProposalsAutocomplete";
 
-export const DatasetForm = () => {
+export const DatasetFormWithSampleAutocomp = () => {
   return (
     <Grid container spacing={3}>
       <Grid item sm={2} md={4}>
@@ -97,9 +97,9 @@ export const DatasetForm = () => {
         <ProposalsAutocomplete disabled name="proposalId" />
       </Grid>
 
-      {/* <Grid item sm={2} md={4}>
+      <Grid item sm={2} md={4}>
         <SamplesAutocomplete name="sampleId" />
-      </Grid> */}
+      </Grid>
 
       <Grid item sm={2} md={4}>
         <TextField

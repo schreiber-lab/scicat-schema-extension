@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
@@ -12,10 +12,11 @@ import { useSnackbar } from "notistack";
 import { useForm, FormProvider } from "react-hook-form";
 import { preventDefault } from "../../helpers/preventDefault";
 import { yupResolver } from "../../utils/validation";
+import { useModal } from "../../components";
 import * as datasetsApi from "../../api/datasets";
 import { validateMetadataSchema } from "../../api/metadata-schemas";
 import { addDataset } from "../../redux/datasets/actions";
-import { DatasetForm, validationSchema, defaultValues } from "./DatasetForm";
+import { DatasetFormWithSampleAutocomp, validationSchema, defaultValues } from "./DatasetForm";
 import { SelectDatasetModal } from "../../modules/datasets/SelectDatasetModal";
 
 const useStyles = makeStyles(({ spacing }) => ({
@@ -33,11 +34,13 @@ const useStyles = makeStyles(({ spacing }) => ({
 }));
 
 export const CreationDatasetPage = () => {
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { openModal } = useModal();
+
   const form = useForm({
     defaultValues,
     resolver: yupResolver(validationSchema),
@@ -65,18 +68,27 @@ export const CreationDatasetPage = () => {
     console.log(data.scientificMetadata)
   };
 
+  // const openSelectDatasetModal = () => {
+  //   setOpen(true);
+  // };
+
+  // const closeSelectDatasetModal = () => {
+  //   setOpen(false);
+  // };
+
+  // const handleDatasetSelect = ({ pid, ...dataset }) => {
+  //   closeSelectDatasetModal();
+  //   form.reset(dataset);
+  // };
+
   const openSelectDatasetModal = () => {
-    setOpen(true);
+    openModal(SelectDatasetModal, {
+      onModalResolved: (dataset) => {
+        form.reset(dataset);
+      },
+    });
   };
 
-  const closeSelectDatasetModal = () => {
-    setOpen(false);
-  };
-
-  const handleDatasetSelect = ({ pid, ...dataset }) => {
-    closeSelectDatasetModal();
-    form.reset(dataset);
-  };
 
   return (
     <Container className={classes.root}>
@@ -96,11 +108,11 @@ export const CreationDatasetPage = () => {
             Apply template
           </Button>
 
-          <SelectDatasetModal
+          {/* <SelectDatasetModal
             isOpen={open}
             onClose={closeSelectDatasetModal}
             onDatasetSelect={handleDatasetSelect}
-          />
+          /> */}
         </Grid>
       </Grid>
 
@@ -109,7 +121,7 @@ export const CreationDatasetPage = () => {
         onSubmit={preventDefault(form.handleSubmit(handleSubmit))}
       >
         <FormProvider {...form}>
-          <DatasetForm />
+          <DatasetFormWithSampleAutocomp />
         </FormProvider>
 
         <footer className={classes.footer}>

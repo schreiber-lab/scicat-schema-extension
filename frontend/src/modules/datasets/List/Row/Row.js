@@ -4,6 +4,7 @@ import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 // import TouchAppIcon from '@material-ui/icons/TouchApp';
 import moment from "moment";
 import { env } from "../../../../env";
+import { stopPropagation } from "../../../../helpers/stopPropagation";
 import { useModal } from "../../../../components";
 import { DatasetsContext } from "../../DatasetsProvider";
 import { EditDatasetModal } from "./EditDatasetModal";
@@ -38,16 +39,13 @@ export const Row = ({ dataset, onDatasetSelect, ...props }) => {
   };
 
   return (
-    <TableRow {...props}>
-      {/* <TableRow> */}
-      <TableCell component="th" scope="row" onClick={handleDatasetClick}>
+    <TableRow {...props} onClick={handleDatasetClick}>
+      <TableCell component="th" scope="row">
         <Typography color="primary" variant="subtitle2">
           {dataset.datasetName}
         </Typography>
-        {/* <IconButton onClick={handleDatasetClick}>
-          <TouchAppIcon />
-        </IconButton> */}
       </TableCell>
+
       <TableCell
         align="right"
         style={{ wordWrap: "break-word", maxWidth: 200 }}
@@ -55,21 +53,27 @@ export const Row = ({ dataset, onDatasetSelect, ...props }) => {
       >
         {dataset.sourceFolder}
       </TableCell>
+
       {/* <TableCell align="right">{dataset.size}</TableCell> */}
-      <TableCell align="right" onClick={handleDatasetClick}>
+
+      <TableCell align="right">
         <Typography color="primary" variant="subtitle2">
           {moment(dataset.creationTime).format("L")}
         </Typography>
       </TableCell>
-      <TableCell align="right" onClick={handleDatasetClick}>
+
+      <TableCell align="right">
         {dataset.type}
       </TableCell>
+
       {/* <TableCell align="right">{dataset.pid}</TableCell> */}
-      <TableCell align="right" onClick={handleDatasetClick}>
+
+      <TableCell align="right">
         {dataset.ownerGroup}
       </TableCell>
+
       <TableCell align="right">
-        <IconButton onClick={openEditModal}>
+        <IconButton onClick={stopPropagation(openEditModal)}>
           <EditOutlinedIcon />
         </IconButton>
       </TableCell>

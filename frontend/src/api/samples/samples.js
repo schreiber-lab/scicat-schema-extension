@@ -11,7 +11,7 @@ const transformSampleRequest = (sample) => {
 
 export const getSamples = (config) => {
   return api
-    .get("/Samples", config)
+    .get("/Samples/fullquery", config)
     .then(({ data }) => {
       return data;
     })

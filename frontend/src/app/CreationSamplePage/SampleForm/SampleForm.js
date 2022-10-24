@@ -1,6 +1,7 @@
 import { Grid, Box } from "@material-ui/core";
 import { TextField } from "../../../components/TextField";
 import { Metadata } from "../../../components/Metadata";
+import { WarningBox } from "../../../components/WarningBox";
 
 export const SampleForm = () => {
   return (
@@ -13,6 +14,9 @@ export const SampleForm = () => {
             margin="dense"
             name="sampleId"
             label="Sample Id"
+            InputProps={{
+              endAdornment: <WarningBox />,
+            }}
           />
         </Grid>
 

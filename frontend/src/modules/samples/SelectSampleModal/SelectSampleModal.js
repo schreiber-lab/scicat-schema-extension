@@ -9,17 +9,17 @@ import {
   Toolbar,
 } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
-import { DatasetsProvider } from "../DatasetsProvider";
-import { SearchDatasetBox } from "../../../app/DatasetsPage/Datasets/SearchDatasetBox";
+import { SamplesProvider } from "../SamplesProvider";
+import { SearchSampleBox } from "../../../app/Samples/SearchSampleBox";
 
-export const SelectDatasetModal = ({ DialogProps, handleModalResolve, handleModalReject }) => {
+export const SelectSampleModal = ({ DialogProps, handleModalResolve, handleModalReject }) => {
   return (
     <Dialog maxWidth="lg" {...DialogProps}>
       <AppBar position="static">
         <Toolbar>
           <Grid container alignItems="center">
             <Grid item xs>
-              <Typography variant="h6">Select dataset</Typography>
+              <Typography variant="h6">Select sample</Typography>
             </Grid>
 
             <Grid item>
@@ -32,10 +32,10 @@ export const SelectDatasetModal = ({ DialogProps, handleModalResolve, handleModa
       </AppBar>
 
       <DialogContent>
-        <DatasetsProvider>
-          <SearchDatasetBox />
-          <List onDatasetSelect={handleModalResolve} />
-        </DatasetsProvider>
+        <SamplesProvider>
+          <SearchSampleBox />
+          <List onSampleSelect={handleModalResolve} />
+        </SamplesProvider>
       </DialogContent>
     </Dialog>
   );

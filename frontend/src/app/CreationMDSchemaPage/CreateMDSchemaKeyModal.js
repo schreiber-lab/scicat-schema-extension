@@ -21,8 +21,6 @@ const defaultValues = {
 };
 
 export const CreateMDSchemaKeyModal = ({ DialogProps, handleModalResolve, handleModalReject }) => {
-  //   const { control } = useFormContext()
-
   const form = useForm({
     defaultValues,
     resolver: yupResolver(validationSchema),

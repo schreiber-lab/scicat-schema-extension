@@ -24,7 +24,8 @@ export const TextField = forwardRef(({
   const value = formContext?.watch(name) || "";
 
   const handleChange = (event) => {
-    onChange(event);
+    console.log(name, formRegister)
+    onChange?.(event);
     formRegister?.onChange(event);
   };
 

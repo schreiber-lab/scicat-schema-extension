@@ -25,7 +25,7 @@ const transformDatasetResponse = (dataset) => {
   };
 };
 
-const injectDatasetPid = (dataset) => {
+const injectDatasetPid = ({ pid, ...dataset }) => {
   if (!dataset.proposalId || !dataset.sampleId) {
     return dataset;
   }
@@ -33,8 +33,7 @@ const injectDatasetPid = (dataset) => {
   return {
     ...dataset,
 
-    pid:
-      dataset.proposalId + "/" + dataset.sampleId + "/" + dataset.datasetName,
+    pid: dataset.proposalId + "/" + dataset.sampleId + "/" + dataset.datasetName,
   };
 };
 

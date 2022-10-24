@@ -14,6 +14,7 @@ import { preventDefault } from "../../helpers/preventDefault";
 import { yupResolver } from "../../utils/validation";
 import * as datasetsApi from "../../api/datasets";
 // import { validateMetadataSchema } from "../../api/metadata-schemas";
+import { useModal } from "../../components";
 import { addDataset } from "../../redux/datasets/actions";
 import { DatasetForm, validationSchema, defaultValues } from "./DatasetForm";
 import { SelectDatasetModal } from "../../modules/datasets/SelectDatasetModal";
@@ -34,8 +35,8 @@ const useStyles = makeStyles(({ spacing }) => ({
 }));
 
 export const CreationDatasetAndSamplePage = () => {
-  const [open, setOpen] = useState(false);
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  // const [openDataset, setOpenDataset] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -45,6 +46,7 @@ export const CreationDatasetAndSamplePage = () => {
   });
   const datasetFormRef = useRef();
   const sampleFormRef = useRef();
+  const { openModal } = useModal();
 
   const submitForms = () => {
     datasetsApi.validateDataset(form.getValues()).then(({ valid }) => {
@@ -89,18 +91,25 @@ export const CreationDatasetAndSamplePage = () => {
     );
   };
 
+  // const openSelectDatasetModal = () => {
+  //   setOpenDataset(true);
+  // };
+
+  // const closeSelectDatasetModal = () => {
+  //   setOpenDataset(false);
+  // };
+
+  // const handleDatasetSelect = ({ pid, ...dataset }) => {
+  //   closeSelectDatasetModal();
+  //   form.reset(dataset);
+  // };
+
   const openSelectDatasetModal = () => {
-    setOpen(true);
-  };
-
-  const closeSelectDatasetModal = () => {
-    setOpen(false);
-  };
-
-  const handleDatasetSelect = ({ pid, ...dataset }) => {
-    console.log(1);
-    closeSelectDatasetModal();
-    form.reset(dataset);
+    openModal(SelectDatasetModal, {
+      onModalResolved: (dataset) => {
+        form.reset(dataset);
+      },
+    });
   };
 
   return (
@@ -121,11 +130,11 @@ export const CreationDatasetAndSamplePage = () => {
             Apply template
           </Button>
 
-          <SelectDatasetModal
-            isOpen={open}
-            onClose={closeSelectDatasetModal}
+          {/* <SelectDatasetModal
+            // isOpen={openDataset}
+            // onClose={closeSelectDatasetModal}
             onDatasetSelect={handleDatasetSelect}
-          />
+          /> */}
         </Grid>
       </Grid>
 

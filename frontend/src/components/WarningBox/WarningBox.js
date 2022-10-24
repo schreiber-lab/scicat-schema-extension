@@ -4,7 +4,7 @@ import ReportIcon from "@material-ui/icons/Report";
 export const WarningBox = () =>  {
  return (
      <>
-    <Tooltip arrow title="You should probably change this field">
+    <Tooltip arrow title=" If you used a template, you should change this field.">
     <Box color="warning.main">
       <ReportIcon color="inherit" />
     </Box>
