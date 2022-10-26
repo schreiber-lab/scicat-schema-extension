@@ -9,7 +9,7 @@ def test_hello(client):
 
 ## simple test to see that mock of mongodb is working
 def test_simple_mongo(mongodb):
-    assert "prepopulate_metadata_schemas" in mongodb.list_collection_names()
+    assert "prepopulated_metadata_schemas" in mongodb.list_collection_names()
 
 
 ## test combination of flask and mongo
@@ -22,7 +22,7 @@ def test_db_collection_creation(client, mongodb):
     """
     check if the additional collections in db are created on before first request if missing
     """
-    assert "prepopulate_metadata_schemas" in mongodb.list_collection_names()
+    assert "prepopulated_metadata_schemas" in mongodb.list_collection_names()
     assert len(mongodb.list_collection_names()) == 2
 
     response = client.get("/addons/metadata_schemas")

@@ -58,7 +58,7 @@ def use_prepop_db(mongodb):
     """
     use prepopulated db for tests instead of creating all collections from fresh
     """
-    mongodb.rename_collection("prepopulate_metadata_schemas", "metadata_schemas")
+    mongodb.rename_collection("prepopulated_metadata_schemas", "metadata_schemas")
     mongodb.rename_collection(
         "prepopulated_fixed_values_test schema200", "fixed_values_test schema200"
     )
