@@ -12,7 +12,10 @@ BASE_DATA = {
             "title": "a nice proposal",
             "participants": ["Max Mustermann", "John Doe"],
         },
-        "logbook": {"logbook_file": "/path/to/logbook.pdf", "logbook_pages": "17-19",},
+        "logbook": {
+            "logbook_file": "/path/to/logbook.pdf",
+            "logbook_pages": "17-19",
+        },
     },
 }
 
@@ -27,7 +30,10 @@ BASE_SAMPLE_DATA = {
             "title": "a nice proposal",
             "participants": ["Max Mustermann", "John Doe"],
         },
-        "logbook": {"logbook_file": "/path/to/logbook.pdf", "logbook_pages": "17-19",},
+        "logbook": {
+            "logbook_file": "/path/to/logbook.pdf",
+            "logbook_pages": "17-19",
+        },
     },
 }
 
@@ -38,7 +44,7 @@ def _post_request(client, endpoint, data):
     return client.post(endpoint, data=json.dumps(data), headers=headers)
 
 
-def test_post_addons_validate(client):
+def test_post_addons_validate(client, use_prepop_db):
     """
     check that schema can be added to the db and that invalid schema is rejected
     """
@@ -46,12 +52,10 @@ def test_post_addons_validate(client):
 
     data["metadata"].update(
         {
-            "XRR": {"counter_name": "roi1", "scans": [17, 18, 19]},
-            "GIWAXS": {"sample_detector_distance": 17, "central_pixel": [123, 345]},
-            "insitu_perovskite": {
-                "spinning_scan": 12,
-                "annealing_scan": 13,
-                "incidence_angle_scan": 14,
+            "measurement": {"instrument_id": "i1", "measurement_type": "beamtime"},
+            "GIWAXS_no_unit": {
+                "sample_detector_distance": 17,
+                "central_pixel": [123, 345],
             },
         }
     )

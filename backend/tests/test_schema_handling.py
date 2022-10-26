@@ -1,7 +1,7 @@
 import json
 
 
-def test_get_addons_metadata_schemas(client):
+def test_get_addons_metadata_schemas(client, use_prepop_db):
     # check that dataset is default object_type
     response = client.get("/addons/metadata_schemas")
     assert b'"schema_type":"dataset"' in response.data
@@ -17,7 +17,7 @@ def test_get_addons_metadata_schemas(client):
     assert response.status_code == 422
 
 
-def test_get_addons_metadata_schema(client):
+def test_get_addons_metadata_schema(client, use_prepop_db):
     # check this works for a given object_type
     response = client.get("/addons/get_metadata_schema?schema_name=measurement")
 
@@ -37,7 +37,10 @@ def test_post_addons_metadata_schemas(client, mongodb):
         "schema_type": "dataset",
         "keys": [
             {"key_name": "key1", "changes_likely": False},
-            {"key_name": "key2", "allowed": ["beamtime", "lab"],},
+            {
+                "key_name": "key2",
+                "allowed": ["beamtime", "lab"],
+            },
         ],
     }
 
@@ -66,12 +69,12 @@ def test_post_addons_metadata_schemas(client, mongodb):
     assert response.status_code == 422
 
 
-def test_addons_get_fixed_value_entries(client):
+def test_addons_get_fixed_value_entries(client, use_prepop_db):
     """
     check that data in fixed_value collection is available
     """
-    response = client.get("/addons/get_fixed_value_entries?schema_name=material")
-    assert b"Diindenoperylene" in response.data
+    response = client.get("/addons/get_fixed_value_entries?schema_name=test schema200")
+    assert b"test key" in response.data
     assert response.status_code == 200
 
     response = client.get("/addons/get_fixed_value_entries?schema_name=does_not_exist")
@@ -80,8 +83,32 @@ def test_addons_get_fixed_value_entries(client):
 
 
 def test_add_fixed_value_entries(client):
+
     mimetype = "application/json"
     headers = {"Content-Type": mimetype, "Accept": mimetype}
+    data = {
+        "schema_name": "material",
+        "schema_type": "sample",
+        "fixed_value_entries": True,
+        "multiples_entries": True,
+        "id_key": "material_id",
+        "keys": [
+            {
+                "key_name": "material_id",
+                "type": "string",
+                "required": True,
+            },  # a.k.a. short name
+            {"key_name": "full_name", "type": "string", "required": False},
+            {"key_name": "formula", "type": "string", "required": False},
+            {"key_name": "composition", "type": "dict", "required": False},
+        ],
+    }
+
+    response = client.post(
+        "/addons/metadata_schemas", data=json.dumps(data), headers=headers
+    )
+    assert response.status_code == 200
+
     data = {
         "entries": [
             {

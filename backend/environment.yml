@@ -11,3 +11,10 @@ dependencies:
   - cerberus
   - flask-pymongo
   - flask-cors   #should only be there for dev.
+  
+  #for testing you may want to add
+  # pytest
+  # pytest-mongodb (only on pip)
+  
+  # for code formatting:
+  # black

@@ -45,7 +45,10 @@ class MetadataValidationResponseSchema(Schema):
 
 
 class MdSchemaName(Schema):
-    schema_name = fields.String(required=True, description="unique schema name",)
+    schema_name = fields.String(
+        required=True,
+        description="unique schema name",
+    )
 
 
 class MdSchemaSchema(MdSchemaName):
