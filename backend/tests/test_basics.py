@@ -13,14 +13,14 @@ def test_simple_mongo(mongodb):
 
 
 ## test combination of flask and mongo
-def test_flask_and_mongo(client):
+def test_flask_and_mongo(client, use_prepop_db):
     response = client.get("/addons/metadata_schemas")
     assert b"changes_likely" in response.data
 
 
 def test_db_collection_creation(client, mongodb):
     """
-    check if the additional collections in db are created on before first request if missing
+    check if the additional collection in db are created on before first request if missing
     """
     assert "prepopulated_metadata_schemas" in mongodb.list_collection_names()
     assert len(mongodb.list_collection_names()) == 2
@@ -28,10 +28,6 @@ def test_db_collection_creation(client, mongodb):
     response = client.get("/addons/metadata_schemas")
 
     assert "metadata_schemas" in mongodb.list_collection_names()
-    assert "fixed_values_material" in mongodb.list_collection_names()
-    assert len(mongodb.list_collection_names()) == 4
-
-    assert b"changes_likely" in response.data
 
 
 def test_db_use_prepop_db(client, mongodb, use_prepop_db):

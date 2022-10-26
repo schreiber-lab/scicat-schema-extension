@@ -90,23 +90,23 @@ def init_addon_db():
         print("======= create scicat_addons metadata schemas collection ===========")
 
         # to get started: prepopulate this collection  TODO: this should be done somewhere else
-        from .md_schema.base_sci_meta_schema import (
-            schema_template_json,
-            fixed_value_entries,
-        )
-        from .md_schema import validator
+        # from .md_schema.base_sci_meta_schema import (
+        #    schema_template_json,
+        #    fixed_value_entries,
+        # )
+        # from .md_schema import validator
 
-        for s in schema_template_json:
-            norm = validator.validate_md_schema(s)
-            current_app.db.metadata_schemas.insert_one(norm)
-            if norm["fixed_value_entries"]:
-                create_dyn_collection(
-                    norm["schema_name"], norm.setdefault("id_key", None)
-                )
+        # for s in schema_template_json:
+        #    norm = validator.validate_md_schema(s)
+        #    current_app.db.metadata_schemas.insert_one(norm)
+        #    if norm["fixed_value_entries"]:
+        #        create_dyn_collection(
+        #            norm["schema_name"], norm.setdefault("id_key", None)
+        #        )
 
-        for e in fixed_value_entries:
-            # TODO: add validation
-            # TODO: replace getattr with something 'nice'
-            cp = e.copy()
-            schema_name = cp.pop("schema_name")
-            getattr(current_app.db, "fixed_values_" + schema_name).insert_one(cp)
+        # for e in fixed_value_entries:
+        # TODO: add validation
+        # TODO: replace getattr with something 'nice'
+        #    cp = e.copy()
+        #    schema_name = cp.pop("schema_name")
+        #    getattr(current_app.db, "fixed_values_" + schema_name).insert_one(cp)
