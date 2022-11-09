@@ -14,3 +14,5 @@ RUN npm --dd run-script build
 
 FROM nginx:alpine
 COPY --from=0 /home/node/app/build /usr/share/nginx/html/upload
+# fix serving react router URLs
+RUN   sed -i "s|index  index.html index.htm;|index  index.html index.htm;\n        try_files \$uri \$uri\/ \/upload\/index.html;|g" /etc/nginx/conf.d/default.conf
