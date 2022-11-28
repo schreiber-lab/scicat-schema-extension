@@ -107,7 +107,7 @@ export const fieldsByTypesMap = {
       />
     );
   },
-  boolean: ({ field, onChange, ...props }) => {
+  boolean: ({ name, field, onChange, ...props }) => {
     const handleChange = (value) => {
       onChange(value);
     };
@@ -115,7 +115,7 @@ export const fieldsByTypesMap = {
     return (
       <FormControlLabel
         control={
-          <Checkbox name="fixed_value_entries" onChange={handleChange} />
+          <Checkbox name={name} onChange={handleChange} />
         }
         {...props}
       />
