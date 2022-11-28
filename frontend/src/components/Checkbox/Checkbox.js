@@ -25,7 +25,6 @@ export const Checkbox = ({
             onChange={(event) => {
               onChange(event);
               field.onChange(event);
-        
             }}
            />
         )}
