@@ -21,7 +21,7 @@ const defaultValues = {
   ownerGroup: null,
   // startTime: null,
   type: null,
-  // proposalId: null,
+  proposalId: null,
   group: null,
 };
 

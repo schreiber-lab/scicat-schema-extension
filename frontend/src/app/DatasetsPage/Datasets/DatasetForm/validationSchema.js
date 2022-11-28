@@ -10,6 +10,6 @@ export const validationSchema = Yup.object({
   ownerGroup: Yup.string().nullable().required(),
   // startTime: Yup.number().nullable(),
   type: Yup.string().nullable().required(),
-  // proposalId: Yup.number().nullable(),
+  // proposalId: Yup.string().number().nullable(),
   group: Yup.string().nullable(),
 });

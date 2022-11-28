@@ -1,4 +1,4 @@
-import { Grid, MenuItem, Box } from "@material-ui/core";
+import { Grid, MenuItem } from "@material-ui/core";
 import { DatePicker, TextField } from "../../../components";
 import { Metadata } from "../../../components/Metadata";
 import { WarningBox } from "../../../components/WarningBox";
@@ -94,8 +94,12 @@ export const DatasetForm = () => {
       </Grid>
 
       <Grid item sm={2} md={4}>
-        <ProposalsAutocomplete disabled name="proposalId" />
+        <ProposalsAutocomplete name="proposalId" />
       </Grid>
+
+      {/* <Grid item sm={2} md={4}>
+        <ProposalsAutocomplete disabled name="proposalId" />
+      </Grid> */}
 
       {/* <Grid item sm={2} md={4}>
         <SamplesAutocomplete name="sampleId" />
@@ -120,7 +124,7 @@ export const DatasetForm = () => {
         />
       </Grid>
 
-      <Grid item sm={2} md={4}>
+      {/* <Grid item sm={2} md={4}>
         <TextField
           required
           fullWidth
@@ -128,9 +132,9 @@ export const DatasetForm = () => {
           label="Creation Location"
           placeholder="Enter creation location..."
         />
-      </Grid>
+      </Grid> */}
 
-      <Grid item sm={2} md={4}>
+      {/* <Grid item sm={2} md={4}>
         <TextField
           required
           fullWidth
@@ -138,7 +142,7 @@ export const DatasetForm = () => {
           label="Principal Investigator"
           placeholder="Enter principal investigator..."
         />
-      </Grid>
+      </Grid> */}
 
       <Grid item sm={2} md={4}>
         <TextField

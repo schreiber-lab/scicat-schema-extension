@@ -1,8 +1,10 @@
 import { useFormContext } from "react-hook-form";
-import { MenuItem, InputAdornment } from "@material-ui/core";
+// import { MenuItem, InputAdornment, FormControlLabel } from "@material-ui/core";
+import { MenuItem, InputAdornment  } from "@material-ui/core";
 import { Autocomplete } from "../../Autocomplete";
 import { TextField } from "../../TextField";
 import { NumberMaskField } from "../../NumberMaskField";
+// import { Checkbox } from "../../Checkbox";
 
 export const fieldsByTypesMap = {
   string: ({ name, field, onChange, ...props }) => {
@@ -26,7 +28,7 @@ export const fieldsByTypesMap = {
             </MenuItem>
           )),
         };
-        
+
     const handleChange = ({ target: { value } }) => {
       onChange(value);
     };
@@ -106,4 +108,5 @@ export const fieldsByTypesMap = {
       />
     );
   },
+
 };

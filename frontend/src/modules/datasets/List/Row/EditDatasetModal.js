@@ -5,6 +5,7 @@ import {
   DialogTitle,
   DialogContent,
   Box,
+  Typography,
 } from "@material-ui/core";
 import { useForm, FormProvider } from "react-hook-form";
 import { preventDefault } from "../../../../helpers/preventDefault";
@@ -37,7 +38,7 @@ export const EditDatasetModal = ({
   };
 
   return (
-    <Dialog {...DialogProps}>
+    <Dialog maxWidth="lg" {...DialogProps}>
       <Box
         flexGrow={1}
         display="flex"
@@ -46,7 +47,11 @@ export const EditDatasetModal = ({
         component="form"
         onSubmit={preventDefault(form.handleSubmit(handleSubmit))}
       >
-        <DialogTitle>Are you sure you want to edit this dataset?</DialogTitle>
+        <DialogTitle>
+          <Typography variant="h4">
+            Are you sure you want to edit this dataset?
+          </Typography>
+        </DialogTitle>
 
         <DialogContent>
           <FormProvider {...form}>

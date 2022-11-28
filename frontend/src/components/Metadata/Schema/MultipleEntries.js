@@ -1,10 +1,6 @@
 import { Fragment } from "react";
 import { useFormContext, useFieldArray } from "react-hook-form";
-import {
-  IconButton,
-  Grid,
-  Button,
-} from "@material-ui/core";
+import { IconButton, Grid, Button, Typography } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import AddIcon from "@material-ui/icons/Add";
 import { Entry } from "./Entry";
@@ -15,7 +11,7 @@ export const MultipleEntries = ({ isVisible, schema, baseKey }) => {
     control,
     name: `${baseKey}.${schema.schema_name}`,
   });
-console.log(getValues())
+  console.log(getValues());
   const addEntry = () => {
     append({ isActive: true });
   };
@@ -35,7 +31,11 @@ console.log(getValues())
 
       {fields.map((_, index) => (
         <Fragment key={index}>
-          <Grid item container spacing={2}>
+          <Grid item container spacing={2} alignItems="center">
+            <Grid item>
+              <Typography>{index + 1}.</Typography>
+            </Grid>
+            
             <Grid item xs>
               <Grid container spacing={2}>
                 <Entry
