@@ -4,6 +4,7 @@ import MuiCheckbox from "@material-ui/core/Checkbox";
 // prettier-ignore
 export const Checkbox = ({
   name,
+  onChange = () => {},
 
   ...props
 }) => {
@@ -21,6 +22,11 @@ export const Checkbox = ({
             {...field}
             inputRef={ref}
             checked={!!value}
+            onChange={(event) => {
+              onChange(event);
+              field.onChange(event);
+        
+            }}
            />
         )}
     />

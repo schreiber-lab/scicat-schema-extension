@@ -35,7 +35,7 @@ const useStyles = makeStyles(({ spacing }) => ({
 
 export const CreationDatasetPage = () => {
   // const [open, setOpen] = useState(false);
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
