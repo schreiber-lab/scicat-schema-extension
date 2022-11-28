@@ -1,10 +1,9 @@
 import { useFormContext } from "react-hook-form";
-// import { MenuItem, InputAdornment, FormControlLabel } from "@material-ui/core";
-import { MenuItem, InputAdornment  } from "@material-ui/core";
+import { MenuItem, InputAdornment, FormControlLabel } from "@material-ui/core";
 import { Autocomplete } from "../../Autocomplete";
 import { TextField } from "../../TextField";
 import { NumberMaskField } from "../../NumberMaskField";
-// import { Checkbox } from "../../Checkbox";
+import { Checkbox } from "../../Checkbox";
 
 export const fieldsByTypesMap = {
   string: ({ name, field, onChange, ...props }) => {
@@ -104,6 +103,20 @@ export const fieldsByTypesMap = {
         margin="dense"
         onCreate={(value) => Promise.resolve(isNumber ? +value : value)}
         onChange={handleChange}
+        {...props}
+      />
+    );
+  },
+  boolean: ({ field, onChange, ...props }) => {
+    const handleChange = (value) => {
+      onChange(value);
+    };
+
+    return (
+      <FormControlLabel
+        control={
+          <Checkbox name="fixed_value_entries" onChange={handleChange} />
+        }
         {...props}
       />
     );

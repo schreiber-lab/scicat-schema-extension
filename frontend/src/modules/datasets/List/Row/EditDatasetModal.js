@@ -49,7 +49,7 @@ export const EditDatasetModal = ({
       >
         <DialogTitle>
           <Typography variant="h4">
-            Are you sure you want to edit this dataset?
+            Edit dataset
           </Typography>
         </DialogTitle>
 
