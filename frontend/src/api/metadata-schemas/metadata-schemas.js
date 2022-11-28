@@ -1,5 +1,6 @@
-import { api2 } from "../api";
+import { isNil } from "lodash";
 import { removeEmpty } from "../../helpers/removeEmpty";
+import { api2 } from "../api";
 
 export const transformMetadataSchemaRequest = (metadataSchema = {}) => {
   return Object.entries(metadataSchema).reduce(
@@ -7,10 +8,10 @@ export const transformMetadataSchemaRequest = (metadataSchema = {}) => {
       const isArray = Array.isArray(metadata);
       const filledFields = isArray
         ? metadata.map(({ fields }) => {
-            return removeEmpty(fields, (value) => !value);
+            return removeEmpty(fields, (value) => isNil(value));
           })
         : metadata.fields
-        ? removeEmpty(metadata.fields, (value) => !value)
+        ? removeEmpty(metadata.fields, (value) => isNil(value))
         : {};
       const isValid =
         isArray || (metadata.isActive && Object.keys(filledFields).length);

@@ -3,13 +3,13 @@ import { env } from '../../../env';
 export const defaultValues = {
   datasetName: null,
   sourceFolder: null,
-  owner: "Schreiber_lab",
+  owner: env.REACT_APP_SCICAT_DEFAULT_DS_OWNER,
   contactEmail: null,
   creationTime: null,
-  ownerGroup: env.REACT_APP_STORE_KEY,
+  ownerGroup: env.REACT_APP_SCICAT_DEFAULT_DS_GROUP,
   type: null,
   description: null,
-  group: "Schreiber_lab",
+  group: env.REACT_APP_SCICAT_DEFAULT_DS_OWNER_GROUP,
   // creationLocation: null,
   // principalInvestigator: null,
   // accessGroups: null
