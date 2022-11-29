@@ -31,6 +31,10 @@ export const CreateMDSchemaKeyModal = ({
   });
 
   const handleSubmit = (data) => {
+    if (!data.withPredefinedValues) {
+      delete data.allowed;
+    }
+
     handleModalResolve(data);
   };
 

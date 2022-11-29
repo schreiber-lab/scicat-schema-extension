@@ -1,11 +1,18 @@
 import { useState } from "react";
-import { FormGroup, FormControlLabel, MenuItem, Checkbox as MuiCheckbox } from "@material-ui/core";
+import { useWatch } from "react-hook-form";
+import {
+  FormGroup,
+  FormControlLabel,
+  MenuItem,
+  Checkbox as MuiCheckbox,
+} from "@material-ui/core";
 import { TextField } from "../../../components/TextField";
 import { Checkbox } from "../../../components/Checkbox";
 import { Autocomplete } from "../../../components/Autocomplete";
 
 export const MDSchemaKeyForm = () => {
   const [checkboxes, setCheckboxes] = useState({});
+  const keyType = useWatch({ name: "type" });
 
   const handleCheckboxChange =
     (name) =>
@@ -43,10 +50,10 @@ export const MDSchemaKeyForm = () => {
       <FormGroup>
         <FormControlLabel
           control={
-            <MuiCheckbox 
-              name="withUnit" 
-              checked={checkboxes.withUnit} 
-              onChange={handleCheckboxChange("withUnit")} 
+            <MuiCheckbox
+              name="withUnit"
+              checked={checkboxes.withUnit}
+              onChange={handleCheckboxChange("withUnit")}
             />
           }
           label="Use unit"
@@ -63,16 +70,18 @@ export const MDSchemaKeyForm = () => {
           />
         )}
 
-        <FormControlLabel
-          control={
-            <MuiCheckbox
-              name="withPredefinedValues"
-              checked={checkboxes.withPredefinedValues}
-              onChange={handleCheckboxChange("withPredefinedValues")}
-            />
-          }
-          label="Use predefined values"
-        />
+        {keyType !== "boolean" && (
+          <FormControlLabel
+            control={
+              <MuiCheckbox
+                name="withPredefinedValues"
+                checked={checkboxes.withPredefinedValues}
+                onChange={handleCheckboxChange("withPredefinedValues")}
+              />
+            }
+            label="Use predefined values"
+          />
+        )}
 
         {!!checkboxes.withPredefinedValues && (
           <Autocomplete

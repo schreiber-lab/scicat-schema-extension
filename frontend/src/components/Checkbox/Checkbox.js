@@ -14,20 +14,20 @@ export const Checkbox = ({
   
   return (
     <Controller
-        name={name}
-        control={formContext?.control}
-        defaultValue={false}
-        render={({ field: { value, ref, ...field } }) => (
-          <MuiCheckbox
-            {...field}
-            inputRef={ref}
-            checked={!!value}
-            onChange={(event) => {
-              onChange(event);
-              field.onChange(event);
-            }}
-           />
-        )}
+      name={name}
+      control={formContext?.control}
+      defaultValue={false}
+      render={({ field: { value, ref, ...field } }) => (
+        <MuiCheckbox
+          {...field}
+          inputRef={ref}
+          checked={!!value}
+          onChange={(event) => {
+            onChange(event);
+            field.onChange(event);
+          }}
+        />
+      )}
     />
   );
 };

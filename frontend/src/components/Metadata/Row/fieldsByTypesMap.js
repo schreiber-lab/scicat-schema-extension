@@ -115,7 +115,7 @@ export const fieldsByTypesMap = {
     return (
       <FormControlLabel
         control={
-          <Checkbox name={name} onChange={handleChange} />
+          <Checkbox name={name} onChange={handleChange}/>
         }
         {...props}
       />
