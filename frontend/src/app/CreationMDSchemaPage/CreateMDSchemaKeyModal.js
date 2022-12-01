@@ -20,13 +20,21 @@ const defaultValues = {
   changes_likely: false,
 };
 
-export const CreateMDSchemaKeyModal = ({ DialogProps, handleModalResolve, handleModalReject }) => {
+export const CreateMDSchemaKeyModal = ({
+  DialogProps,
+  handleModalResolve,
+  handleModalReject,
+}) => {
   const form = useForm({
     defaultValues,
     resolver: yupResolver(validationSchema),
   });
 
   const handleSubmit = (data) => {
+    if (!data.withPredefinedValues) {
+      delete data.allowed;
+    }
+
     handleModalResolve(data);
   };
 
@@ -37,6 +45,7 @@ export const CreateMDSchemaKeyModal = ({ DialogProps, handleModalResolve, handle
         onSubmit={preventDefault(form.handleSubmit(handleSubmit))}
       >
         <DialogTitle>Add new key</DialogTitle>
+
         <DialogContent>
           <FormProvider {...form}>
             <MDSchemaKeyForm />
@@ -44,7 +53,11 @@ export const CreateMDSchemaKeyModal = ({ DialogProps, handleModalResolve, handle
         </DialogContent>
 
         <DialogActions>
-          <Button variant="outlined" color="primary" onClick={handleModalReject}>
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={handleModalReject}
+          >
             Cancel
           </Button>
 
