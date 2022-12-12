@@ -7,6 +7,7 @@ import { yupResolver } from "../../utils/validation";
 import * as proposalsApi from "../../api/proposals";
 import { addProposal } from "../../redux/proposals/actions";
 import { ProposalForm, validationSchema } from "./ProposalForm";
+import { env } from '../../env';
 
 const defaultValues = {
   proposalId: null,
@@ -17,7 +18,7 @@ const defaultValues = {
   lastname: null,
   title: "",
   abstract: null,
-  ownerGroup: "Schreiber_lab",
+  ownerGroup: env.REACT_APP_SCICAT_DEFAULT_DS_OWNER_GROUP,
   accessGroups: []
 };
 
