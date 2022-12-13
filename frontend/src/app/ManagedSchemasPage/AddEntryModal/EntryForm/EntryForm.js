@@ -19,6 +19,8 @@ export const EntryForm = ({ schemaName }) => {
   return !metadataSchema ? (
     <LinearProgress />
   ) : (
-    metadataSchema.keys.map((field) => <Field key={field.key_name} field={field}/>)
+    metadataSchema.keys.map((field) => (
+      <Field key={field.key_name} field={field} />
+    ))
   );
 };

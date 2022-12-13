@@ -1,1 +1,1 @@
-export * from './fullfacets';
+export * from "./fullfacets";

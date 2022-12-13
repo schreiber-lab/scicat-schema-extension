@@ -1,1 +1,1 @@
-export * from './MDSchemasPage'
+export * from "./MDSchemasPage";

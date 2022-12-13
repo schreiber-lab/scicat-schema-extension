@@ -6,7 +6,7 @@ export const reducer = createHookReducer({
     return {
       ...state,
 
-      datasets: [ dataset, ...state.datasets ]
+      datasets: [dataset, ...state.datasets],
     };
   },
 
@@ -14,7 +14,7 @@ export const reducer = createHookReducer({
     return {
       ...state,
 
-      filter: { ...filter, ...newFilter }
+      filter: { ...filter, ...newFilter },
     };
   },
 
@@ -24,17 +24,17 @@ export const reducer = createHookReducer({
 
       datasets: state.datasets.map((dataset) => {
         return dataset.pid === updatedDataset.pid ? updatedDataset : dataset;
-      })
+      }),
     };
   },
-  
+
   [types.UPDATE_PAGINATION]: (state, pagination) => {
     return {
       ...state,
 
-      pagination: { ...state.pagination, ...pagination }
+      pagination: { ...state.pagination, ...pagination },
     };
-  }, 
+  },
 
   [types.LOAD_DATASETS_REQUEST]: (state) => {
     return {

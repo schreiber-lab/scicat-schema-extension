@@ -1,12 +1,19 @@
-import * as proposalsApi from '../../api/proposals';
-import { loadProposalsError, loadProposalsRequest, loadProposalsSuccess } from './actions';
+import * as proposalsApi from "../../api/proposals";
+import {
+  loadProposalsError,
+  loadProposalsRequest,
+  loadProposalsSuccess,
+} from "./actions";
 
 export const getProposals = () => (dispatch) => {
-    dispatch(loadProposalsRequest());
+  dispatch(loadProposalsRequest());
 
-    return proposalsApi.getProposals().then((data) => {
-        dispatch(loadProposalsSuccess(data));
-    }).catch(() => {
-        dispatch(loadProposalsError());
-    });    
+  return proposalsApi
+    .getProposals()
+    .then((data) => {
+      dispatch(loadProposalsSuccess(data));
+    })
+    .catch(() => {
+      dispatch(loadProposalsError());
+    });
 };

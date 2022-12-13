@@ -8,11 +8,11 @@ export const transformMetadataSchemaRequest = (metadataSchema = {}) => {
       const isArray = Array.isArray(metadata);
       const filledFields = isArray
         ? metadata.map(({ fields }) => {
-            return removeEmpty(fields, (value) => isNil(value));
-          })
+          return removeEmpty(fields, (value) => isNil(value));
+        })
         : metadata.fields
-        ? removeEmpty(metadata.fields, (value) => isNil(value))
-        : {};
+          ? removeEmpty(metadata.fields, (value) => isNil(value))
+          : {};
       const isValid =
         isArray || (metadata.isActive && Object.keys(filledFields).length);
 
@@ -26,7 +26,7 @@ export const transformMetadataSchemaRequest = (metadataSchema = {}) => {
 };
 
 export const transformMetadataSchemaResponse = (metadataSchema) => {
-  return Object.entries(metadataSchema).reduce((metadataSchema, [ name, schema ]) => {
+  return Object.entries(metadataSchema).reduce((metadataSchema, [name, schema]) => {
     const transformedSchema = Array.isArray(schema) ? schema.map((schema) => ({
       fields: schema
     })) : {

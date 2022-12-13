@@ -1,8 +1,8 @@
-import { Component } from 'react';
-import { Typography, Box } from '@material-ui/core';
-import ErrorIcon from '@material-ui/icons/Error';
-import { Loader } from '../Loader';
-import { SvgIcon } from '../SvgIcon';
+import { Component } from "react";
+import { Typography, Box } from "@material-ui/core";
+import ErrorIcon from "@material-ui/icons/Error";
+import { Loader } from "../Loader";
+import { SvgIcon } from "../SvgIcon";
 
 export class ErrorBoundary extends Component {
   constructor(props) {
@@ -12,7 +12,7 @@ export class ErrorBoundary extends Component {
 
   static getDerivedStateFromError() {
     return { hasError: true };
-  };
+  }
 
   componentDidCatch(error, errorInfo) {
     // eslint-disable-next-line no-console
@@ -31,8 +31,11 @@ export class ErrorBoundary extends Component {
           p={3}
         >
           <Box pb={1}>
-            <Loader surface inset={false} color="error" render={
-              () => (
+            <Loader
+              surface
+              inset={false}
+              color="error"
+              render={() => (
                 <SvgIcon color="warning" fontSize="large">
                   <ErrorIcon />
                 </SvgIcon>
@@ -45,7 +48,8 @@ export class ErrorBoundary extends Component {
           </Typography>
 
           <Typography variant="subtitle1" color="error">
-            We know about the error, and are already actively working on its solution.
+            We know about the error, and are already actively working on its
+            solution.
           </Typography>
         </Box>
       );

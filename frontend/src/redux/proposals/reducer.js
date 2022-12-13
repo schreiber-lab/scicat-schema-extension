@@ -15,7 +15,7 @@ export const reducer = createReduxReducer(initialState, {
       proposals: [proposal, ...state.proposals],
     };
   },
-  [types.LOAD_PROPOSALS_REQUEST]: (state) => { 
+  [types.LOAD_PROPOSALS_REQUEST]: (state) => {
     return {
       ...state,
 

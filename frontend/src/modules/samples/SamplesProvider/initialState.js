@@ -1,5 +1,5 @@
 export const initialState = {
-   isLoaded: false,
-   samples: [],
-   filter: {}
+  isLoaded: false,
+  samples: [],
+  filter: {},
 };

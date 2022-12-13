@@ -1,2 +1,2 @@
-export * from './SamplesProvider';
-export * from './initialState';
+export * from "./SamplesProvider";
+export * from "./initialState";

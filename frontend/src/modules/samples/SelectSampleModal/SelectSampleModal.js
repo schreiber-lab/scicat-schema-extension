@@ -12,7 +12,11 @@ import CloseIcon from "@material-ui/icons/Close";
 import { SamplesProvider } from "../SamplesProvider";
 import { SearchSampleBox } from "../../../app/Samples/SearchSampleBox";
 
-export const SelectSampleModal = ({ DialogProps, handleModalResolve, handleModalReject }) => {
+export const SelectSampleModal = ({
+  DialogProps,
+  handleModalResolve,
+  handleModalReject,
+}) => {
   return (
     <Dialog maxWidth="lg" {...DialogProps}>
       <AppBar position="static">
@@ -23,7 +27,11 @@ export const SelectSampleModal = ({ DialogProps, handleModalResolve, handleModal
             </Grid>
 
             <Grid item>
-              <IconButton edge="end" color="inherit" onClick={handleModalReject}>
+              <IconButton
+                edge="end"
+                color="inherit"
+                onClick={handleModalReject}
+              >
                 <CloseIcon />
               </IconButton>
             </Grid>

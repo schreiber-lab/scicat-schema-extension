@@ -8,11 +8,11 @@ import {
   InputAdornment,
   Chip,
   IconButton,
-  TextField
+  TextField,
 } from "@material-ui/core";
 import {
   Autocomplete as MuiAutocomplete,
-  createFilterOptions
+  createFilterOptions,
 } from "@material-ui/lab";
 import CloseIcon from "@material-ui/icons/Close";
 import AddIcon from "@material-ui/icons/Add";

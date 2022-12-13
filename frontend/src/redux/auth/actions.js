@@ -15,5 +15,5 @@ export const logOut = () => (dispatch) => {
 
   dispatch({
     type: types.LOGOUT,
-  })
+  });
 };

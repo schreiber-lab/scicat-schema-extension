@@ -25,10 +25,7 @@ export const AddTechniqueModal = ({
   handleModalReject,
 }) => {
   const form = useForm({
-    defaultValues: merge(
-      defaultValues,
-      initialValues,
-    ),
+    defaultValues: merge(defaultValues, initialValues),
     resolver: yupResolver(validationSchema),
   });
 

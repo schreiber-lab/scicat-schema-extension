@@ -1,5 +1,5 @@
 export const styles = ({ palette }) => ({
-  root: ({ color, background }) =>
+  root: ({ color }) =>
     palette[color]
       ? {
           color: palette[color].main,

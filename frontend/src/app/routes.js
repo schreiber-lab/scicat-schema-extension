@@ -45,7 +45,11 @@ export const routes = ({ isAuthenticated }) => [
   },
   {
     path: "/dataset-and-sample-creation",
-    element: isAuthenticated ? <CreationDatasetAndSamplePage /> : <ForbiddenPage />,
+    element: isAuthenticated ? (
+      <CreationDatasetAndSamplePage />
+    ) : (
+      <ForbiddenPage />
+    ),
   },
   {
     path: "/sample-creation",

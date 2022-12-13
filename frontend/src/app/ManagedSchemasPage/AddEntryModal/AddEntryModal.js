@@ -9,12 +9,11 @@ import {
 import { useForm, FormProvider } from "react-hook-form";
 import { preventDefault } from "../../../helpers/preventDefault";
 import * as fixedValueEntriesApi from "../../../api/fixed-value-entries";
-import {  addFixedValueEntry } from "../../../redux/fixed-value-entries/actions";
+import { addFixedValueEntry } from "../../../redux/fixed-value-entries/actions";
 import { EntryForm } from "./EntryForm";
 
 export const AddEntryModal = ({ isOpen, schemaName, onClose, onResolve }) => {
   const dispatch = useDispatch();
-
 
   const form = useForm({
     defaultValues: {
@@ -27,13 +26,11 @@ export const AddEntryModal = ({ isOpen, schemaName, onClose, onResolve }) => {
   });
 
   const handleSubmit = (data) => {
-    fixedValueEntriesApi
-    .createFixedValueEntry(data)
-    .then((data) => {
+    fixedValueEntriesApi.createFixedValueEntry(data).then((data) => {
       dispatch(addFixedValueEntry(data));
       onClose();
-      console.log(data)
-    })
+      console.log(data);
+    });
   };
   // const handleSubmit = (data) => {
   //   onResolve(data);

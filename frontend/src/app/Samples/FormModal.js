@@ -43,7 +43,7 @@ export const FormModal = ({ isOpen, onClose }) => {
 
         <DialogContent>
           <FormProvider {...form}>
-            <SampleForm/>
+            <SampleForm />
           </FormProvider>
         </DialogContent>
 

@@ -35,7 +35,7 @@ export const MultipleEntries = ({ isVisible, schema, baseKey }) => {
             <Grid item>
               <Typography>{index + 1}.</Typography>
             </Grid>
-            
+
             <Grid item xs>
               <Grid container spacing={2}>
                 <Entry

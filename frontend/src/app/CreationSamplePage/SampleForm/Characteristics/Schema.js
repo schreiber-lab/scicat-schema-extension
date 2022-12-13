@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Controller, useFormContext, useWatch } from "react-hook-form"
+import { Controller, useFormContext, useWatch } from "react-hook-form";
 import {
   FormGroup,
   FormControlLabel,
@@ -12,12 +12,12 @@ import { Row } from "./Row";
 
 export const Schema = ({ schema }) => {
   const [openCollapse, setOpenCollapse] = useState(false);
-  const { control } = useFormContext()
-  const field = useWatch({ name: "scientificMetadata.measurement" })
+  const { control } = useFormContext();
+  const field = useWatch({ name: "scientificMetadata.measurement" });
   const toggleCollapse = () => {
     setOpenCollapse((isOpen) => !isOpen);
   };
-console.log(field)
+  console.log(field);
   return (
     <FormGroup row>
       <IconButton onClick={toggleCollapse}>
@@ -43,7 +43,11 @@ console.log(field)
 
       <Collapse in={openCollapse} timeout="auto">
         {schema.keys.map((field) => (
-          <Row key={field.key_name} field={field} schemaName={schema.schema_name} />
+          <Row
+            key={field.key_name}
+            field={field}
+            schemaName={schema.schema_name}
+          />
         ))}
       </Collapse>
     </FormGroup>

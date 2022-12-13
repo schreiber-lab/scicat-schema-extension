@@ -15,8 +15,8 @@ import { deleteSample } from "../../../../redux/samples/actions";
 import { EditModal } from "./EditModal";
 
 export const Row = ({ sample }) => {
-  const [ open, setOpen ] = useState(false);
-  const [ isOpenEdit, setIsOpenEdit ] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [isOpenEdit, setIsOpenEdit] = useState(false);
   const dispatch = useDispatch();
 
   const openDeleteModal = () => {
@@ -70,7 +70,11 @@ export const Row = ({ sample }) => {
               <EditOutlinedIcon />
             </IconButton>
 
-            <EditModal isOpen={isOpenEdit} sample={sample} onClose={handleEditModalClose} />
+            <EditModal
+              isOpen={isOpenEdit}
+              sample={sample}
+              onClose={handleEditModalClose}
+            />
           </Grid>
 
           <Grid item>

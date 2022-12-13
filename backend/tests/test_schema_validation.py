@@ -1,6 +1,4 @@
 import json
-from copy import deepcopy
-
 
 def _post_request(client, endpoint, data):
     mimetype = "application/json"

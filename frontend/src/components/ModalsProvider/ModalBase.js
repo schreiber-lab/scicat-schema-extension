@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { ErrorBoundary } from '../ErrorBoundary';
+import { useEffect, useState } from "react";
+import { ErrorBoundary } from "../ErrorBoundary";
 
 export const ModalBase = ({
   modalID,
@@ -9,10 +9,10 @@ export const ModalBase = ({
   DialogProps,
   onModalResolved = () => {},
   onModalRejected = () => {},
-  onModalExited
+  onModalExited,
 }) => {
-  const [ isModalOpen, setIsModalOpen ] = useState(open);
-  const [ isModalEntered, setIsModalEntered ] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(open);
+  const [isModalEntered, setIsModalEntered] = useState(false);
 
   const handleModalEntered = () => {
     setIsModalEntered(true);
@@ -34,7 +34,7 @@ export const ModalBase = ({
 
   useEffect(() => {
     setIsModalOpen(open);
-  }, [ open ]);
+  }, [open]);
 
   return (
     <ErrorBoundary>
@@ -49,7 +49,7 @@ export const ModalBase = ({
           open: isModalOpen,
           onClose: handleModalReject,
           onExited: handleModalExited,
-          onEntered: handleModalEntered
+          onEntered: handleModalEntered,
         }}
         handleModalResolve={handleModalResolve}
         handleModalReject={handleModalReject}

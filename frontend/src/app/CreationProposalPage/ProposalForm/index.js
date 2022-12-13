@@ -1,3 +1,2 @@
-export * from './ProposalForm';
-export * from './validationSchema';
-
+export * from "./ProposalForm";
+export * from "./validationSchema";

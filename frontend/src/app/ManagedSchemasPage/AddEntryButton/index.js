@@ -1,1 +1,1 @@
-export * from './AddEntryButton';
+export * from "./AddEntryButton";

@@ -1,1 +1,1 @@
-export * from './DatasetViewModal';
+export * from "./DatasetViewModal";

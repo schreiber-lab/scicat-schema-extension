@@ -101,7 +101,6 @@ export const DatasetFormWithSampleAutocomp = () => {
         <ProposalsAutocomplete disabled name="proposalId" />
       </Grid> */}
 
-
       <Grid item sm={2} md={4}>
         <SamplesAutocomplete name="sampleId" />
       </Grid>

@@ -5,7 +5,13 @@ export const Entry = ({ schema, baseKey, index, isVisible }) => {
   return schema.keys?.map((field) => {
     return (
       <Grid item key={field.key_name} xs={4}>
-        <Row isVisible={isVisible} field={field} schema={schema} baseKey={baseKey} index={index} />
+        <Row
+          isVisible={isVisible}
+          field={field}
+          schema={schema}
+          baseKey={baseKey}
+          index={index}
+        />
       </Grid>
     );
   });

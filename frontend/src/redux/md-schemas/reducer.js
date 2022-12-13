@@ -8,8 +8,7 @@ const initialState = {
 };
 
 export const reducer = createReduxReducer(initialState, {
-
-  [types.LOAD_MD_SCHEMAS_REQUEST]: (state) => { 
+  [types.LOAD_MD_SCHEMAS_REQUEST]: (state) => {
     return {
       ...state,
 
@@ -36,4 +35,3 @@ export const reducer = createReduxReducer(initialState, {
     };
   },
 });
-

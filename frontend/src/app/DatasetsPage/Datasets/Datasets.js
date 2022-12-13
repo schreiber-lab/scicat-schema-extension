@@ -6,7 +6,7 @@ import { CreateDatasetButton } from "./CreateDatasetButton";
 const useStyles = makeStyles(({ spacing }) => ({
   root: {
     marginTop: spacing(2.5),
-  }
+  },
 }));
 
 export const Datasets = () => {
@@ -16,7 +16,7 @@ export const Datasets = () => {
     <Container className={classes.root}>
       <DatasetsProvider>
         {/* <SearchDatasetBox /> */}
-        <List/>
+        <List />
         <CreateDatasetButton />
       </DatasetsProvider>
     </Container>

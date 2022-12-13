@@ -1,12 +1,19 @@
-import * as datasetsApi from '../../api/datasets';
-import { loadDatasetsError, loadDatasetsRequest, loadDatasetsSuccess } from './actions';
+import * as datasetsApi from "../../api/datasets";
+import {
+  loadDatasetsError,
+  loadDatasetsRequest,
+  loadDatasetsSuccess,
+} from "./actions";
 
 export const getDatasets = () => (dispatch) => {
-    dispatch(loadDatasetsRequest());
+  dispatch(loadDatasetsRequest());
 
-    return datasetsApi.getDatasets().then((data) => {
-        dispatch(loadDatasetsSuccess(data));
-    }).catch(() => {
-        dispatch(loadDatasetsError());
-    });    
+  return datasetsApi
+    .getDatasets()
+    .then((data) => {
+      dispatch(loadDatasetsSuccess(data));
+    })
+    .catch(() => {
+      dispatch(loadDatasetsError());
+    });
 };

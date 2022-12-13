@@ -4,7 +4,7 @@ import { List } from "./List";
 export const ManagedSchemasPage = () => {
   return (
     <>
-      <Container >
+      <Container>
         <List />
       </Container>
     </>

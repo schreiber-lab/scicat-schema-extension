@@ -1,8 +1,8 @@
+from inspect import getmembers, isfunction
+
 from flask import Flask, current_app
 from flask_apispec import FlaskApiSpec
 from flask_cors import CORS
-
-from inspect import getmembers, isfunction
 
 
 def create_app(config_file=None, config_mapping=None):

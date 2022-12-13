@@ -31,8 +31,10 @@ export const reducer = createReduxReducer(initialState, {
       ...state,
 
       samples: state.samples.map((sample) => {
-        return sample.sampleId === updatedSample.sampleId ? updatedSample : sample;
-      })
+        return sample.sampleId === updatedSample.sampleId
+          ? updatedSample
+          : sample;
+      }),
     };
   },
 

@@ -9,7 +9,7 @@ import {
   TableRow,
   Paper,
   LinearProgress,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import { Row } from "./Row";
 import { DatasetsContext } from "../DatasetsProvider";
@@ -42,7 +42,9 @@ export const List = ({ onDatasetSelect }) => {
   return !isLoaded ? (
     <LinearProgress />
   ) : !pagination.total ? (
-    <Typography align="center" variant="h3">No datasets found</Typography>
+    <Typography align="center" variant="h3">
+      No datasets found
+    </Typography>
   ) : (
     <TableContainer component={Paper}>
       <TablePagination

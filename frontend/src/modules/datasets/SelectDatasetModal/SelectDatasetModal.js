@@ -12,7 +12,11 @@ import CloseIcon from "@material-ui/icons/Close";
 import { DatasetsProvider } from "../DatasetsProvider";
 import { SearchDatasetBox } from "../../../app/DatasetsPage/Datasets/SearchDatasetBox";
 
-export const SelectDatasetModal = ({ DialogProps, handleModalResolve, handleModalReject }) => {
+export const SelectDatasetModal = ({
+  DialogProps,
+  handleModalResolve,
+  handleModalReject,
+}) => {
   return (
     <Dialog maxWidth="lg" {...DialogProps}>
       <AppBar position="static">
@@ -23,7 +27,11 @@ export const SelectDatasetModal = ({ DialogProps, handleModalResolve, handleModa
             </Grid>
 
             <Grid item>
-              <IconButton edge="end" color="inherit" onClick={handleModalReject}>
+              <IconButton
+                edge="end"
+                color="inherit"
+                onClick={handleModalReject}
+              >
                 <CloseIcon />
               </IconButton>
             </Grid>

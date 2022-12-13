@@ -1,19 +1,15 @@
 import { useForm, FormProvider } from "react-hook-form";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import { preventDefault } from "../../helpers/preventDefault";
 import { yupResolver } from "../../utils/validation";
 import { useModal } from "../../components";
 import { Button, Typography, Grid, makeStyles } from "@material-ui/core";
 import { SelectSampleModal } from "../../modules/samples/SelectSampleModal";
 import * as samplesApi from "../../api/samples";
-import {
-  SampleForm,
-  validationSchema,
-  defaultValues,
-} from "./SampleForm";
+import { SampleForm, validationSchema, defaultValues } from "./SampleForm";
 
-const useStyles = makeStyles(({spacing}) => ({
-  root:{
+const useStyles = makeStyles(({ spacing }) => ({
+  root: {
     padding: spacing(2),
   },
   title: {
@@ -21,10 +17,9 @@ const useStyles = makeStyles(({spacing}) => ({
   },
   footer: {
     display: "flex",
-    justifyContent: "flex-end"
-  }
+    justifyContent: "flex-end",
+  },
 }));
-
 
 export const CreationSamplePage = ({ formRef, onCreate }) => {
   const classes = useStyles();
@@ -37,15 +32,13 @@ export const CreationSamplePage = ({ formRef, onCreate }) => {
 
   const handleSubmit = (data) => {
     samplesApi.createSample(data).then(onCreate);
-    navigate("/samples")
+    navigate("/samples");
   };
-  
 
   const openSelectSampleModal = () => {
     openModal(SelectSampleModal, {
       onModalResolved: (sample) => {
         form.reset(sample);
-        
       },
     });
   };
@@ -76,9 +69,9 @@ export const CreationSamplePage = ({ formRef, onCreate }) => {
             <SampleForm />
           </FormProvider>
           <footer className={classes.footer}>
-          <Button type="submit" color="primary" variant="contained">
-            Add sample
-          </Button>
+            <Button type="submit" color="primary" variant="contained">
+              Add sample
+            </Button>
           </footer>
         </form>
       </Grid>

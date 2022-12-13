@@ -5,7 +5,7 @@ import { Schema } from "./Schema";
 
 export const Metadata = () => {
   const [datasetMetadataSchemas, setDatasetMetadataSchemas] = useState(null);
- 
+
   useEffect(() => {
     getMetadataSchemas().then((datasetMetadataSchemas) => {
       setDatasetMetadataSchemas(datasetMetadataSchemas);

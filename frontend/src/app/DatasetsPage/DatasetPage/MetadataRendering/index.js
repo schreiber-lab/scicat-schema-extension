@@ -1,1 +1,1 @@
-export * from './MetadataRendering';
+export * from "./MetadataRendering";

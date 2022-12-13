@@ -48,9 +48,7 @@ export const EditDatasetModal = ({
         onSubmit={preventDefault(form.handleSubmit(handleSubmit))}
       >
         <DialogTitle>
-          <Typography variant="h4">
-            Edit dataset
-          </Typography>
+          <Typography variant="h4">Edit dataset</Typography>
         </DialogTitle>
 
         <DialogContent>

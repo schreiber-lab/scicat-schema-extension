@@ -62,15 +62,11 @@ export const Row = ({ dataset, onDatasetSelect, ...props }) => {
         </Typography>
       </TableCell>
 
-      <TableCell align="right">
-        {dataset.type}
-      </TableCell>
+      <TableCell align="right">{dataset.type}</TableCell>
 
       {/* <TableCell align="right">{dataset.pid}</TableCell> */}
 
-      <TableCell align="right">
-        {dataset.ownerGroup}
-      </TableCell>
+      <TableCell align="right">{dataset.ownerGroup}</TableCell>
 
       <TableCell align="right">
         <IconButton onClick={stopPropagation(openEditModal)}>

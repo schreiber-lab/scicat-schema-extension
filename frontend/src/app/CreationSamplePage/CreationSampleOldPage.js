@@ -8,9 +8,8 @@ import * as samplesApi from "../../api/samples";
 import { addSample } from "../../redux/samples/actions";
 import { SampleForm, validationSchema, defaultValues } from "./SampleForm";
 
-
-const useStyles = makeStyles(({spacing}) => ({
-  root:{
+const useStyles = makeStyles(({ spacing }) => ({
+  root: {
     paddingTop: spacing(2),
     paddingBottom: spacing(2),
   },
@@ -19,28 +18,25 @@ const useStyles = makeStyles(({spacing}) => ({
   },
   footer: {
     display: "flex",
-    justifyContent: "flex-end"
-
-  }
+    justifyContent: "flex-end",
+  },
 }));
 
 export const CreationSampleOldPage = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const form = useForm({
     defaultValues,
     resolver: yupResolver(validationSchema),
   });
 
   const handleSubmit = (data) => {
-    samplesApi
-      .createSample(data)
-      .then((data) => {
-        dispatch(addSample(data));
-        navigate("/samples")
-      })
+    samplesApi.createSample(data).then((data) => {
+      dispatch(addSample(data));
+      navigate("/samples");
+    });
   };
 
   return (

@@ -10,7 +10,7 @@ import {
   Paper,
   LinearProgress,
   Typography,
-  Container
+  Container,
 } from "@material-ui/core";
 import { Row } from "./Row";
 import { SamplesContext } from "../SamplesProvider";
@@ -27,11 +27,7 @@ const useStyles = makeStyles(({ palette }) => ({
 
 export const List = ({ onSampleSelect }) => {
   const classes = useStyles();
-  const {
-    isLoaded,
-    samples,
-    getSamples
-  } = useContext(SamplesContext);
+  const { isLoaded, samples, getSamples } = useContext(SamplesContext);
 
   useEffect(() => {
     getSamples();
@@ -50,17 +46,34 @@ export const List = ({ onSampleSelect }) => {
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell className={classes.tableHeaderCell}>Sample Id</TableCell>
-                <TableCell align="right" className={classes.tableHeaderCell}>Description</TableCell>
-                <TableCell align="right" className={classes.tableHeaderCell}>Owner</TableCell>
-                <TableCell align="right" className={classes.tableHeaderCell}>Creation Time</TableCell>
-                <TableCell align="right" className={classes.tableHeaderCell}>Owner Group</TableCell>
-                <TableCell align="right" className={classes.tableHeaderCell}></TableCell>
+                <TableCell className={classes.tableHeaderCell}>
+                  Sample Id
+                </TableCell>
+                <TableCell align="right" className={classes.tableHeaderCell}>
+                  Description
+                </TableCell>
+                <TableCell align="right" className={classes.tableHeaderCell}>
+                  Owner
+                </TableCell>
+                <TableCell align="right" className={classes.tableHeaderCell}>
+                  Creation Time
+                </TableCell>
+                <TableCell align="right" className={classes.tableHeaderCell}>
+                  Owner Group
+                </TableCell>
+                <TableCell
+                  align="right"
+                  className={classes.tableHeaderCell}
+                ></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {samples.map((sample) => (
-                <Row key={sample.sampleId} sample={sample} onSampleSelect={onSampleSelect}/>
+                <Row
+                  key={sample.sampleId}
+                  sample={sample}
+                  onSampleSelect={onSampleSelect}
+                />
               ))}
             </TableBody>
           </Table>

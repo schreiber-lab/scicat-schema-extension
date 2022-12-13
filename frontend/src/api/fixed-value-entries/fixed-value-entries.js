@@ -9,7 +9,7 @@ export const getFixedValueEntries = (config) => {
     .catch((data) => {
       throw data;
     });
-};  
+};
 
 export const createFixedValueEntry = (data) => {
   return api2

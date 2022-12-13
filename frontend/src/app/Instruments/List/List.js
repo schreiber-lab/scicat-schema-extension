@@ -10,7 +10,7 @@ import {
   Paper,
   Container,
   LinearProgress,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { getInstruments } from "../../../redux/instruments/operations";

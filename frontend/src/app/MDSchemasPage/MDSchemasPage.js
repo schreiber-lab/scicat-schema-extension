@@ -1,10 +1,9 @@
-import { List } from './List';
+import { List } from "./List";
 
 export const MDSchemasPage = () => {
-    return (
-      <div>
-            <List />
-      </div>
-    );
-  };
-  
+  return (
+    <div>
+      <List />
+    </div>
+  );
+};

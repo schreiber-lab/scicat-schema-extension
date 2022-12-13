@@ -11,7 +11,7 @@ import { preventDefault } from "../../../../helpers/preventDefault";
 import { yupResolver } from "../../../../utils/validation";
 import { editSample } from "../../../../redux/samples/actions";
 import * as samplesApi from "../../../../api/samples";
-import { SampleForm, validationSchema } from '../../SampleForm'
+import { SampleForm, validationSchema } from "../../SampleForm";
 
 export const EditModal = ({ sample, isOpen, onClose }) => {
   const dispatch = useDispatch();
@@ -19,7 +19,6 @@ export const EditModal = ({ sample, isOpen, onClose }) => {
     defaultValues: sample,
     resolver: yupResolver(validationSchema),
   });
-
 
   const handleSubmit = (data) => {
     samplesApi
@@ -38,7 +37,7 @@ export const EditModal = ({ sample, isOpen, onClose }) => {
 
         <DialogContent>
           <FormProvider {...form}>
-            <SampleForm/>
+            <SampleForm />
           </FormProvider>
         </DialogContent>
 

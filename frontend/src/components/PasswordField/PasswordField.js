@@ -27,7 +27,7 @@ export const PasswordField = (props) => {
 
   return (
     <TextField
-      type={passwordIsVisible ? "text" : "password" }
+      type={passwordIsVisible ? "text" : "password"}
       InputProps={{
         startAdornment: (
           <InputAdornment position="start" color="primary">

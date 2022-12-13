@@ -25,7 +25,9 @@ export const Keys = ({ keys }) => {
   // React Hook Form
   const formContext = useFormContext();
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const isFixedValueEntries = !!(formContext && useWatch({ name: "fixed_value_entries"}));
+  const isFixedValueEntries = !!(
+    formContext && useWatch({ name: "fixed_value_entries" })
+  );
 
   return !keys?.length ? (
     <Typography>Keys weren't found</Typography>
@@ -34,7 +36,9 @@ export const Keys = ({ keys }) => {
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
-            {isFixedValueEntries && <TableCell className={classes.tableHeaderCell}>Id key</TableCell>}
+            {isFixedValueEntries && (
+              <TableCell className={classes.tableHeaderCell}>Id key</TableCell>
+            )}
 
             <TableCell className={classes.tableHeaderCell}>Key name</TableCell>
 

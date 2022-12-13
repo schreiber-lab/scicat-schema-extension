@@ -22,10 +22,9 @@ export const getProposal = (id, config) => {
     });
 };
 
-
 export const createProposal = (data) => {
   return api
-    .post('/proposals', data)
+    .post("/proposals", data)
     .then(({ data }) => {
       return data;
     })
@@ -33,4 +32,3 @@ export const createProposal = (data) => {
       throw data;
     });
 };
-

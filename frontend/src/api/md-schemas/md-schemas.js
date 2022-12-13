@@ -9,7 +9,7 @@ export const getMDSchemas = (config) => {
     .catch((data) => {
       throw data;
     });
-};  
+};
 
 export const getMDSchemaKeys = (config) => {
   return api2
@@ -20,7 +20,7 @@ export const getMDSchemaKeys = (config) => {
     .catch((data) => {
       throw data;
     });
-};  
+};
 
 export const createMDSchema = (data) => {
   return api2

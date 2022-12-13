@@ -1,1 +1,1 @@
-export * from './AddTechniqueModal';
+export * from "./AddTechniqueModal";

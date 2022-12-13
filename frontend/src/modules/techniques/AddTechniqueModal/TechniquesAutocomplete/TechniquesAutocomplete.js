@@ -40,7 +40,6 @@ const renderOption = (option) => {
       <Box display="flex" mr={1}>
         <AddIcon color="primary" />
       </Box>
-      
       Add {option.inputValue || "technique"}
     </>
   );
@@ -59,12 +58,12 @@ export const TechniquesAutocomplete = ({
         payload: {
           initialValues: {
             _id: {
-              name
-            }
-          }
+              name,
+            },
+          },
         },
         onModalResolved: resolve,
-        onModalRejected: reject
+        onModalRejected: reject,
       });
     });
   };

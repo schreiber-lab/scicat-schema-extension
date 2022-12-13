@@ -5,7 +5,7 @@ const transformInstrumentRequest = (instrument) => {
   return {
     ...instrument,
 
-    customMetadata: transformMetadataSchemaRequest(instrument.customMetadata)
+    customMetadata: transformMetadataSchemaRequest(instrument.customMetadata),
   };
 };
 
@@ -31,10 +31,9 @@ export const getInstrument = (id, config) => {
     });
 };
 
-
 export const createInstrument = (data) => {
   return api
-    .post('/Instruments', transformInstrumentRequest(data))
+    .post("/Instruments", transformInstrumentRequest(data))
     .then(({ data }) => {
       return data;
     })
@@ -42,4 +41,3 @@ export const createInstrument = (data) => {
       throw data;
     });
 };
-

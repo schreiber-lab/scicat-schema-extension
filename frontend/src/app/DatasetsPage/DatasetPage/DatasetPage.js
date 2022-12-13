@@ -7,7 +7,7 @@ import { getDataset } from "../../../api/datasets";
 export const DatasetPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [ dataset, setDataset ] = useState();
+  const [dataset, setDataset] = useState();
 
   useEffect(() => {
     getDataset(id)
@@ -17,7 +17,7 @@ export const DatasetPage = () => {
       .catch(() => {
         navigate("/datasets");
       });
-  }, [ id, navigate ]);
+  }, [id, navigate]);
 
   return (
     <Container>

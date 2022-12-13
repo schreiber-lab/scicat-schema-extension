@@ -10,7 +10,7 @@ import {
   Paper,
   Container,
   LinearProgress,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import { getSamples } from "../../../redux/samples/operations";
 import { Row } from "./Row";
@@ -18,12 +18,12 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(({ palette, spacing }) => ({
   root: {
-    marginTop: spacing(2.5)
+    marginTop: spacing(2.5),
   },
   tableHeaderCell: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     backgroundColor: palette.primary.dark,
-    color: palette.primary.contrastText
+    color: palette.primary.contrastText,
   },
 }));
 
@@ -40,7 +40,7 @@ export const List = () => {
     <Container className={classes.root}>
       {!isLoaded ? (
         <LinearProgress />
-      ) :  !samples.length ? (
+      ) : !samples.length ? (
         <Typography align="center" variant="h3">
           No samples found
         </Typography>
@@ -49,12 +49,25 @@ export const List = () => {
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell className={classes.tableHeaderCell}>Sample Id</TableCell>
-                <TableCell align="right" className={classes.tableHeaderCell}>Description</TableCell>
-                <TableCell align="right" className={classes.tableHeaderCell}>Owner</TableCell>
-                <TableCell align="right" className={classes.tableHeaderCell}>Creation Time</TableCell>
-                <TableCell align="right" className={classes.tableHeaderCell}>Owner Group</TableCell>
-                <TableCell align="right" className={classes.tableHeaderCell}></TableCell>
+                <TableCell className={classes.tableHeaderCell}>
+                  Sample Id
+                </TableCell>
+                <TableCell align="right" className={classes.tableHeaderCell}>
+                  Description
+                </TableCell>
+                <TableCell align="right" className={classes.tableHeaderCell}>
+                  Owner
+                </TableCell>
+                <TableCell align="right" className={classes.tableHeaderCell}>
+                  Creation Time
+                </TableCell>
+                <TableCell align="right" className={classes.tableHeaderCell}>
+                  Owner Group
+                </TableCell>
+                <TableCell
+                  align="right"
+                  className={classes.tableHeaderCell}
+                ></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

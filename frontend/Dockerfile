@@ -1,4 +1,4 @@
-# 
+#
 # Build stage 1.
 #
 FROM node:14.19-alpine

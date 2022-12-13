@@ -10,7 +10,7 @@ import * as types from "./types";
 export const DatasetsContext = createContext();
 
 export const DatasetsProvider = ({ children }) => {
-  const [ state, dispatch ] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
   const { filter } = state;
   const prevFilter = usePrevious(filter);
 
@@ -20,7 +20,7 @@ export const DatasetsProvider = ({ children }) => {
 
   const getDatasets = debounce(({ limits = {}, ...filter } = {}) => {
     dispatch({ type: types.LOAD_DATASETS_REQUEST });
-   
+
     return fullfacetsApi.getFullfacets().then((data) => {
       updatePagination({ total: data[0].all[0]?.totalSets ?? 0 });
 
@@ -78,10 +78,10 @@ export const DatasetsProvider = ({ children }) => {
   };
 
   useEffect(() => {
-   if (!isEqual(filter, prevFilter)) {
-    resetDatasets(filter);
-   }
-  }, [ filter, prevFilter ]);
+    if (!isEqual(filter, prevFilter)) {
+      resetDatasets(filter);
+    }
+  }, [filter, prevFilter]);
 
 
   return (

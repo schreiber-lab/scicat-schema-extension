@@ -1,7 +1,7 @@
-import axios from 'axios';
-import { api } from './api';
-import { requestInterceptor } from './requestInterceptor';
-import { handleErrorResponse } from './responseInterceptor';
+import axios from "axios";
+import { api } from "./api";
+import { requestInterceptor } from "./requestInterceptor";
+import { handleErrorResponse } from "./responseInterceptor";
 
 api.interceptors.request.use(requestInterceptor);
 api.interceptors.response.use((response) => response, handleErrorResponse);

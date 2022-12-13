@@ -6,12 +6,14 @@ export const DatePicker = ({ name, ...props }) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const formContext = name && useFormContext();
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { fieldState } = (formContext && useController({
-    name,
-    control: formContext?.control
-  })) || {};
+  const { fieldState } =
+    (formContext &&
+      useController({
+        name,
+        control: formContext?.control,
+      })) ||
+    {};
   const errorMessage = fieldState?.error?.message;
-
 
   return (
     <Controller
@@ -27,7 +29,6 @@ export const DatePicker = ({ name, ...props }) => {
           {...field}
           {...props}
         />
-
       )}
     />
   );

@@ -1,20 +1,14 @@
 # make sure no callables are imported here ... due to inspection of module when building swagger
+import json
+import traceback
+from http import HTTPStatus
+
 import flask
 import flask_apispec
 
-
-import json
-from http import HTTPStatus
-import traceback
-
+from ..marshalling_schema import (MdEntriesSchema, MdSchemaName,
+                                  MdSchemaSchema, TypeSchema)
 from ..md_schema import validator
-from ..marshalling_schema import (
-    TypeSchema,
-    MdSchemaSchema,
-    MdSchemaName,
-    MdEntriesSchema,
-)
-
 
 bp = flask.Blueprint("schema", __name__)  # , url_prefix='/auth')
 

@@ -5,8 +5,8 @@ import { DatasetPage } from "./DatasetPage";
 export const DatasetsPage = () => {
   return (
     <Routes>
-      <Route exact path="/" element={<Datasets />}/>
-      <Route path=":id" element={<DatasetPage />}/>
+      <Route exact path="/" element={<Datasets />} />
+      <Route path=":id" element={<DatasetPage />} />
     </Routes>
   );
 };

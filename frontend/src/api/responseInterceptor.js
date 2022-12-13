@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const handleErrorResponse = (thrown) => {
   if (axios.isCancel(thrown)) {
-    return new Promise(() => {});
+    return new Promise(() => { });
   } else {
     const { response = { status: 500 } } = thrown;
 

@@ -112,7 +112,10 @@ export const List = () => {
                   <TableHead>
                     <TableRow>
                       {entriesProps.map((property) => (
-                        <TableCell key={property} className={classes.tableHeaderCell}>
+                        <TableCell
+                          key={property}
+                          className={classes.tableHeaderCell}
+                        >
                           {property}
                         </TableCell>
                       ))}

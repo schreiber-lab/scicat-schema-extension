@@ -33,7 +33,8 @@ const injectDatasetPid = ({ pid, ...dataset }) => {
   return {
     ...dataset,
 
-    pid: dataset.proposalId + "/" + dataset.sampleId + "/" + dataset.datasetName,
+    pid:
+      dataset.proposalId + "/" + dataset.sampleId + "/" + dataset.datasetName,
   };
 };
 

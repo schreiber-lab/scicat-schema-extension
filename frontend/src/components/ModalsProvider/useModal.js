@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import { ModalsContext } from './ModalsProvider';
+import { useContext } from "react";
+import { ModalsContext } from "./ModalsProvider";
 
 export const useModal = () => {
   const { addModal } = useContext(ModalsContext);
@@ -7,6 +7,6 @@ export const useModal = () => {
   return {
     openModal: (ModalComponent, props) => {
       return addModal({ ModalComponent, ...props });
-    }
+    },
   };
 };

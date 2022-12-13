@@ -1,13 +1,11 @@
+from http import HTTPStatus
+
 import flask
 import flask_apispec
-
-from http import HTTPStatus
 from cerberus.validator import DocumentError
 
-from ..marshalling_schema import (
-    MetadataValidationSchema,
-    MetadataValidationResponseSchema,
-)
+from ..marshalling_schema import (MetadataValidationResponseSchema,
+                                  MetadataValidationSchema)
 from ..md_schema import validator
 
 bp = flask.Blueprint("validation", __name__)  # , url_prefix='/auth')
@@ -16,7 +14,7 @@ bp = flask.Blueprint("validation", __name__)  # , url_prefix='/auth')
 @bp.post("/addons/validate")
 @flask_apispec.use_kwargs(MetadataValidationSchema, location="json")
 @flask_apispec.marshal_with(MetadataValidationResponseSchema)
-def validate(object_type=None, metadata=None):
+def validate(object_type=None, metadata=None) -> dict | int:
     db = flask.current_app.db
     valid = False
     message = None

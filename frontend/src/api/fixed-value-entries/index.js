@@ -1,1 +1,1 @@
-export * from './fixed-value-entries';
+export * from "./fixed-value-entries";

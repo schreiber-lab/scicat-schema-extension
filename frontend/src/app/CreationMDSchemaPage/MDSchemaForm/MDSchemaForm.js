@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 import {
   Grid,
@@ -14,13 +13,12 @@ import { CreateMDSchemaKeyModal } from "../CreateMDSchemaKeyModal";
 import { Checkbox } from "../../../components/Checkbox";
 import { useModal } from "../../../components";
 
-
 export const MDSchemaForm = () => {
   const { getValues, reset } = useFormContext();
   const keys = useWatch({ name: "keys" });
   const { openModal } = useModal();
   const addKey = (key) => {
-    reset({ ...getValues(), "keys": (getValues().keys || []).concat(key) });
+    reset({ ...getValues(), keys: (getValues().keys || []).concat(key) });
     console.log((getValues().keys || []).concat(key));
   };
 
@@ -28,7 +26,7 @@ export const MDSchemaForm = () => {
     openModal(CreateMDSchemaKeyModal, {
       onModalResolved: (key) => {
         addKey(key);
-      }
+      },
     });
   };
 
@@ -60,7 +58,7 @@ export const MDSchemaForm = () => {
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox  name="fixed_value_entries"/>}
+            control={<Checkbox name="fixed_value_entries" />}
             label="Fixed value entries"
           />
         </Grid>

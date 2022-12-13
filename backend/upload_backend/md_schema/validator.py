@@ -4,7 +4,6 @@ from cerberus import Validator
 
 from .schema import metadata_schema  # , sample ,material
 
-
 # ~ def validate_sample(document):
 # ~ validator = Validator(sample)
 
@@ -14,8 +13,8 @@ from .schema import metadata_schema  # , sample ,material
 # ~ raise RuntimeError(str(validator.errors))
 
 
-def _rework_keydict(keydict):
-    # todo :scan-ref check ignored for now
+def _rework_keydict(keydict) -> dict:
+    # TODO :scan-ref check ignored for now
     keydict.pop("scan_ref", None)
 
     # remove "changes_likely" keys for cerberous
@@ -35,7 +34,7 @@ def _rework_keydict(keydict):
     return keydict
 
 
-def _build_dataset_schema(schemas):
+def _build_dataset_schema(schemas) -> dict:
     ds_schema = dict()
     for s in schemas:
         name = s["schema_name"]
@@ -60,7 +59,9 @@ def _build_dataset_schema(schemas):
 
 
 def validate_dataset(document, dyn_schema):
-
+    """
+    Does ...
+    """
     ds_schema = _build_dataset_schema(dyn_schema)
     validator = Validator(ds_schema)
 
@@ -71,6 +72,9 @@ def validate_dataset(document, dyn_schema):
 
 
 def validate_md_schema(document):
+    """
+    Does ...
+    """
     validator = Validator(metadata_schema)
 
     if validator(document):
@@ -79,8 +83,10 @@ def validate_md_schema(document):
         raise RuntimeError(str(validator.errors))
 
 
-def _build_entry_schema(schema):
-
+def _build_entry_schema(schema) -> dict:
+    """
+    Does ...
+    """
     validator_schema = dict()
     for key in schema["keys"]:
 
@@ -99,7 +105,9 @@ def _build_entry_schema(schema):
 
 
 def validate_fixed_entry(document, entry_schema):
-
+    """
+    Raises RuntimeError ...
+    """
     e_schema = _build_entry_schema(entry_schema)
     validator = Validator(e_schema)
 

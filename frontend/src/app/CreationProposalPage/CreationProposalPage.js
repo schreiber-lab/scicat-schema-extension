@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import { Button, Typography, Container, makeStyles } from "@material-ui/core";
 import { useForm, FormProvider } from "react-hook-form";
 import { preventDefault } from "../../helpers/preventDefault";
@@ -18,11 +18,11 @@ const defaultValues = {
   title: "",
   abstract: null,
   ownerGroup: "Schreiber_lab",
-  accessGroups: []
+  accessGroups: [],
 };
 
-const useStyles = makeStyles(({spacing}) => ({
-  root:{
+const useStyles = makeStyles(({ spacing }) => ({
+  root: {
     paddingTop: spacing(2),
     paddingBottom: spacing(2),
   },
@@ -31,28 +31,25 @@ const useStyles = makeStyles(({spacing}) => ({
   },
   footer: {
     display: "flex",
-    justifyContent: "flex-end"
-
-  }
+    justifyContent: "flex-end",
+  },
 }));
 
 export const CreationProposalPage = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const form = useForm({
     defaultValues,
     resolver: yupResolver(validationSchema),
   });
 
   const handleSubmit = (data) => {
-    proposalsApi
-      .createProposal(data)
-      .then((data) => {
-        dispatch(addProposal(data));
-        navigate("/proposals")
-      })
+    proposalsApi.createProposal(data).then((data) => {
+      dispatch(addProposal(data));
+      navigate("/proposals");
+    });
   };
 
   return (
@@ -70,9 +67,9 @@ export const CreationProposalPage = () => {
         </FormProvider>
 
         <footer className={classes.footer}>
-        <Button type="submit" color="primary" variant="contained">
-          Add proposal
-        </Button>
+          <Button type="submit" color="primary" variant="contained">
+            Add proposal
+          </Button>
         </footer>
       </form>
     </Container>

@@ -1,36 +1,38 @@
-import { createContext, useCallback, useRef, useState } from 'react';
-import { ModalBase } from './ModalBase';
+import { createContext, useCallback, useRef, useState } from "react";
+import { ModalBase } from "./ModalBase";
 
 export const ModalsContext = createContext({
-  addModal: () => {}
+  addModal: () => {},
 });
 
 export const ModalsProvider = ({ children }) => {
   const modalsCount = useRef(0);
-  const [ modals, setModals ] = useState([]);
+  const [modals, setModals] = useState([]);
 
   const deleteModal = useCallback((modalID) => {
-    setModals((modals) => modals.filter((modal) => modal.modalID !== modalID ));
+    setModals((modals) => modals.filter((modal) => modal.modalID !== modalID));
   }, []);
 
   const addModal = (modal) => {
-    setModals((modals) => modals.concat({
-      ...modal,
+    setModals((modals) =>
+      modals.concat({
+        ...modal,
 
-      modalID: modalsCount.current++,
-      onModalExited: deleteModal
-    }));
+        modalID: modalsCount.current++,
+        onModalExited: deleteModal,
+      })
+    );
   };
 
-//   useEffect(() => {
-//     const removeListener = navigate.listen(() => {
-//       setModals((modals) => modals.map((modal) => ({ ...modal, open: false })));
-//     });
+  //   useEffect(() => {
+  //     const removeListener = navigate.listen(() => {
+  //       setModals((modals) => modals.map((modal) => ({ ...modal, open: false })));
+  //     });
 
-//     return () => {
-//       removeListener();
-//     };
-//   }, []);
+  //     return () => {
+  //       removeListener();
+  //     };
+  //   }, []);
 
   return (
     <ModalsContext.Provider value={{ addModal }}>

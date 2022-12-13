@@ -7,12 +7,13 @@ const useStyles = makeStyles(({ spacing }) => ({
   root: {
     paddingTop: spacing(3),
     paddingBottom: spacing(2),
-  }
+  },
 }));
 
 export const Characteristics = () => {
   const classes = useStyles();
-  const [sampleCharacteristicSchema, setSampleCharacteristicSchema] = useState(null);
+  const [sampleCharacteristicSchema, setSampleCharacteristicSchema] =
+    useState(null);
   console.log(sampleCharacteristicSchema);
 
   useEffect(() => {
@@ -23,7 +24,9 @@ export const Characteristics = () => {
 
   return (
     <Container className={classes.root}>
-      <Typography component="h1" variant="h5">Sample characteristics</Typography>
+      <Typography component="h1" variant="h5">
+        Sample characteristics
+      </Typography>
 
       {sampleCharacteristicSchema?.map((schema) => (
         <Schema key={schema.schema_name} schema={schema} />

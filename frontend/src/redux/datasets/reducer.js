@@ -8,11 +8,11 @@ const initialState = {
 };
 
 export const reducer = createReduxReducer(initialState, {
-  [types.ADD_DATASET]: (state, dataset ) => {
+  [types.ADD_DATASET]: (state, dataset) => {
     return {
       ...state,
 
-      datasets: [ dataset, ...state.datasets ]
+      datasets: [dataset, ...state.datasets],
     };
   },
   [types.EDIT_DATASET]: (state, updatedDataset) => {
@@ -21,7 +21,7 @@ export const reducer = createReduxReducer(initialState, {
 
       datasets: state.datasets.map((dataset) => {
         return dataset.pid === updatedDataset.pid ? updatedDataset : dataset;
-      })
+      }),
     };
   },
   [types.LOAD_DATASETS_REQUEST]: (state) => {

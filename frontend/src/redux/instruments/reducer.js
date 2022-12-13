@@ -15,7 +15,7 @@ export const reducer = createReduxReducer(initialState, {
       instruments: [instrument, ...state.instruments],
     };
   },
-  [types.LOAD_INSTRUMENTS_REQUEST]: (state) => { 
+  [types.LOAD_INSTRUMENTS_REQUEST]: (state) => {
     return {
       ...state,
 

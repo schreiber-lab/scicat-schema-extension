@@ -1,38 +1,39 @@
-import T from 'prop-types';
-import cn from 'classnames';
+import T from "prop-types";
+import cn from "classnames";
 import {
   makeStyles,
   TablePagination as MuiTablePagination,
   useMediaQuery,
-  useTheme
-} from '@material-ui/core';
-import { TablePaginationActions } from './TablePaginationActions';
+  useTheme,
+} from "@material-ui/core";
+import { TablePaginationActions } from "./TablePaginationActions";
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
-    borderTop: ({ borderTop }) => borderTop ? `1px solid ${palette.divider}` : null
+    borderTop: ({ borderTop }) =>
+      borderTop ? `1px solid ${palette.divider}` : null,
   },
 
   disableCaption: {
-    '&:first-of-type': {
-      display: 'none'
-    }
+    "&:first-of-type": {
+      display: "none",
+    },
   },
 
   disableSelectRoot: {
-    display: 'none'
-  }
+    display: "none",
+  },
 }));
 
 const propTypes = {
   borderTop: T.bool,
-  disablePerPage: T.bool
+  disablePerPage: T.bool,
 };
 
 export const TablePagination = ({
   borderTop,
   disablePerPage,
-  component = 'div',
+  component = "div",
   className,
   pagination: { total = 0, skip, limit },
   onChange,
@@ -41,8 +42,10 @@ export const TablePagination = ({
 }) => {
   const classes = useStyles({ borderTop });
   const theme = useTheme();
-  const isMobileSM = useMediaQuery(theme.breakpoints.down(theme.breakpoints.values.mobileSm));
-  const paginationProps = isMobileSM ? { labelRowsPerPage: '' } : {};
+  const isMobileSM = useMediaQuery(
+    theme.breakpoints.down(theme.breakpoints.values.mobileSm)
+  );
+  const paginationProps = isMobileSM ? { labelRowsPerPage: "" } : {};
   const page = (skip + limit) / limit;
 
   const handlePageChange = (event, page) => {
@@ -56,7 +59,7 @@ export const TablePagination = ({
   return (
     <MuiTablePagination
       component={component}
-      rowsPerPageOptions={[ 5, 10, 15, 30 ]}
+      rowsPerPageOptions={[5, 10, 15, 30]}
       count={total}
       rowsPerPage={limit}
       page={page - 1}
@@ -66,9 +69,8 @@ export const TablePagination = ({
       className={cn(classes.root, className)}
       classes={{
         caption: disablePerPage && classes.disableCaption,
-        selectRoot: disablePerPage && classes.disableSelectRoot
+        selectRoot: disablePerPage && classes.disableSelectRoot,
       }}
-
       {...paginationProps}
       {...props}
     />

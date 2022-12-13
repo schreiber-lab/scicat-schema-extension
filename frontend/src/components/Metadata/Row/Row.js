@@ -4,7 +4,8 @@ import { FixedValueEntriesAutocomplete } from "../../../modules/fixed-value-entr
 
 export const Row = ({ isVisible, field, schema, baseKey, index }) => {
   const formContext = useFormContext();
-  const schemaName = schema.schema_name + (schema.multiples_entries ? `[${index}]` : "");
+  const schemaName =
+    schema.schema_name + (schema.multiples_entries ? `[${index}]` : "");
   const fieldProps = {
     name: `${baseKey}.${schemaName}.fields.${field.key_name}`,
     label: field.key_name,
@@ -12,10 +13,14 @@ export const Row = ({ isVisible, field, schema, baseKey, index }) => {
     onChange: (value) => {
       console.log(value);
       if (value) {
-        formContext.setValue(`${baseKey}.${schemaName}.isActive`, true, {shouldDirty: true, shouldTouch: true, shouldValidate: true});
+        formContext.setValue(`${baseKey}.${schemaName}.isActive`, true, {
+          shouldDirty: true,
+          shouldTouch: true,
+          shouldValidate: true,
+        });
         console.log(formContext.getValues());
       }
-    }
+    },
   };
 
   if (schema.id_key === field.key_name) {

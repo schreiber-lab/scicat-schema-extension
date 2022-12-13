@@ -10,7 +10,7 @@ import {
   Paper,
   Container,
   LinearProgress,
-  Typography
+  Typography,
 } from "@material-ui/core";
 // import FingerprintIcon from "@material-ui/icons/Fingerprint";
 import { makeStyles } from "@material-ui/core/styles";

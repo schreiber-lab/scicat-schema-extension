@@ -21,9 +21,16 @@ export const MetadataRendering = ({ metadata }) => {
         </TableHead>
 
         <TableBody>
-          {metadataArray.map(([ schemaName, { isActive, fields } ]) => !!isActive && (
-            <Schema key={schemaName} fields={fields} schemaName={schemaName} />
-          ))}
+          {metadataArray.map(
+            ([schemaName, { isActive, fields }]) =>
+              !!isActive && (
+                <Schema
+                  key={schemaName}
+                  fields={fields}
+                  schemaName={schemaName}
+                />
+              )
+          )}
         </TableBody>
       </Table>
     </TableContainer>

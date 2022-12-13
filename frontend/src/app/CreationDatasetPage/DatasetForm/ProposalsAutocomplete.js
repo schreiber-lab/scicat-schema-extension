@@ -1,27 +1,31 @@
-import { Box, Typography } from '@material-ui/core';
-import * as proposalsApi from '../../../api/proposals';
-import { Autocomplete } from '../../../components/Autocomplete';
+import { Box, Typography } from "@material-ui/core";
+import * as proposalsApi from "../../../api/proposals";
+import { Autocomplete } from "../../../components/Autocomplete";
 
-const fetchProposals = (params) => ({ search, loadedOptions = [], additionalData: { page = 0 } }) => {
-    console.log(loadedOptions)
-  return proposalsApi.getProposals({
-    params: {
-      find: search,
-    //   page: page + 1,
+const fetchProposals =
+  (params) =>
+  ({ search, loadedOptions = [], additionalData: { page = 0 } }) => {
+    console.log(loadedOptions);
+    return proposalsApi
+      .getProposals({
+        params: {
+          find: search,
+          //   page: page + 1,
 
-      ...params
-    }
-  }).then((data) => {
-    console.log(data)
-    return {
-    //   hasMore: pagination.page < pagination.last_page && pagination.total > 0,
-      options: loadedOptions.concat(data),
-    //   additionalData: {
-    //     page: pagination.page
-    //   }
-    };
-  });
-};
+          ...params,
+        },
+      })
+      .then((data) => {
+        console.log(data);
+        return {
+          //   hasMore: pagination.page < pagination.last_page && pagination.total > 0,
+          options: loadedOptions.concat(data),
+          //   additionalData: {
+          //     page: pagination.page
+          //   }
+        };
+      });
+  };
 
 const renderOption = (option) => {
   return (
@@ -31,7 +35,11 @@ const renderOption = (option) => {
   );
 };
 
-export const ProposalsAutocomplete = ({ params = {}, creatablePayload, ...props }) => {
+export const ProposalsAutocomplete = ({
+  params = {},
+  creatablePayload,
+  ...props
+}) => {
   return (
     <Autocomplete
       isAsync
@@ -39,10 +47,11 @@ export const ProposalsAutocomplete = ({ params = {}, creatablePayload, ...props 
       placeholder="Search and add proposal..."
       onNeedFetch={fetchProposals(params)}
       renderOption={renderOption}
-      getOptionLabel={((option) => option && option?.proposalId)}
+      getOptionLabel={(option) => option && option?.proposalId}
       getOptionValue={(option) => option?.proposalId}
-      getOptionSelected={(option, value) => option?.proposalId === value?.proposalId}
-
+      getOptionSelected={(option, value) =>
+        option?.proposalId === value?.proposalId
+      }
       {...props}
     />
   );

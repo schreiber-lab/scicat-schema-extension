@@ -16,7 +16,11 @@ import { useModal } from "../../components";
 import * as datasetsApi from "../../api/datasets";
 import { validateMetadataSchema } from "../../api/metadata-schemas";
 import { addDataset } from "../../redux/datasets/actions";
-import { DatasetFormWithSampleAutocomp, validationSchema, defaultValues } from "./DatasetForm";
+import {
+  DatasetFormWithSampleAutocomp,
+  validationSchema,
+  defaultValues,
+} from "./DatasetForm";
 import { SelectDatasetModal } from "../../modules/datasets/SelectDatasetModal";
 
 const useStyles = makeStyles(({ spacing }) => ({
@@ -65,7 +69,7 @@ export const CreationDatasetPage = () => {
           }
         );
       });
-    console.log(data.scientificMetadata)
+    console.log(data.scientificMetadata);
   };
 
   // const openSelectDatasetModal = () => {
@@ -88,7 +92,6 @@ export const CreationDatasetPage = () => {
       },
     });
   };
-
 
   return (
     <Container className={classes.root}>

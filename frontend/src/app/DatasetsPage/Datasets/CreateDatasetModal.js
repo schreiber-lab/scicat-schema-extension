@@ -44,7 +44,10 @@ export const CreateDatasetModal = ({ isOpen, onClose, onDatasetCreate }) => {
 
   return (
     <Dialog open={isOpen} onClose={onClose}>
-      <form noValidate onSubmit={preventDefault(form.handleSubmit(handleSubmit))}>
+      <form
+        noValidate
+        onSubmit={preventDefault(form.handleSubmit(handleSubmit))}
+      >
         <DialogTitle>Add new dataset</DialogTitle>
 
         <DialogContent>

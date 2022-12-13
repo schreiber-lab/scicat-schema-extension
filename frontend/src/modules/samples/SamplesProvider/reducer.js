@@ -6,7 +6,7 @@ export const reducer = createHookReducer({
     return {
       ...state,
 
-      samples: [ sample, ...state.samples ]
+      samples: [sample, ...state.samples],
     };
   },
 
@@ -14,7 +14,7 @@ export const reducer = createHookReducer({
     return {
       ...state,
 
-      filter: { ...filter, ...newFilter }
+      filter: { ...filter, ...newFilter },
     };
   },
 
@@ -23,11 +23,12 @@ export const reducer = createHookReducer({
       ...state,
 
       samples: state.samples.map((sample) => {
-        return sample.sampleId === updatedSample.sampleId ? updatedSample : sample;
-      })
+        return sample.sampleId === updatedSample.sampleId
+          ? updatedSample
+          : sample;
+      }),
     };
   },
-  
 
   [types.LOAD_SAMPLES_REQUEST]: (state) => {
     return {

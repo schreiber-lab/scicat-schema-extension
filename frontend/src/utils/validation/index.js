@@ -1,2 +1,2 @@
-export * from './yupResolver';
-export * from './validation';
+export * from "./yupResolver";
+export * from "./validation";

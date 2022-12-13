@@ -12,11 +12,11 @@ export const reducer = createReduxReducer(initialState, {
     return {
       ...state,
 
-      fixedValueEntries: [ fixedValueEntry, ...state.fixedValueEntries ],
+      fixedValueEntries: [fixedValueEntry, ...state.fixedValueEntries],
     };
   },
 
-  [types.LOAD_FIXED_VALUE_ENTRIES_REQUEST]: (state) => { 
+  [types.LOAD_FIXED_VALUE_ENTRIES_REQUEST]: (state) => {
     return {
       ...state,
 
@@ -43,4 +43,3 @@ export const reducer = createReduxReducer(initialState, {
     };
   },
 });
-
