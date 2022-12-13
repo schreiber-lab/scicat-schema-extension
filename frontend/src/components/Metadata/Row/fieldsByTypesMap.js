@@ -28,6 +28,7 @@ export const fieldsByTypesMap = {
           )),
         };
 
+
     const handleChange = ({ target: { value } }) => {
       onChange?.(value);
     };
