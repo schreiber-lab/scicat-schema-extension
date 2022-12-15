@@ -29,7 +29,7 @@ export const fieldsByTypesMap = {
         };
 
     const handleChange = ({ target: { value } }) => {
-      onChange(value);
+      onChange?.(value);
     };
 
     return (
@@ -63,7 +63,7 @@ export const fieldsByTypesMap = {
     }
 
     const handleChange = ({ target: { value } }) => {
-      onChange(value);
+      onChange?.(value);
     };
 
     return (
@@ -91,7 +91,7 @@ export const fieldsByTypesMap = {
     const isNumber = field.schema?.type === "number";
 
     const handleChange = (value) => {
-      onChange(value);
+      onChange?.(value);
     };
 
     return (
@@ -109,7 +109,7 @@ export const fieldsByTypesMap = {
   },
   boolean: ({ name, field, onChange, ...props }) => {
     const handleChange = (value) => {
-      onChange(value);
+      onChange?.(value);
     };
 
     return (
