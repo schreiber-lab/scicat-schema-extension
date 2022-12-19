@@ -1,9 +1,9 @@
 import pytest
+import upload_backend
+import upload_backend.db
 
 # from pytest_mongodb import plugin
 
-import upload_backend
-import upload_backend.db
 
 # from upload_backend import create_app
 

@@ -1,5 +1,4 @@
 import json
-from copy import deepcopy
 
 
 def _post_request(client, endpoint, data):
@@ -53,7 +52,7 @@ def test_fixed_values(client, mongodb):
     # try to get the keys
     response = client.get("/addons/get_fixed_value_entries?schema_name=test_cat")
     assert response.status_code == 200
-    resp = json.loads(response.data)
+    json.loads(response.data)
 
     # try to validate md
     ds_data = {
