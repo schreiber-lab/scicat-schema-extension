@@ -12,7 +12,8 @@ import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined"
 import { DeleteModal } from "../../../../components/DeleteModal";
 import * as samplesApi from "../../../../api/samples";
 import { deleteSample } from "../../../../redux/samples/actions";
-import { EditModal } from "./EditModal";
+// import { EditModal } from "./EditModal";
+import { EditSampleModal } from "./EditSampleModal";
 
 export const Row = ({ sample }) => {
   const [ open, setOpen ] = useState(false);
@@ -70,7 +71,7 @@ export const Row = ({ sample }) => {
               <EditOutlinedIcon />
             </IconButton>
 
-            <EditModal isOpen={isOpenEdit} sample={sample} onClose={handleEditModalClose} />
+            <EditSampleModal isOpen={isOpenEdit} sample={sample} onClose={handleEditModalClose} />
           </Grid>
 
           <Grid item>

@@ -73,7 +73,7 @@ export const MDSchemaKeyForm = () => {
         {keyType !== "boolean" && (
           <FormControlLabel
             control={
-              <MuiCheckbox
+              <Checkbox
                 name="withPredefinedValues"
                 checked={checkboxes.withPredefinedValues}
                 onChange={handleCheckboxChange("withPredefinedValues")}
