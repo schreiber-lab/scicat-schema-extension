@@ -10,21 +10,21 @@ import {
   Paper,
   Container,
   LinearProgress,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { getInstruments } from "../../../redux/instruments/operations";
-import { Row } from "./Row";
+// import { Row } from "./Row";
+import { RowWithContext } from "./Row/RowWithContext";
 
 const useStyles = makeStyles(({ palette, spacing }) => ({
   root: {
-    margin: spacing(2.5, 10),
-    maxWidth: 1100,
+    marginTop: spacing(2.5),
   },
   tableHeaderCell: {
     fontWeight: "bold",
     backgroundColor: palette.primary.dark,
-    color: palette.getContrastText(palette.primary.dark),
+    color: palette.primary.contrastText,
   },
 }));
 
@@ -53,14 +53,18 @@ export const List = () => {
             <TableHead>
               <TableRow>
                 <TableCell className={classes.tableHeaderCell}>Name</TableCell>
-                <TableCell className={classes.tableHeaderCell}>
+                <TableCell align="right" className={classes.tableHeaderCell}>
                   Custom Metadata
                 </TableCell>
+                <TableCell
+                  align="right"
+                  className={classes.tableHeaderCell}
+                ></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {instruments.map((instrument) => (
-                <Row key={instrument.pid} instrument={instrument} />
+                <RowWithContext key={instrument.pid} instrument={instrument} />
               ))}
             </TableBody>
           </Table>

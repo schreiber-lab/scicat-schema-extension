@@ -1,4 +1,5 @@
 import { TextField } from "../../../components/TextField";
+import { Metadata } from "../../../components/Metadata";
 
 export const SampleForm = () => {
   return (
@@ -21,6 +22,11 @@ export const SampleForm = () => {
         label="Owner Group"
         placeholder="Use a group you have access to"
       />
+        <Metadata
+          baseKey="sampleCharacteristics"
+          objectType="sample"
+          title="Sample Characteristics"
+        />
     </>
   );
 };
