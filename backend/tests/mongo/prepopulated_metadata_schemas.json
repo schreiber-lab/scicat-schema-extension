@@ -10,10 +10,7 @@
         "unit": null
       },
       {
-        "allowed": [
-          "beamtime",
-          "lab"
-        ],
+        "allowed": ["beamtime", "lab"],
         "changes_likely": false,
         "key_name": "measurement_type",
         "required": true,
@@ -115,12 +112,12 @@
         "required": true,
         "scan_ref": false,
         "type": "list",
-        "schema":{
-                  "type":"number"
-               },
+        "schema": {
+          "type": "number"
+        },
         "unit": null
       },
-            {
+      {
         "changes_likely": false,
         "key_name": "sample_detector_distance",
         "required": true,
@@ -128,7 +125,6 @@
         "type": "number",
         "unit": "mm"
       }
-      
     ],
     "fixed_value_entries": false,
     "schema_name": "GIWAXS",
@@ -142,12 +138,12 @@
         "required": true,
         "scan_ref": false,
         "type": "list",
-        "schema":{
-                  "type":"number"
-               },
+        "schema": {
+          "type": "number"
+        },
         "unit": null
       },
-            {
+      {
         "changes_likely": false,
         "key_name": "sample_detector_distance",
         "required": true,
@@ -155,7 +151,6 @@
         "type": "number",
         "unit": null
       }
-      
     ],
     "fixed_value_entries": false,
     "schema_name": "GIWAXS_no_unit",
@@ -163,22 +158,22 @@
   },
   {
     "keys": [
-        {
-            "key_name": "test key",
-            "type": "number",
-            "unit": "mm",
-            "required": true,
-            "scan_ref": false,
-            "changes_likely": true
-        },
-        {
-            "key_name": "test key56",
-            "type": "string",
-            "required": true,
-            "scan_ref": false,
-            "changes_likely": true,
-            "unit": null
-        }
+      {
+        "key_name": "test key",
+        "type": "number",
+        "unit": "mm",
+        "required": true,
+        "scan_ref": false,
+        "changes_likely": true
+      },
+      {
+        "key_name": "test key56",
+        "type": "string",
+        "required": true,
+        "scan_ref": false,
+        "changes_likely": true,
+        "unit": null
+      }
     ],
     "id_key": "test key56",
     "schema_name": "test schema200",
@@ -192,14 +187,14 @@
     "multiples_entries": true,
     "id_key": "material_id",
     "keys": [
-        {
-            "key_name": "material_id",
-            "type": "string",
-            "required": true
-        }, 
-        {"key_name": "full_name", "type": "string", "required": false},
-        {"key_name": "formula", "type": "string", "required": false},
-        {"key_name": "composition", "type": "dict", "required": false}
-        ]
+      {
+        "key_name": "material_id",
+        "type": "string",
+        "required": true
+      },
+      { "key_name": "full_name", "type": "string", "required": false },
+      { "key_name": "formula", "type": "string", "required": false },
+      { "key_name": "composition", "type": "dict", "required": false }
+    ]
   }
 ]

@@ -1,12 +1,12 @@
+from http import HTTPStatus
+
 import flask
 import flask_apispec
-
-from http import HTTPStatus
 from cerberus.validator import DocumentError
 
 from ..marshalling_schema import (
-    MetadataValidationSchema,
     MetadataValidationResponseSchema,
+    MetadataValidationSchema,
 )
 from ..md_schema import validator
 

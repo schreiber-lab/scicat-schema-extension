@@ -4,7 +4,6 @@ from cerberus import Validator
 
 from .schema import metadata_schema  # , sample ,material
 
-
 # ~ def validate_sample(document):
 # ~ validator = Validator(sample)
 

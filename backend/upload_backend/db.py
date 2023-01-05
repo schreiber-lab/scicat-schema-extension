@@ -1,10 +1,10 @@
-# so far a dummy file
-
 from flask_pymongo import PyMongo
 
 
 def get_mongo():
-    # just here to be pached in tests
+    """
+    Helper function to be pached in tests
+    """
     return PyMongo()
 
 
