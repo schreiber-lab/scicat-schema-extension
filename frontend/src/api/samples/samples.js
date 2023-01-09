@@ -1,5 +1,5 @@
 import { api } from "../api";
-import { transformMetadataSchemaRequest } from "../metadata-schemas";
+import { transformMetadataSchemaRequest, transformMetadataSchemaResponse } from "../metadata-schemas";
 
 const transformSampleRequest = (sample) => {
   return {
@@ -9,11 +9,21 @@ const transformSampleRequest = (sample) => {
   };
 };
 
+const transformSampleResponse = (sample) => {
+  return {
+    ...sample,
+
+    sampleCharacteristics: transformMetadataSchemaResponse(
+      sample.sampleCharacteristics
+    ),
+  };
+};
+
 export const getSamples = (config) => {
   return api
     .get("/Samples/fullquery", config)
     .then(({ data }) => {
-      return data;
+      return data.map(transformSampleResponse);
     })
     .catch((data) => {
       throw data;
@@ -63,3 +73,19 @@ export const createSample = (data) => {
         throw data;
       });
   };
+
+  export const editSampleWithMetadata = (sample, config) => {
+    return api
+      .put(
+        `/Samples/${sample.sampleId}`,
+        transformSampleRequest(sample),
+        config
+      )
+      .then(({ data }) => {
+        return transformSampleResponse(data);
+      })
+      .catch((data) => {
+        throw data;
+      });
+  };
+  

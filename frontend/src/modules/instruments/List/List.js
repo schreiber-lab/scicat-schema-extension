@@ -1,5 +1,6 @@
 import { useEffect, useContext } from "react";
 import {
+  makeStyles,
   Table,
   TableBody,
   TableCell,
@@ -7,31 +8,29 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Container,
   LinearProgress,
-  Typography
+  Typography,
+  Container
 } from "@material-ui/core";
-import { RowWithContext } from "./Row/RowWithContext";
-import { makeStyles } from "@material-ui/core/styles";
-import { SamplesContext } from "../../../modules/samples/SamplesProvider";
+import { Row } from "./Row";
+import { SamplesContext } from "../SamplesProvider";
 
-const useStyles = makeStyles(({ palette, spacing }) => ({
-  root: {
-    marginTop: spacing(2.5)
-  },
+const useStyles = makeStyles(({ palette }) => ({
   tableHeaderCell: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     backgroundColor: palette.primary.dark,
-    color: palette.primary.contrastText
+    color: palette.getContrastText(palette.primary.dark),
+    wordWrap: "break-word",
+    maxWidth: 200,
   },
 }));
 
-export const List = () => {
+export const List = ({ onSampleSelect }) => {
   const classes = useStyles();
   const {
     isLoaded,
     samples,
-    getSamples,
+    getSamples
   } = useContext(SamplesContext);
 
   useEffect(() => {
@@ -42,7 +41,7 @@ export const List = () => {
     <Container className={classes.root}>
       {!isLoaded ? (
         <LinearProgress />
-      ) :  !samples.length ? (
+      ) : !samples.length ? (
         <Typography align="center" variant="h3">
           No samples found
         </Typography>
@@ -61,7 +60,7 @@ export const List = () => {
             </TableHead>
             <TableBody>
               {samples.map((sample) => (
-                <RowWithContext key={sample.sampleId} sample={sample} />
+                <Row key={sample.sampleId} sample={sample} onSampleSelect={onSampleSelect}/>
               ))}
             </TableBody>
           </Table>

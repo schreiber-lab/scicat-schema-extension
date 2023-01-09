@@ -1,10 +1,10 @@
-// import { Form } from "./Form";
 import { List } from './List'
+import { InstrumentsProvider } from "../../modules/instruments/InstrumentsProvider";
 
 export const Instruments = () => {
   return (
-    <div>
+    <InstrumentsProvider>
       <List />
-    </div>
+    </InstrumentsProvider>
   );
 };
