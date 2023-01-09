@@ -14,6 +14,7 @@ const defaultValues = {
   key_name: null,
   type: null,
   unit: null,
+  withPredefinedValues: false,
   allowed: [],
   required: false,
   scan_ref: false,
@@ -34,6 +35,8 @@ export const CreateMDSchemaKeyModal = ({
     if (!data.withPredefinedValues) {
       delete data.allowed;
     }
+
+    delete data.withPredefinedValues;
 
     handleModalResolve(data);
   };

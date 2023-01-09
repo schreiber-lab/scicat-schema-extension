@@ -7,7 +7,7 @@ export const Row = ({ field }) => {
   const formContext = useFormContext();
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const isFixedValueEntries = !!(formContext && useWatch({ name: "fixed_value_entries"}));
-  console.log(isFixedValueEntries)
+  console.log(field)
   return (
     <TableRow>
       {isFixedValueEntries && <TableCell><Radio name="id_key" value={field.key_name}/></TableCell>}
