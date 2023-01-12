@@ -2,11 +2,11 @@ import { createHookReducer } from "../../../helpers/createHookReducer";
 import * as types from "./types";
 
 export const reducer = createHookReducer({
-  [types.ADD_SAMPLE]: (state, sample) => {
+  [types.ADD_INSTRUMENT]: (state, instrument) => {
     return {
       ...state,
 
-      samples: [ sample, ...state.samples ]
+      instruments: [ instrument, ...state.instruments ]
     };
   },
 
@@ -18,34 +18,34 @@ export const reducer = createHookReducer({
     };
   },
 
-  [types.EDIT_SAMPLE]: (state, updatedSample) => {
+  [types.EDIT_INSTRUMENT]: (state, updatedInstrument) => {
     console.log(state)
     return {
       ...state,
 
-      samples: state.samples.map((sample) => {
-        console.log(updatedSample, sample)
-        return sample.sampleId === updatedSample.sampleId ? updatedSample : sample;
+      instruments: state.instruments.map((instrument) => {
+        console.log(updatedInstrument, instrument)
+        return instrument.pid === updatedInstrument.pid ? updatedInstrument : instrument;
       })
     };
   },
   
 
-  [types.LOAD_SAMPLES_REQUEST]: (state) => {
+  [types.LOAD_INSTRUMENTS_REQUEST]: (state) => {
     return {
       ...state,
 
       isLoaded: false,
-      samples: [],
+      instruments: [],
     };
   },
 
-  [types.LOAD_SAMPLES_SUCCESS]: (state, data) => {
+  [types.LOAD_INSTRUMENTS_SUCCESS]: (state, data) => {
     return {
       ...state,
 
       isLoaded: true,
-      samples: data,
+      instruments: data,
     };
   }
 });

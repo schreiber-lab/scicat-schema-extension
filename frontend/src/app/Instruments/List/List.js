@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useContext } from "react";
 import {
   Table,
   TableBody,
@@ -10,33 +9,35 @@ import {
   Paper,
   Container,
   LinearProgress,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { getInstruments } from "../../../redux/instruments/operations";
-import { Row } from "./Row";
+import { InstrumentsContext } from "../../../modules/instruments/InstrumentsProvider";
+// import { Row } from "./Row";
+import { RowWithContext } from "./Row/RowWithContext";
 
 const useStyles = makeStyles(({ palette, spacing }) => ({
   root: {
-    margin: spacing(2.5, 10),
-    maxWidth: 1100,
+    marginTop: spacing(2.5),
   },
   tableHeaderCell: {
     fontWeight: "bold",
     backgroundColor: palette.primary.dark,
-    color: palette.getContrastText(palette.primary.dark),
+    color: palette.primary.contrastText,
   },
 }));
 
 export const List = () => {
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const { isLoaded, instruments } = useSelector(
-    ({ instruments }) => instruments
-  );
+  const {
+    isLoaded,
+    instruments,
+    getInstruments,
+  } = useContext(InstrumentsContext);
+
 
   useEffect(() => {
-    dispatch(getInstruments());
+    getInstruments();
   }, []);
 
   return (
@@ -53,14 +54,15 @@ export const List = () => {
             <TableHead>
               <TableRow>
                 <TableCell className={classes.tableHeaderCell}>Name</TableCell>
-                <TableCell className={classes.tableHeaderCell}>
-                  Custom Metadata
-                </TableCell>
+                <TableCell
+                  align="right"
+                  className={classes.tableHeaderCell}
+                ></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {instruments.map((instrument) => (
-                <Row key={instrument.pid} instrument={instrument} />
+                <RowWithContext key={instrument.pid} instrument={instrument} />
               ))}
             </TableBody>
           </Table>

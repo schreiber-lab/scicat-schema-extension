@@ -13,7 +13,7 @@ export const SamplesProvider = ({ children }) => {
   const { filter } = state;
   const prevFilter = usePrevious(filter);
 
-  const getSamples = debounce((filter = {}) => {
+  const getSamples = (filter = {}) => {
     dispatch({ type: types.LOAD_SAMPLES_REQUEST });
 
     return samplesApi
@@ -24,8 +24,8 @@ export const SamplesProvider = ({ children }) => {
       })
       .then((data) => {
         dispatch({ type: types.LOAD_SAMPLES_SUCCESS, payload: data });
-      });
-  }, 1200);
+      }).catch(console.log);
+  };
 
   const applyFilter = (payload) => {
     dispatch({ type: types.APPLY_FILTER, payload });
