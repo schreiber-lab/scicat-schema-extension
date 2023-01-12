@@ -9,7 +9,7 @@ import { EditInstrumentModal } from "./EditInstrumentModal";
 export const RowWithContext = ({ instrument, ...props }) => {
   const { openModal } = useModal();
   const { editInstrument } = useContext(InstrumentsContext);
-  const facility = instrument.customMetadata?.facility;
+  // const facility = instrument.customMetadata?.facility;
 
   const openEditModal = () => {
     openModal(EditInstrumentModal, {
@@ -17,22 +17,16 @@ export const RowWithContext = ({ instrument, ...props }) => {
         instrument,
       },
       onModalResolved: (instrument) => {
-        editInstrument(editInstrument);
+        editInstrument(instrument);
       },
     });
   };
-
+  
   return (
     <TableRow {...props}>
       <TableCell component="th" scope="row">
         <Typography color="primary" variant="subtitle2">
           {instrument.name}
-        </Typography>
-      </TableCell>
-
-      <TableCell align="right" >
-        <Typography color="primary" variant="subtitle2">
-          {facility?.value || "-"}
         </Typography>
       </TableCell>
 

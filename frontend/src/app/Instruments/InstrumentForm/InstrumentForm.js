@@ -11,14 +11,6 @@ export const InstrumentForm = () => {
         name="name"
         label="Name"
       />
-
-      <TextField
-        required
-        fullWidth
-        margin="dense"
-        name="facility"
-        label="Custom Metadata"
-      />
         <Metadata
           baseKey="customMetadata"
           objectType="instrument"

@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useContext } from "react";
 import {
   Table,
   TableBody,
@@ -13,7 +12,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { getInstruments } from "../../../redux/instruments/operations";
+import { InstrumentsContext } from "../../../modules/instruments/InstrumentsProvider";
 // import { Row } from "./Row";
 import { RowWithContext } from "./Row/RowWithContext";
 
@@ -30,13 +29,15 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
 
 export const List = () => {
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const { isLoaded, instruments } = useSelector(
-    ({ instruments }) => instruments
-  );
+  const {
+    isLoaded,
+    instruments,
+    getInstruments,
+  } = useContext(InstrumentsContext);
+
 
   useEffect(() => {
-    dispatch(getInstruments());
+    getInstruments();
   }, []);
 
   return (
@@ -53,9 +54,6 @@ export const List = () => {
             <TableHead>
               <TableRow>
                 <TableCell className={classes.tableHeaderCell}>Name</TableCell>
-                <TableCell align="right" className={classes.tableHeaderCell}>
-                  Custom Metadata
-                </TableCell>
                 <TableCell
                   align="right"
                   className={classes.tableHeaderCell}

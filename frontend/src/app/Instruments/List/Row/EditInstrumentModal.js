@@ -5,7 +5,6 @@ import {
   DialogTitle,
   DialogContent,
   Box,
-  Typography,
 } from "@material-ui/core";
 import { useForm, FormProvider } from "react-hook-form";
 import { preventDefault } from "../../../../helpers/preventDefault";
@@ -15,7 +14,7 @@ import {
   InstrumentForm,
   validationSchema,
   defaultValues,
-} from '../../InstrumentForm';
+} from "../../InstrumentForm";
 
 export const EditInstrumentModal = ({
   payload: { instrument },
@@ -27,10 +26,11 @@ export const EditInstrumentModal = ({
     defaultValues: { ...defaultValues, ...instrument },
     resolver: yupResolver(validationSchema),
   });
-  
+
   const handleSubmit = (data) => {
     return instrumentsApi.editInstrumentWithMetadata(data).then((data) => {
       handleModalResolve(data);
+      console.log(data)
     });
   };
 
@@ -44,11 +44,7 @@ export const EditInstrumentModal = ({
         component="form"
         onSubmit={preventDefault(form.handleSubmit(handleSubmit))}
       >
-        <DialogTitle>
-          <Typography variant="h4">
-            Edit instrument
-          </Typography>
-        </DialogTitle>
+        <DialogTitle>Edit instrument</DialogTitle>
 
         <DialogContent>
           <FormProvider {...form}>

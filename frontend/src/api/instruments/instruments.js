@@ -23,7 +23,7 @@ export const getInstruments = (config) => {
   return api
     .get("/Instruments", config)
     .then(({ data }) => {
-      return data.map(transformInstrumentResponse);
+    return data.map(transformInstrumentResponse);
     })
     .catch((data) => {
       throw data;

@@ -5,17 +5,12 @@ import {
   DialogTitle,
   DialogContent,
   Box,
-  Typography,
 } from "@material-ui/core";
 import { useForm, FormProvider } from "react-hook-form";
 import { preventDefault } from "../../../../helpers/preventDefault";
 import { yupResolver } from "../../../../utils/validation";
 import * as samplesApi from "../../../../api/samples";
-import {
-  SampleForm,
-  validationSchema,
-  defaultValues,
-} from '../../SampleForm';
+import { SampleForm, validationSchema, defaultValues } from "../../SampleForm";
 
 export const EditSampleModal = ({
   payload: { sample },
@@ -27,7 +22,7 @@ export const EditSampleModal = ({
     defaultValues: { ...defaultValues, ...sample },
     resolver: yupResolver(validationSchema),
   });
-  
+
   const handleSubmit = (data) => {
     return samplesApi.editSampleWithMetadata(data).then((data) => {
       handleModalResolve(data);
@@ -44,11 +39,7 @@ export const EditSampleModal = ({
         component="form"
         onSubmit={preventDefault(form.handleSubmit(handleSubmit))}
       >
-        <DialogTitle>
-          <Typography variant="h4">
-            Edit sample
-          </Typography>
-        </DialogTitle>
+        <DialogTitle>Edit sample</DialogTitle>
 
         <DialogContent>
           <FormProvider {...form}>
