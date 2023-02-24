@@ -251,16 +251,90 @@ def test_addons_delete_metadata_schem_key(client, use_prepop_db):
 
 
 def test_addons_update_metadata_schem_key(client, use_prepop_db):
-    # check this works for a given object_type
     response = client.get("/addons/get_metadata_schema?schema_name=measurement")
-
     schema = json.loads(response.data)
-    assert False
+    n_keys = len(schema["keys"])
+    ind = [k["key_name"] for k in schema["keys"]].index("measurement_type")
+    assert schema["keys"][ind]["type"] == "string"
+
+    mimetype = "application/json"
+    headers = {"Content-Type": mimetype, "Accept": mimetype}
+    data = {
+        "schema_name": "measurement",
+        "key_name": "measurement_type",
+        "new_key_details": {"type": "boolean"},
+    }
+
+    update_response = client.patch(
+        "/addons/metadata_schema_key", data=json.dumps(data), headers=headers
+    )
+
+    response = client.get("/addons/get_metadata_schema?schema_name=measurement")
+    schema = json.loads(response.data)
+    m_keys = len(schema["keys"])
+    ind = [k["key_name"] for k in schema["keys"]].index("measurement_type")
+    assert schema["keys"][ind]["type"] == "boolean"
+
+    assert n_keys == m_keys
+
+    resp = json.loads(update_response.data)
+    assert resp["updatedExisting"] == True
+
+    # test if renaming key works
+    data["new_key_details"]["key_name"] = "toto"
+
+    update_response = client.patch(
+        "/addons/metadata_schema_key", data=json.dumps(data), headers=headers
+    )
+
+    response = client.get("/addons/get_metadata_schema?schema_name=measurement")
+    schema = json.loads(response.data)
+    m_keys = len(schema["keys"])
+    assert "toto" in [k["key_name"] for k in schema["keys"]]
+    assert "measurement_type" not in [k["key_name"] for k in schema["keys"]]
+    assert n_keys == m_keys
 
 
 def test_addons_insert_metadata_schem_key(client, use_prepop_db):
     # check this works for a given object_type
-    response = client.get("/addons/get_metadata_schema?schema_name=measurement")
 
+    response = client.get("/addons/get_metadata_schema?schema_name=measurement")
     schema = json.loads(response.data)
-    assert False
+    n_keys = len(schema["keys"])
+
+    mimetype = "application/json"
+    headers = {"Content-Type": mimetype, "Accept": mimetype}
+    data = {
+        "schema_name": "measurement",
+        "key_name": "new_key",
+        "new_key_details": {"key_name": "key1", "type": "string"},
+    }
+
+    update_response = client.patch(
+        "/addons/metadata_schema_key", data=json.dumps(data), headers=headers
+    )
+
+    response = client.get("/addons/get_metadata_schema?schema_name=measurement")
+    schema = json.loads(response.data)
+    m_keys = len(schema["keys"])
+
+    assert n_keys + 1 == m_keys
+
+    resp = json.loads(update_response.data)
+    assert resp["updatedExisting"] == True
+
+    # check if everything still works if there is no key_name in new_details
+    data["new_key_details"].pop("key_name")
+
+    update_response = client.patch(
+        "/addons/metadata_schema_key", data=json.dumps(data), headers=headers
+    )
+
+    response = client.get("/addons/get_metadata_schema?schema_name=measurement")
+    schema = json.loads(response.data)
+    m_keys = len(schema["keys"])
+
+    assert n_keys + 2 == m_keys
+
+    assert "key1" in [k["key_name"] for k in schema["keys"]]
+    assert "new_key" in [k["key_name"] for k in schema["keys"]]
