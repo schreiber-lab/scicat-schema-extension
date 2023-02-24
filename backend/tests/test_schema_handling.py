@@ -228,3 +228,39 @@ def test_fixed_value_metadata_schemas_post_get2(client, mongodb, use_prepop_db):
     )
 
     assert response.status_code == 200
+
+
+def test_addons_delete_metadata_schem_key(client, use_prepop_db):
+    # check that there is measurement_type in measurement
+    response = client.get("/addons/get_metadata_schema?schema_name=measurement")
+    schema = json.loads(response.data)
+    assert "measurement_type" in [k["key_name"] for k in schema["keys"]]
+
+    # remove measurement type
+    del_response = client.delete(
+        "/addons/metadata_schema_key?schema_name=measurement&key_name=measurement_type"
+    )
+
+    # check that there is measurement_type NOT in measurement
+    response = client.get("/addons/get_metadata_schema?schema_name=measurement")
+    schema = json.loads(response.data)
+    assert "measurement_type" not in [k["key_name"] for k in schema["keys"]]
+
+    resp = json.loads(del_response.data)
+    assert resp["updatedExisting"] == True
+
+
+def test_addons_update_metadata_schem_key(client, use_prepop_db):
+    # check this works for a given object_type
+    response = client.get("/addons/get_metadata_schema?schema_name=measurement")
+
+    schema = json.loads(response.data)
+    assert False
+
+
+def test_addons_insert_metadata_schem_key(client, use_prepop_db):
+    # check this works for a given object_type
+    response = client.get("/addons/get_metadata_schema?schema_name=measurement")
+
+    schema = json.loads(response.data)
+    assert False
