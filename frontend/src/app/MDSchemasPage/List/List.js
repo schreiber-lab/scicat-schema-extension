@@ -18,6 +18,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { getMDSchemas } from "../../../redux/md-schemas/operations";
 import { Row } from "../../../modules/metadata-schemas/Keys/Row";
+import { CreateMDSchemaButton } from "./CreateMDSchemaButton";
 
 const useStyles = makeStyles(({ palette, spacing }) => ({
   root: {
@@ -82,14 +83,14 @@ export const List = () => {
               Schemas of this type not found
             </Typography>
           ) : (
-            mdSchemas.map((mdSchema) => (
-              <Box mb={3}>
+            mdSchemas.map((mdSchema, index) => (
+              <Box key={index} mb={3}>
                 <Typography variant="h5">{mdSchema.schema_name}</Typography>
 
                 {!mdSchema.keys?.length ? (
                   <Typography>Keys weren't found</Typography>
                 ) : (
-                  <TableContainer key={mdSchema.schema_name} component={Paper}>
+                  <TableContainer component={Paper}>
                     <Table aria-label="simple table">
                       <TableHead>
                         <TableRow>
@@ -120,12 +121,15 @@ export const List = () => {
                           <TableCell className={classes.tableHeaderCell}>
                             Allowed
                           </TableCell>
+                          <TableCell className={classes.tableHeaderCell}>
+                          <CreateMDSchemaButton />
+                          </TableCell>
                         </TableRow>
                       </TableHead>
 
                       <TableBody>
-                        {mdSchema.keys?.map((key) => (
-                          <Row key={key.key_name} field={key} />
+                        {mdSchema.keys?.map((key, index) => (
+                          <Row key={index} field={key} />
                         ))}
                       </TableBody>
                     </Table>

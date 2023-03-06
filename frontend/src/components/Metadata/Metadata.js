@@ -28,8 +28,8 @@ export const Metadata = ({ baseKey, objectType, title }) => {
         </Box>
       )}
 
-      {metadataSchemas?.map((schema) => (
-        <Schema key={schema.schema_name} schema={schema} baseKey={baseKey} />
+      {metadataSchemas?.map((schema, index) => (
+        <Schema key={index} schema={schema} baseKey={baseKey} />
       ))}
     </div>
   );
