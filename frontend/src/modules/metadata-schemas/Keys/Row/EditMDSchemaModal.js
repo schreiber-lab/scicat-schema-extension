@@ -10,29 +10,38 @@ import {
 import { useForm, FormProvider } from "react-hook-form";
 import { preventDefault } from "../../../../helpers/preventDefault";
 import { yupResolver } from "../../../../utils/validation";
-import * as datasetsApi from "../../../../api/datasets";
+import * as mdschemasApi from "../../../../api/md-schemas";
 import {
-  DatasetForm,
+  MDSchemaKeyForm,
   validationSchema,
   defaultValues,
-} from "../../../../app/CreationDatasetPage/DatasetForm";
+} from "../../../../app/CreationMDSchemaPage/MDSchemaKeyForm";
 
-export const EditDatasetModal = ({
-  payload: { dataset },
+export const EditMDSchemaModal = ({
+  payload: { field },
   DialogProps,
   handleModalResolve,
   handleModalReject,
 }) => {
-  console.log(dataset);
+  console.log(field);
 
   const form = useForm({
-    defaultValues: { ...defaultValues, ...dataset },
-    resolver: yupResolver(validationSchema),
+    defaultValues: {
+      schema_name: "dataset",
+      key_name: field.key_name,
+      new_key_details: field,
+    },
+    // resolver: yupResolver(validationSchema),
   });
-  console.log(form);
+
   const handleSubmit = (data) => {
-    console.log(data);
-    return datasetsApi.editDataset(data).then((data) => {
+    if (!data.withPredefinedValues) {
+      delete data.allowed;
+    }
+
+    delete data.withPredefinedValues;
+
+    return mdschemasApi.editMDSchemaKey(data).then((data) => {
       handleModalResolve(data);
     });
   };
@@ -40,6 +49,7 @@ export const EditDatasetModal = ({
   return (
     <Dialog maxWidth="lg" {...DialogProps}>
       <Box
+        noValidate
         flexGrow={1}
         display="flex"
         flexDirection="column"
@@ -47,13 +57,15 @@ export const EditDatasetModal = ({
         component="form"
         onSubmit={preventDefault(form.handleSubmit(handleSubmit))}
       >
-        <DialogTitle>Edit dataset</DialogTitle>
+        <DialogTitle>
+          <Typography variant="h4">Edit key</Typography>
+        </DialogTitle>
 
-        <DialogContent>
+        {/* <DialogContent>
           <FormProvider {...form}>
-            <DatasetForm />
+            <MDSchemaKeyForm />
           </FormProvider>
-        </DialogContent>
+        </DialogContent> */}
 
         <DialogActions>
           <Button

@@ -32,3 +32,25 @@ export const createMDSchema = (data) => {
       throw data;
     });
 };
+
+export const deleteMDSchemaKey = (config) => {
+  return api2
+    .delete(`/addons/metadata_schema_key`, config)
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((data) => {
+      throw data;
+    });
+};
+
+export const editMDSchemaKey = (data, config) => {
+  return api2
+    .patch(`/addons/metadata_schema_key`, data, config)
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((data) => {
+      throw data;
+    });
+};
