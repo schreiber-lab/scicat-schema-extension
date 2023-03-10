@@ -61,11 +61,11 @@ export const EditMDSchemaModal = ({
           <Typography variant="h4">Edit key</Typography>
         </DialogTitle>
 
-        {/* <DialogContent>
+        <DialogContent>
           <FormProvider {...form}>
             <MDSchemaKeyForm />
           </FormProvider>
-        </DialogContent> */}
+        </DialogContent>
 
         <DialogActions>
           <Button

@@ -54,3 +54,14 @@ export const editMDSchemaKey = (data, config) => {
       throw data;
     });
 };
+
+export const createMDSchemaKey = (data, config) => {
+  return api2
+    .patch(`/addons/metadata_schema_key`, data, config)
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((data) => {
+      throw data;
+    });
+};

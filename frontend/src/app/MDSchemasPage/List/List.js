@@ -18,7 +18,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { getMDSchemas } from "../../../redux/md-schemas/operations";
 import { Row } from "../../../modules/metadata-schemas/Keys/Row";
-import { CreateMDSchemaButton } from "./CreateMDSchemaButton";
+import { CreateMDSchemaKeyButton } from "./CreateMDSchemaKeyButton";
 
 const useStyles = makeStyles(({ palette, spacing }) => ({
   root: {
@@ -122,14 +122,14 @@ export const List = () => {
                             Allowed
                           </TableCell>
                           <TableCell className={classes.tableHeaderCell}>
-                          <CreateMDSchemaButton />
+                          <CreateMDSchemaKeyButton />
                           </TableCell>
                         </TableRow>
                       </TableHead>
 
                       <TableBody>
                         {mdSchema.keys?.map((key, index) => (
-                          <Row key={index} field={key} />
+                          <Row key={index} field={key}/>
                         ))}
                       </TableBody>
                     </Table>

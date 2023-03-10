@@ -11,6 +11,7 @@ export const DeleteMDSchemaModal = ({
 
     return mdschemasApi.deleteMDSchemaKey({
       params: {
+        schema_name: "dataset",
         key_name: field.key_name,
       }
     }).then(() => {

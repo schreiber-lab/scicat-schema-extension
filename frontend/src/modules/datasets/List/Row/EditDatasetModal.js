@@ -5,7 +5,6 @@ import {
   DialogTitle,
   DialogContent,
   Box,
-  Typography,
 } from "@material-ui/core";
 import { useForm, FormProvider } from "react-hook-form";
 import { preventDefault } from "../../../../helpers/preventDefault";
