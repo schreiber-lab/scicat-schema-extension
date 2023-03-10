@@ -1,8 +1,8 @@
-import { useContext } from "react";
-import { IconButton, TableCell, TableRow } from "@material-ui/core";
+// import { useContext } from "react";
+import { Box, IconButton, TableCell, TableRow } from "@material-ui/core";
 import { useWatch, useFormContext } from "react-hook-form";
 import { stopPropagation } from "../../../../helpers/stopPropagation";
-import { KeysContext } from "../../../keys/KeysProvider";
+// import { KeysContext } from "../../../keys/KeysProvider";
 import { Radio } from "../../../../components";
 import { useModal } from "../../../../components";
 import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
@@ -58,7 +58,8 @@ export const Row = ({ field }) => {
       <TableCell>{String(field.scan_ref)}</TableCell>
       <TableCell>{String(field.changes_likely)}</TableCell>
       <TableCell>{field.allowed?.join(", ") || "-"}</TableCell>
-      <TableCell>
+      <TableCell >
+        <Box display="flex" justifyContent="flex-end">
         <IconButton onClick={stopPropagation(openEditModal)}>
           <EditOutlinedIcon />
         </IconButton>
@@ -66,6 +67,7 @@ export const Row = ({ field }) => {
         <IconButton onClick={stopPropagation(openDeleteModal)}>
           <DeleteOutlineOutlinedIcon />
         </IconButton>
+        </Box>
       </TableCell>
     </TableRow>
   );
