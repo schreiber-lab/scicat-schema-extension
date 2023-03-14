@@ -129,7 +129,7 @@ export const List = () => {
 
                       <TableBody>
                         {mdSchema.keys?.map((key, index) => (
-                          <Row key={index} field={key}/>
+                          <Row key={index} field={key} schemaName={mdSchema.schema_name} />
                         ))}
                       </TableBody>
                     </Table>

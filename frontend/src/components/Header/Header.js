@@ -69,7 +69,7 @@ export const Header = () => {
             variant="h6"
             className={classes.title}
           >
-            SciCat Ingest Extension
+            SciCat Ingest Extension v{process.env.REACT_APP_VERSION}
           </Typography>
 
           <Grid item onClick={handleHelpClick}>

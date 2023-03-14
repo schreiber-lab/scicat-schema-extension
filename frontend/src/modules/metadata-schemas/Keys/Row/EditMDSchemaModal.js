@@ -9,16 +9,19 @@ import {
 } from "@material-ui/core";
 import { useForm, FormProvider } from "react-hook-form";
 import { preventDefault } from "../../../../helpers/preventDefault";
-import { yupResolver } from "../../../../utils/validation";
+// import { yupResolver } from "../../../../utils/validation";
 import * as mdschemasApi from "../../../../api/md-schemas";
 import {
   MDSchemaKeyForm,
-  validationSchema,
-  defaultValues,
+  // validationSchema,
+  // defaultValues,
 } from "../../../../app/CreationMDSchemaPage/MDSchemaKeyForm";
 
 export const EditMDSchemaModal = ({
-  payload: { field },
+  payload: {
+    field, 
+    schemaName,
+   },
   DialogProps,
   handleModalResolve,
   handleModalReject,
@@ -27,9 +30,9 @@ export const EditMDSchemaModal = ({
 
   const form = useForm({
     defaultValues: {
-      schema_name: "dataset",
-      key_name: field.key_name,
-      new_key_details: field,
+      schema_name: schemaName,
+      
+      ...field,
     },
     // resolver: yupResolver(validationSchema),
   });
