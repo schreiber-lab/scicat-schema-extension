@@ -10,7 +10,7 @@ import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import { DeleteMDSchemaModal } from "./DeleteMDSchemaModal";
 import { EditMDSchemaModal } from "./EditMDSchemaModal";
 
-export const Row = ({ field }) => {
+export const Row = ({ field, schemaName }) => {
   const { openModal } = useModal();
   // const { editKey, deleteKey } = useContext(KeysContext);
 
@@ -26,6 +26,7 @@ export const Row = ({ field }) => {
     openModal(EditMDSchemaModal, {
       payload: {
         field,
+        schemaName
       },
       onModalResolved: (field) => {
         // editKey(field);
