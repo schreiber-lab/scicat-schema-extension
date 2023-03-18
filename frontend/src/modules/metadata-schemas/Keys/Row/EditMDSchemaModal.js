@@ -5,7 +5,6 @@ import {
   DialogTitle,
   DialogContent,
   Box,
-  Typography,
 } from "@material-ui/core";
 import { useForm, FormProvider } from "react-hook-form";
 import { preventDefault } from "../../../../helpers/preventDefault";
@@ -18,31 +17,30 @@ import {
 } from "../../../../app/CreationMDSchemaPage/MDSchemaKeyForm";
 
 export const EditMDSchemaModal = ({
-  payload: {
-    field, 
-    schemaName,
-   },
+  payload: { field, schemaName },
   DialogProps,
   handleModalResolve,
   handleModalReject,
 }) => {
-  console.log(field);
-
+  const fieldNamePrefix = "new_key_details.";
   const form = useForm({
     defaultValues: {
       schema_name: schemaName,
-      
-      ...field,
+      key_name: field.key_name,
+      new_key_details: field,
+      withPredefinedValues: !!field.allowed?.length,
+      withUnit: !!field.unit,
     },
     // resolver: yupResolver(validationSchema),
   });
 
   const handleSubmit = (data) => {
     if (!data.withPredefinedValues) {
-      delete data.allowed;
+      data.new_key_details.allowed = [];
     }
 
     delete data.withPredefinedValues;
+    delete data.withUnit;
 
     return mdschemasApi.editMDSchemaKey(data).then((data) => {
       handleModalResolve(data);
@@ -60,13 +58,11 @@ export const EditMDSchemaModal = ({
         component="form"
         onSubmit={preventDefault(form.handleSubmit(handleSubmit))}
       >
-        <DialogTitle>
-          <Typography variant="h4">Edit key</Typography>
-        </DialogTitle>
+        <DialogTitle>Edit key</DialogTitle>
 
         <DialogContent>
           <FormProvider {...form}>
-            <MDSchemaKeyForm />
+            <MDSchemaKeyForm fieldNamePrefix={fieldNamePrefix} />
           </FormProvider>
         </DialogContent>
 
