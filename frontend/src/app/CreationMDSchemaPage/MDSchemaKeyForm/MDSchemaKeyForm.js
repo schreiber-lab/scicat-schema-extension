@@ -10,9 +10,11 @@ import { TextField } from "../../../components/TextField";
 import { Checkbox } from "../../../components/Checkbox";
 import { Autocomplete } from "../../../components/Autocomplete";
 
-export const MDSchemaKeyForm = () => {
+export const MDSchemaKeyForm = ({ fieldNamePrefix = "" }) => {
   const [checkboxes, setCheckboxes] = useState({});
-  const keyType = useWatch({ name: "type" });
+  const keyType = useWatch({ name: fieldNamePrefix + "type" });
+  const withPredefinedValues = useWatch({ name: "withPredefinedValues" });
+  const withUnit = useWatch({ name: "withUnit" });
 
   const handleCheckboxChange =
     (name) =>
@@ -28,7 +30,7 @@ export const MDSchemaKeyForm = () => {
       <TextField
         fullWidth
         margin="dense"
-        name="key_name"
+        name={fieldNamePrefix + "key_name"}
         label="Key name"
         placeholder="Enter key name..."
       />
@@ -38,7 +40,7 @@ export const MDSchemaKeyForm = () => {
         fullWidth
         select
         margin="dense"
-        name="type"
+        name={fieldNamePrefix + "type"}
         label="Type"
       >
         <MenuItem value="string">string</MenuItem>
@@ -59,12 +61,12 @@ export const MDSchemaKeyForm = () => {
           label="Use unit"
         />
 
-        {!!checkboxes.withUnit && (
+        {!!withUnit && (
           <TextField
             fullWidth
             variant="outlined"
             margin="dense"
-            name="unit"
+            name={fieldNamePrefix + "unit"}
             label="Unit"
             placeholder="Enter unit..."
           />
@@ -75,22 +77,22 @@ export const MDSchemaKeyForm = () => {
             control={
               <Checkbox
                 name="withPredefinedValues"
-                checked={checkboxes.withPredefinedValues}
-                onChange={handleCheckboxChange("withPredefinedValues")}
+                // checked={withPredefinedValues}
+                // onChange={handleCheckboxChange("withPredefinedValues")}
               />
             }
             label="Use predefined values"
           />
         )}
 
-        {!!checkboxes.withPredefinedValues && (
+        {!!withPredefinedValues && (
           <Autocomplete
             fullWidth
             multiple
             isCreatable
             variant="outlined"
             margin="dense"
-            name="allowed"
+            name={fieldNamePrefix + "allowed"}
             label="Predefined values"
             placeholder="Enter predefined values..."
           />
@@ -98,15 +100,15 @@ export const MDSchemaKeyForm = () => {
 
         <FormGroup row={true}>
           <FormControlLabel
-            control={<Checkbox name="required" />}
+            control={<Checkbox name={fieldNamePrefix + "required"} />}
             label="Required"
           />
           <FormControlLabel
-            control={<Checkbox name="scan_ref" />}
+            control={<Checkbox name={fieldNamePrefix + "scan_ref"} />}
             label="Scan ref"
           />
           <FormControlLabel
-            control={<Checkbox name="changes_likely" />}
+            control={<Checkbox name={fieldNamePrefix + "changes_likely"} />}
             label="Changes likely"
           />
         </FormGroup>
