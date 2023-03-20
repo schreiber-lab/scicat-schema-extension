@@ -38,6 +38,7 @@ export const Row = ({ field, schemaName }) => {
     openModal(DeleteMDSchemaModal, {
       payload: {
         field,
+        schemaName
       },
       onModalResolved: (field) => {
         // deleteKey(field);

@@ -4,13 +4,14 @@ import { CreateMDSchemaKeyModal } from "./CreateMDSchemaKeyModal";
 import AddIcon from "@material-ui/icons/Add";
 import { useModal } from "../../../components";
 
-export const CreateMDSchemaKeyButton = ({ field }) => {
+export const CreateMDSchemaKeyButton = ({ field, schemaName }) => {
   const { openModal } = useModal();
 
   const openCreateModal = () => {
     openModal(CreateMDSchemaKeyModal, {
       payload: {
         field,
+        schemaName
       },
       onModalResolved: (field) => {
         // createKey(field);

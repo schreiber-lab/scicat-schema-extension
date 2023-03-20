@@ -7,37 +7,37 @@ import {
 } from "@material-ui/core";
 import { useForm, FormProvider } from "react-hook-form";
 import { preventDefault } from "../../../helpers/preventDefault";
-import { yupResolver } from "../../../utils/validation";
+// import { yupResolver } from "../../../utils/validation";
 import * as mdschemasApi from "../../../api/md-schemas";
-import { MDSchemaKeyForm, validationSchema } from "./MDSchemaKeyForm";
-
-const defaultValues = {
-  key_name: null,
-  type: null,
-  unit: null,
-  withPredefinedValues: false,
-  allowed: [],
-  required: false,
-  scan_ref: false,
-  changes_likely: false,
-};
+import { MDSchemaKeyForm } from "./MDSchemaKeyForm";
 
 export const CreateMDSchemaKeyModal = ({
+  payload: { field, schemaName },
   DialogProps,
   handleModalResolve,
   handleModalReject,
 }) => {
+  const fieldNamePrefix = "new_key_details.";
   const form = useForm({
-    defaultValues,
-    resolver: yupResolver(validationSchema),
+    defaultValues: {
+      key_name: field.key_name,
+      schema_name: schemaName,
+      new_key_details: field,
+      withPredefinedValues: !!field.allowed?.length,
+      withUnit: !!field.unit,
+    },
+    // resolver: yupResolver(validationSchema),
   });
+
 
   const handleSubmit = (data) => {
     if (!data.withPredefinedValues) {
-      delete data.allowed;
+      data.new_key_details.allowed = [];
     }
 
     delete data.withPredefinedValues;
+    delete data.withUnit;
+
 
     return mdschemasApi.createMDSchemaKey(data).then((data) => {
     handleModalResolve(data);
@@ -54,7 +54,7 @@ export const CreateMDSchemaKeyModal = ({
 
         <DialogContent>
           <FormProvider {...form}>
-            <MDSchemaKeyForm />
+            <MDSchemaKeyForm fieldNamePrefix={fieldNamePrefix} />
           </FormProvider>
         </DialogContent>
 

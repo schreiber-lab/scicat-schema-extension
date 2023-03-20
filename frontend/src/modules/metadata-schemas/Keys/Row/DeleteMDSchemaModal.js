@@ -2,7 +2,7 @@ import { Button, Dialog, DialogActions, DialogTitle } from "@material-ui/core";
 import * as mdschemasApi from "../../../../api/md-schemas";
 
 export const DeleteMDSchemaModal = ({
-  payload: { field },
+  payload: { field, schemaName },
   DialogProps,
   handleModalResolve,
   handleModalReject,
@@ -11,7 +11,7 @@ export const DeleteMDSchemaModal = ({
 
     return mdschemasApi.deleteMDSchemaKey({
       params: {
-        schema_name: "dataset",
+        schema_name: schemaName,
         key_name: field.key_name,
       }
     }).then(() => {
