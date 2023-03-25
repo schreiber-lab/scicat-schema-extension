@@ -2,18 +2,20 @@
 import { Box, IconButton, TableCell, TableRow } from "@material-ui/core";
 import { useWatch, useFormContext } from "react-hook-form";
 import { stopPropagation } from "../../../../helpers/stopPropagation";
-// import { KeysContext } from "../../../keys/KeysProvider";
+import { KeysContext } from "../../../keys/KeysProvider";
 import { Radio } from "../../../../components";
 import { useModal } from "../../../../components";
 import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import { DeleteMDSchemaModal } from "./DeleteMDSchemaModal";
 import { EditMDSchemaModal } from "./EditMDSchemaModal";
+import { useDispatch } from "react-redux";
+import { deleteSchemaKey } from "../../../../redux/md-schemas/actions";
 
 export const Row = ({ field, schemaName }) => {
   const { openModal } = useModal();
   // const { editKey, deleteKey } = useContext(KeysContext);
-
+  const dispatch = useDispatch();
 
   // React Hook Form
   const formContext = useFormContext();
@@ -41,7 +43,7 @@ export const Row = ({ field, schemaName }) => {
         schemaName
       },
       onModalResolved: (field) => {
-        // deleteKey(field);
+        dispatch(deleteSchemaKey({ schemaName, keyName: field.key_name }));
       },
     });
   };

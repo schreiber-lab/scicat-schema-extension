@@ -12,7 +12,7 @@ import * as mdschemasApi from "../../../api/md-schemas";
 import { MDSchemaKeyForm } from "./MDSchemaKeyForm";
 
 export const CreateMDSchemaKeyModal = ({
-  payload: { field, schemaName },
+  payload: { schemaName },
   DialogProps,
   handleModalResolve,
   handleModalReject,
@@ -20,28 +20,32 @@ export const CreateMDSchemaKeyModal = ({
   const fieldNamePrefix = "new_key_details.";
   const form = useForm({
     defaultValues: {
-      key_name: field.key_name,
+      key_name: null,
       schema_name: schemaName,
-      new_key_details: field,
-      withPredefinedValues: !!field.allowed?.length,
-      withUnit: !!field.unit,
+      new_key_details: {},
+      withPredefinedValues: false,
+      withUnit: false,
     },
     // resolver: yupResolver(validationSchema),
   });
 
-
-  const handleSubmit = (data) => {
-    if (!data.withPredefinedValues) {
-      data.new_key_details.allowed = [];
+  const handleSubmit = (values) => {
+    if (!values.withPredefinedValues) {
+      values.new_key_details.allowed = [];
     }
 
-    delete data.withPredefinedValues;
-    delete data.withUnit;
+    delete values.withPredefinedValues;
+    delete values.withUnit;
+  
+    const data = {
+      ...values,
 
+      key_name: values.new_key_details.key_name,
+    };
 
     return mdschemasApi.createMDSchemaKey(data).then((data) => {
-    handleModalResolve(data);
-  });
+      handleModalResolve(data);
+    });
   };
 
   return (
