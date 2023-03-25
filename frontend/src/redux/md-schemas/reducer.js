@@ -8,7 +8,6 @@ const initialState = {
 };
 
 export const reducer = createReduxReducer(initialState, {
-
   [types.LOAD_MD_SCHEMAS_REQUEST]: (state) => { 
     return {
       ...state,
@@ -33,6 +32,23 @@ export const reducer = createReduxReducer(initialState, {
 
       isLoaded: false,
       mdSchemas: [],
+    };
+  },
+
+  [types.DELETE_SCHEMA_KEY]: (state, { schemaName, keyName }) => { 
+    console.log(schemaName, keyName)
+    return {
+      ...state,
+ 
+      mdSchemas: state.mdSchemas.map((schema) => {
+        return schemaName !== schema.schema_name ? schema : {
+          ...schema,
+          
+          keys: (
+            schema.keys?.filter(({ key_name }) => key_name !== keyName)
+          )
+        }
+      }),
     };
   },
 });

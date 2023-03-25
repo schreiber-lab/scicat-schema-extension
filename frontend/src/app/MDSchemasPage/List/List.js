@@ -83,8 +83,8 @@ export const List = () => {
               Schemas of this type not found
             </Typography>
           ) : (
-            mdSchemas.map((mdSchema, key) => (
-              <Box mb={3}>
+            mdSchemas.map((mdSchema, index) => (
+              <Box mb={3} key={index}>
                 <Typography variant="h5">{mdSchema.schema_name}</Typography>
 
                 {!mdSchema.keys?.length ? (
@@ -122,7 +122,7 @@ export const List = () => {
                             Allowed
                           </TableCell>
                           <TableCell className={classes.tableHeaderCell}>
-                          <CreateMDSchemaKeyButton field={key} schemaName={mdSchema.schema_name}/>
+                          <CreateMDSchemaKeyButton schemaName={mdSchema.schema_name}/>
                           </TableCell>
                         </TableRow>
                       </TableHead>
