@@ -3,9 +3,12 @@ import { stopPropagation } from "../../../helpers/stopPropagation";
 import { CreateMDSchemaKeyModal } from "./CreateMDSchemaKeyModal";
 import AddIcon from "@material-ui/icons/Add";
 import { useModal } from "../../../components";
+import { useDispatch } from "react-redux";
+import { addSchemaKey } from "../../../redux/md-schemas/actions";
 
 export const CreateMDSchemaKeyButton = ({ schemaName }) => {
   const { openModal } = useModal();
+  const dispatch = useDispatch();
 
   const openCreateModal = () => {
     openModal(CreateMDSchemaKeyModal, {
@@ -13,7 +16,7 @@ export const CreateMDSchemaKeyButton = ({ schemaName }) => {
         schemaName
       },
       onModalResolved: (field) => {
-        // createKey(field);
+        dispatch(addSchemaKey({ schemaName }));
       },
     });
   }; 

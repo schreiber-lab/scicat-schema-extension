@@ -51,5 +51,39 @@ export const reducer = createReduxReducer(initialState, {
       }),
     };
   },
+
+  [types.EDIT_SCHEMA_KEY]: (state, { schemaName, keyName, updatedKey }) => {
+    console.log(schemaName, updatedKey)
+    return {
+      ...state,
+
+      mdSchemas: state.mdSchemas.map((schema) => {
+        return schemaName !== schema.schema_name ? schema : {
+          ...schema,
+
+          keys: schema.keys.map((key) => {
+            console.log(key.key_name, updatedKey.key_name)
+            return key.key_name === keyName ? updatedKey : key
+          })
+        }
+      }),
+    };
+  },
+
+  [types.ADD_SCHEMA_KEY]: (state, { schemaName }, key) => {
+    return {
+      ...state,
+
+      mdSchemas: state.mdSchemas.map((schema) => {
+        return schemaName !== schema.schema_name ? schema : {
+          ...schema,
+
+
+          keys: [key, ...schema.keys],
+        }
+      }),
+    };
+  },
 });
+
 

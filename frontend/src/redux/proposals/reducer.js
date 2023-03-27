@@ -15,6 +15,7 @@ export const reducer = createReduxReducer(initialState, {
       proposals: [proposal, ...state.proposals],
     };
   },
+  
   [types.LOAD_PROPOSALS_REQUEST]: (state) => { 
     return {
       ...state,
@@ -42,3 +43,4 @@ export const reducer = createReduxReducer(initialState, {
     };
   },
 });
+

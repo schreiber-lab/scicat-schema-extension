@@ -2,7 +2,7 @@
 import { Box, IconButton, TableCell, TableRow } from "@material-ui/core";
 import { useWatch, useFormContext } from "react-hook-form";
 import { stopPropagation } from "../../../../helpers/stopPropagation";
-import { KeysContext } from "../../../keys/KeysProvider";
+// import { KeysContext } from "../../../keys/KeysProvider";
 import { Radio } from "../../../../components";
 import { useModal } from "../../../../components";
 import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
@@ -11,6 +11,7 @@ import { DeleteMDSchemaModal } from "./DeleteMDSchemaModal";
 import { EditMDSchemaModal } from "./EditMDSchemaModal";
 import { useDispatch } from "react-redux";
 import { deleteSchemaKey } from "../../../../redux/md-schemas/actions";
+import { editSchemaKey } from "../../../../redux/md-schemas/actions";
 
 export const Row = ({ field, schemaName }) => {
   const { openModal } = useModal();
@@ -21,17 +22,15 @@ export const Row = ({ field, schemaName }) => {
   const formContext = useFormContext();
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const isFixedValueEntries = !!(formContext && useWatch({ name: "fixed_value_entries" }));
-  console.log(field);
   
-
   const openEditModal = () => {
     openModal(EditMDSchemaModal, {
       payload: {
         field,
         schemaName
       },
-      onModalResolved: (field) => {
-        // editKey(field);
+      onModalResolved: (updatedKey) => {
+        dispatch(editSchemaKey({ schemaName, keyName: field.key_name, updatedKey }));
       },
     });
   };
