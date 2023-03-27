@@ -42,8 +42,9 @@ export const EditMDSchemaModal = ({
     delete data.withPredefinedValues;
     delete data.withUnit;
 
-    return mdschemasApi.editMDSchemaKey(data).then((data) => {
-      handleModalResolve(data);
+    return mdschemasApi.editMDSchemaKey(data).then(() => {
+      console.log(data)
+      handleModalResolve(data.new_key_details);
     });
   };
 

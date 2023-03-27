@@ -41,7 +41,7 @@ export const List = () => {
   const dispatch = useDispatch();
   const [schemaType, setSchemaType] = useState("dataset");
   const { isLoaded, mdSchemas } = useSelector(({ mdSchemas }) => mdSchemas);
-
+console.log(mdSchemas)
   const handleSchemaTypeChange = ({ target: { value } }) => {
     dispatch(getMDSchemas({ object_type: value }));
     setSchemaType(value);
