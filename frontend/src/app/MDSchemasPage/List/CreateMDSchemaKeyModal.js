@@ -43,8 +43,8 @@ export const CreateMDSchemaKeyModal = ({
       key_name: values.new_key_details.key_name,
     };
 
-    return mdschemasApi.createMDSchemaKey(data).then((data) => {
-      handleModalResolve(data);
+    return mdschemasApi.createMDSchemaKey(data).then(() => {
+      handleModalResolve(data.new_key_details);
     });
   };
 
