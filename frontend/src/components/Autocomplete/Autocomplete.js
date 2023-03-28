@@ -1,5 +1,5 @@
 import { useState, forwardRef, useEffect, useCallback } from "react";
-import { isObject, isEqual, debounce } from "lodash";
+import { isObject, isEqual, debounce, isUndefined } from "lodash";
 import cn from "classnames";
 import {
   makeStyles,
@@ -188,6 +188,12 @@ export const Autocomplete = forwardRef(({
       setIsFetched(false);
     }
   }, [ open ]);
+
+  useEffect(() => {
+    if (!isUndefined(valueProp) && !isEqual(valueProp, value)) {
+      setValue(valueProp);
+    }
+  }, [ valueProp, value ]);
 
   return (
     <MuiAutocomplete
