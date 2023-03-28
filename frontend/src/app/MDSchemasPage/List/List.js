@@ -121,8 +121,9 @@ console.log(mdSchemas)
                           <TableCell className={classes.tableHeaderCell}>
                             Allowed
                           </TableCell>
+                          
                           <TableCell className={classes.tableHeaderCell}>
-                          <CreateMDSchemaKeyButton schemaName={mdSchema.schema_name}/>
+                            <CreateMDSchemaKeyButton schemaName={mdSchema.schema_name}/>
                           </TableCell>
                         </TableRow>
                       </TableHead>

@@ -70,7 +70,7 @@ export const reducer = createReduxReducer(initialState, {
     };
   },
 
-  [types.ADD_SCHEMA_KEY]: (state, { schemaName }, key) => {
+  [types.ADD_SCHEMA_KEY]: (state, { schemaName, newKey }) => {
     return {
       ...state,
 
@@ -79,7 +79,7 @@ export const reducer = createReduxReducer(initialState, {
           ...schema,
 
 
-          keys: [key, ...schema.keys],
+          keys: [ newKey, ...schema.keys ],
         }
       }),
     };

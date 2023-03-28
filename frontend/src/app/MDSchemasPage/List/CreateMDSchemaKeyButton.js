@@ -1,10 +1,10 @@
-import { IconButton, Fab, Box } from "@material-ui/core";
-import { stopPropagation } from "../../../helpers/stopPropagation";
-import { CreateMDSchemaKeyModal } from "./CreateMDSchemaKeyModal";
-import AddIcon from "@material-ui/icons/Add";
-import { useModal } from "../../../components";
 import { useDispatch } from "react-redux";
+import { IconButton, Fab, Box } from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
+import { stopPropagation } from "../../../helpers/stopPropagation";
+import { useModal } from "../../../components";
 import { addSchemaKey } from "../../../redux/md-schemas/actions";
+import { CreateMDSchemaKeyModal } from "./CreateMDSchemaKeyModal";
 
 export const CreateMDSchemaKeyButton = ({ schemaName }) => {
   const { openModal } = useModal();
@@ -15,8 +15,8 @@ export const CreateMDSchemaKeyButton = ({ schemaName }) => {
       payload: {
         schemaName
       },
-      onModalResolved: (field) => {
-        dispatch(addSchemaKey({ schemaName }));
+      onModalResolved: (newKey) => {
+        dispatch(addSchemaKey({ schemaName, newKey }));
       },
     });
   }; 
