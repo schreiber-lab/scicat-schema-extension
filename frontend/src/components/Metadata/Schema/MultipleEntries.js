@@ -50,7 +50,7 @@ export const MultipleEntries = ({ isVisible, schema, baseKey }) => {
             </Grid>
 
             <Grid item>
-              <IconButton color="error" onClick={() => remove(index)}>
+              <IconButton onClick={() => remove(index)}>
                 <CloseIcon />
               </IconButton>
             </Grid>
