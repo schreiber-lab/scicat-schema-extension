@@ -21,7 +21,7 @@ const transformSampleResponse = (sample) => {
 
 export const getSamples = (config) => {
   return api
-    .get("/Samples/fullquery", config)
+    .get("/samples/fullquery", config)
     .then(({ data }) => {
       return data.map(transformSampleResponse);
     })
@@ -32,7 +32,7 @@ export const getSamples = (config) => {
 
 export const getSample = (id, config) => {
   return api
-    .get(`/Samples/${id}`, config)
+    .get(`/samples/${id}`, config)
     .then(({ data }) => {
       return data;
     })
@@ -43,7 +43,7 @@ export const getSample = (id, config) => {
 
 export const createSample = (data) => {
     return api
-      .post('/Samples', transformSampleRequest(data))
+      .post('/samples', transformSampleRequest(data))
       .then(({ data }) => {
         return data;
       })
@@ -54,7 +54,7 @@ export const createSample = (data) => {
 
   export const deleteSample = (id, config) => {
     return api
-      .delete(`/Samples/${id}`, config)
+      .delete(`/samples/${id}`, config)
       .then(({ data }) => {
         return data;
       })
@@ -63,9 +63,10 @@ export const createSample = (data) => {
       });
   };
 
+////////////////////////////////////////
   export const editSample = (sample, config) => {
     return api
-      .put(`/Samples/${sample.sampleId}`, transformSampleRequest(sample), config)
+      .patch(`/samples/${sample.sampleId}`, transformSampleRequest(sample), config)
       .then(({ data }) => {
         return data;
       })
@@ -74,10 +75,11 @@ export const createSample = (data) => {
       });
   };
 
+/////////////////////////////
   export const editSampleWithMetadata = (sample, config) => {
     return api
-      .put(
-        `/Samples/${sample.sampleId}`,
+      .patch(
+        `/samples/${sample.sampleId}`,
         transformSampleRequest(sample),
         config
       )
