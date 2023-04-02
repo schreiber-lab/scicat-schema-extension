@@ -13,7 +13,7 @@ export const getProposals = (config) => {
 
 export const getProposal = (id, config) => {
   return api
-    .get(`/Proposals/${id}`, config)
+    .get(`/proposals/${id}`, config)
     .then(({ data }) => {
       return data;
     })

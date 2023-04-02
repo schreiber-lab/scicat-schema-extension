@@ -39,7 +39,7 @@ const injectDatasetPid = ({ pid, ...dataset }) => {
 
 export const getDatasets = (config) => {
   return api
-    .get("/Datasets/fullquery", config)
+    .get("/datasets/fullquery", config)
     .then(({ data }) => {
       return data.map(transformDatasetResponse);
     })
@@ -50,7 +50,7 @@ export const getDatasets = (config) => {
 
 export const getDataset = (id, config = {}) => {
   return api
-    .get("/Datasets/findOne", {
+    .get("/datasets/findOne", {
       ...config,
 
       headers: {
@@ -75,7 +75,7 @@ export const getDataset = (id, config = {}) => {
 
 export const createDataset = (data) => {
   return api
-    .post("/Datasets", injectDatasetPid(transformDatasetRequest(data)))
+    .post("/datasets", injectDatasetPid(transformDatasetRequest(data)))
     .then(({ data }) => {
       return data;
     })
@@ -86,7 +86,7 @@ export const createDataset = (data) => {
 
 export const validateDataset = (data) => {
   return api
-    .post("/Datasets/isValid", injectDatasetPid(transformDatasetRequest(data)))
+    .post("/datasets/isValid", injectDatasetPid(transformDatasetRequest(data)))
     .then(({ data }) => {
       return data;
     })
@@ -95,11 +95,12 @@ export const validateDataset = (data) => {
     });
 };
 
+/////////////////////////////////////////
 export const editDataset = ({ pid, ...dataset }, config) => {
   console.log(dataset);
   return api
-    .put(
-      `/Datasets/${encodeURIComponent(pid)}`,
+    .patch(
+      `/datasets/${encodeURIComponent(pid)}`,
       transformDatasetRequest(dataset),
       config
     )
