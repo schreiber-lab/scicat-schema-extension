@@ -101,7 +101,6 @@ export const DatasetFormWithSampleAutocomp = () => {
         <ProposalsAutocomplete disabled name="proposalId" />
       </Grid> */}
 
-
       <Grid item sm={2} md={4}>
         <SamplesAutocomplete name="sampleId" />
       </Grid>
@@ -116,16 +115,26 @@ export const DatasetFormWithSampleAutocomp = () => {
         />
       </Grid>
 
-      <Grid item sm={2} md={4}>
+      {/* <Grid item sm={2} md={4}>
         <TextField
           fullWidth
           name="group"
           label="Group"
           placeholder="Enter group..."
         />
+      </Grid> */}
+
+      <Grid item sm={2} md={4}>
+        <TextField
+          required
+          fullWidth
+          name="ownerEmail"
+          label="Owner email"
+          placeholder="Enter owner email..."
+        />
       </Grid>
 
-      {/* <Grid item sm={2} md={4}>
+      <Grid item sm={2} md={4}>
         <TextField
           required
           fullWidth
@@ -133,9 +142,9 @@ export const DatasetFormWithSampleAutocomp = () => {
           label="Creation Location"
           placeholder="Enter creation location..."
         />
-      </Grid> */}
+      </Grid>
 
-      {/* <Grid item sm={2} md={4}>
+      <Grid item sm={2} md={4}>
         <TextField
           required
           fullWidth
@@ -143,7 +152,7 @@ export const DatasetFormWithSampleAutocomp = () => {
           label="Principal Investigator"
           placeholder="Enter principal investigator..."
         />
-      </Grid> */}
+      </Grid>
 
       <Grid item sm={2} md={4}>
         <TextField
