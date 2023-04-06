@@ -1,11 +1,11 @@
 import { api } from "../api";
-import { transformMetadataSchemaRequest, transformMetadataSchemaResponse } from "../metadata-schemas";
+// import { transformMetadataSchemaRequest, transformMetadataSchemaResponse } from "../metadata-schemas";
 
 const transformSampleRequest = (sample) => {
   return {
     ...sample,
 
-    sampleCharacteristics: transformMetadataSchemaRequest(sample.sampleCharacteristics)
+    // sampleCharacteristics: transformMetadataSchemaRequest(sample.sampleCharacteristics)
   };
 };
 
@@ -13,9 +13,9 @@ const transformSampleResponse = (sample) => {
   return {
     ...sample,
 
-    sampleCharacteristics: transformMetadataSchemaResponse(
-      sample.sampleCharacteristics
-    ),
+    // sampleCharacteristics: transformMetadataSchemaResponse(
+    //   sample.sampleCharacteristics
+    // ),
   };
 };
 
