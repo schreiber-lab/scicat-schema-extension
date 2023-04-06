@@ -115,16 +115,26 @@ export const DatasetForm = () => {
         />
       </Grid>
 
-      <Grid item sm={2} md={4}>
+      {/* <Grid item sm={2} md={4}>
         <TextField
           fullWidth
           name="group"
           label="Group"
           placeholder="Enter group..."
         />
+      </Grid> */}
+
+      <Grid item sm={2} md={4}>
+        <TextField
+          required
+          fullWidth
+          name="ownerEmail"
+          label="Owner email"
+          placeholder="Enter owner email..."
+        />
       </Grid>
 
-      {/* <Grid item sm={2} md={4}>
+      <Grid item sm={2} md={4}>
         <TextField
           required
           fullWidth
@@ -132,9 +142,9 @@ export const DatasetForm = () => {
           label="Creation Location"
           placeholder="Enter creation location..."
         />
-      </Grid> */}
+      </Grid>
 
-      {/* <Grid item sm={2} md={4}>
+      <Grid item sm={2} md={4}>
         <TextField
           required
           fullWidth
@@ -142,7 +152,7 @@ export const DatasetForm = () => {
           label="Principal Investigator"
           placeholder="Enter principal investigator..."
         />
-      </Grid> */}
+      </Grid>
 
       <Grid item sm={2} md={4}>
         <TextField
