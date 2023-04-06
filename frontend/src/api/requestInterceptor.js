@@ -6,7 +6,7 @@ export const requestInterceptor = (config) => {
   config.headers = {
     ...(config.headers || {}),
     
-    Authorization: config.headers?.Authorization || authToken,
+    Authorization: `Bearer ${config.headers?.Authorization || authToken}`,
   };
   
   return config;
