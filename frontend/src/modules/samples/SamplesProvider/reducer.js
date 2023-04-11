@@ -18,6 +18,15 @@ export const reducer = createHookReducer({
     };
   },
 
+  [types.DELETE_SAMPLE]: (state, sample) => {
+    return {
+      ...state,
+
+      samples: state.samples.filter(
+        ({ sampleId }) => sampleId !== sample.sampleId
+      ),
+    };
+  },
   [types.EDIT_SAMPLE]: (state, updatedSample) => {
     console.log(state)
     return {

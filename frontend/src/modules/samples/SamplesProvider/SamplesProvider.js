@@ -41,6 +41,10 @@ export const SamplesProvider = ({ children }) => {
     dispatch({ type: types.ADD_SAMPLE, payload });
   };
 
+  const deleteSample = (payload) => {
+    dispatch({ type: types.DELETE_SAMPLE, payload });
+  };
+
   const editSample = (payload) => {
     dispatch({ type: types.EDIT_SAMPLE, payload });
   };
@@ -52,6 +56,7 @@ export const SamplesProvider = ({ children }) => {
     getSamples,
     addSample,
     editSample,
+    deleteSample
   };
 
   useEffect(() => {

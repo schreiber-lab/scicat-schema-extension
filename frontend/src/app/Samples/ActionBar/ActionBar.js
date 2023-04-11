@@ -1,36 +1,36 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { Container, Toolbar, Button, Grid } from "@material-ui/core";
-// import { Autocomplete } from "@material-ui/lab";
-// import Autocomplete from '@material-ui/lab/Autocomplete';
-// import { Autocomplete } from "../../../components/Autocomplete";
-import { FormModal } from "../FormModal";
-// import { SamplesAutocomplete } from "./SamplesAutocomplete";
+import { stopPropagation } from "../../../helpers/stopPropagation";
+import { SamplesContext } from "../../../modules/samples/SamplesProvider";
+import { useModal } from "../../../components";
+import { AddSampleModal } from "../AddSampleModal";
 
-export const ActionBar = () => {
-  const [open, setOpen] = useState(false);
+export const ActionBar = ({ sample, ...props }) => {
+  const { openModal } = useModal();
+  const { addSample } = useContext(SamplesContext);
 
-  const openFormModal = () => {
-    setOpen(true);
-  };
-
-  const handleFormModalClose = () => {
-    setOpen(false);
+  const openAddModal = () => {
+    openModal(AddSampleModal, {
+      payload: {
+        sample,
+      },
+      onModalResolved: (sample) => {
+        addSample(sample);
+      },
+    });
   };
 
   return (
-    <Container>
+    <Container {...props}>
       <Toolbar disableGutters>
         <Grid container>
-          <Grid item xs>
-            {/* <SamplesAutocomplete style={{ width: 300 }} /> */}
-          </Grid>
 
           <Grid item>
-            <Button color="primary" variant="contained" onClick={openFormModal}>
+            <Button  color="primary" variant="contained" onClick={stopPropagation(openAddModal)}>
               Create Sample
             </Button>
 
-            <FormModal isOpen={open} onClose={handleFormModalClose} />
+            <AddSampleModal />
           </Grid>
         </Grid>
       </Toolbar>

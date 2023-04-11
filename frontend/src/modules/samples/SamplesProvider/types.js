@@ -1,4 +1,5 @@
 export const ADD_SAMPLE = 'ADD_SAMPLE';
+export const DELETE_SAMPLE = 'DELETE_SAMPLE';
 export const RESET_SAMPLES = 'RESET_SAMPLES';
 export const APPLY_FILTER = 'APPLY_FILTER';
 export const EDIT_SAMPLE = 'EDIT_SAMPLE';

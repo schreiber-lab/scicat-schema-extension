@@ -8,6 +8,13 @@ export const SampleForm = () => {
         required
         fullWidth
         margin="dense"
+        name="sampleId"
+        label="Sample Id"
+      />
+      <TextField
+        required
+        fullWidth
+        margin="dense"
         name="description"
         label="Sample Description"
       />
@@ -22,11 +29,11 @@ export const SampleForm = () => {
         label="Owner Group"
         placeholder="Use a group you have access to"
       />
-        <Metadata
-          baseKey="sampleCharacteristics"
-          objectType="sample"
-          title="Sample Characteristics"
-        />
+      <Metadata
+        baseKey="sampleCharacteristics"
+        objectType="sample"
+        title="Sample Characteristics"
+      />
     </>
   );
 };
