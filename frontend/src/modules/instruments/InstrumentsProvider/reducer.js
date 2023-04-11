@@ -18,6 +18,17 @@ export const reducer = createHookReducer({
     };
   },
 
+  [types.DELETE_INSTRUMENT]: (state, instrument) => {
+    return {
+      ...state,
+
+      instruments: state.instruments.filter(
+        ({ pid }) => pid !== instrument.pid
+      ),
+    };
+  },
+
+
   [types.EDIT_INSTRUMENT]: (state, updatedInstrument) => {
     console.log(state)
     return {

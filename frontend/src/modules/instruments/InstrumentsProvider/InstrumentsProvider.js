@@ -41,6 +41,10 @@ export const InstrumentsProvider = ({ children }) => {
     dispatch({ type: types.ADD_INSTRUMENT, payload });
   };
 
+  const deleteInstrument = (payload) => {
+    dispatch({ type: types.DELETE_INSTRUMENT, payload });
+  };
+
   const editInstrument = (payload) => {
     dispatch({ type: types.EDIT_INSTRUMENT, payload });
   };
@@ -51,6 +55,7 @@ export const InstrumentsProvider = ({ children }) => {
     applyFilter,
     getInstruments,
     addInstrument,
+    deleteInstrument,
     editInstrument,
   };
 

@@ -53,6 +53,17 @@ export const createInstrument = (data) => {
     });
 };
 
+export const deleteInstrument = (id, config) => {
+  return api
+    .delete(`/Instruments/${id}`, config)
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((data) => {
+      throw data;
+    });
+};
+
 export const editInstrumentWithMetadata = (instrument, config) => {
   return api
     .put(
