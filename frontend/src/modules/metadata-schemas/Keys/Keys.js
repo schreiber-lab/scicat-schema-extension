@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import { useWatch, useFormContext } from "react-hook-form";
 import { makeStyles } from "@material-ui/core/styles";
-import { Row } from "./Row";
+import { SecondRow } from "./Row/SecondRow";
 
 const useStyles = makeStyles(({ palette }) => ({
   tableHeaderCell: {
@@ -56,7 +56,7 @@ export const Keys = ({ keys }) => {
 
         <TableBody>
           {keys?.map((key) => (
-            <Row key={key.key_name} field={key} />
+            <SecondRow key={key.key_name} field={key} />
           ))}
         </TableBody>
       </Table>

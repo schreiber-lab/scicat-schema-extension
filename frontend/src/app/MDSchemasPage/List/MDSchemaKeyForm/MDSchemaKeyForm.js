@@ -52,7 +52,7 @@ export const MDSchemaKeyForm = ({ fieldNamePrefix = "" }) => {
       <FormGroup>
         <FormControlLabel
           control={
-            <MuiCheckbox
+            <Checkbox
               name="withUnit"
               checked={checkboxes.withUnit}
               onChange={handleCheckboxChange("withUnit")}
