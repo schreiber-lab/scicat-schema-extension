@@ -37,6 +37,7 @@ export const CreateMDSchemaKeyModal = ({
     }
 
     delete data.withPredefinedValues;
+    delete data.withUnit
 
     handleModalResolve(data);
   };
@@ -65,7 +66,7 @@ export const CreateMDSchemaKeyModal = ({
           </Button>
 
           <Button type="submit" color="primary" variant="contained">
-            Add key
+            Add key 6
           </Button>
         </DialogActions>
       </form>
