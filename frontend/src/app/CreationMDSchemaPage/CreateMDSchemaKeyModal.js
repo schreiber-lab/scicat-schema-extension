@@ -66,7 +66,7 @@ export const CreateMDSchemaKeyModal = ({
           </Button>
 
           <Button type="submit" color="primary" variant="contained">
-            Add key 6
+            Add key
           </Button>
         </DialogActions>
       </form>
