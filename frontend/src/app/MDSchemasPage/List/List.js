@@ -88,7 +88,12 @@ console.log(mdSchemas)
                 <Typography variant="h5">{mdSchema.schema_name}</Typography>
 
                 {!mdSchema.keys?.length ? (
-                  <Typography>Keys weren't found</Typography>
+                   <TableHead>
+                  <Typography>No keys of these schema were found. Press the button to create a new key. </Typography>
+                  <TableCell >
+                  <CreateMDSchemaKeyButton schemaName={mdSchema.schema_name}/>
+                </TableCell>
+                </TableHead>
                 ) : (
                   <TableContainer component={Paper}>
                     <Table aria-label="simple table">
