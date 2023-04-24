@@ -6,6 +6,8 @@ FROM node:14.19-alpine
 COPY . /home/node/app
 WORKDIR /home/node/app
 RUN npm --dd install
+ARG REACT_APP_VERSION
+ENV REACT_APP_VERSION=${REACT_APP_VERSION}
 RUN npm --dd run-script build
 
 #
