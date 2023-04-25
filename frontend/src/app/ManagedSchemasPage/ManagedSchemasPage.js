@@ -3,10 +3,8 @@ import { List } from "./List";
 
 export const ManagedSchemasPage = () => {
   return (
-    <>
-      <Container >
-        <List />
-      </Container>
-    </>
+    <Container>
+      <List />
+    </Container>
   );
 };

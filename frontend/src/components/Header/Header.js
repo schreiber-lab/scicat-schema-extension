@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { AppBar, Toolbar, Typography, Button, Grid } from "@material-ui/core";
 import { actions } from "../../redux/auth";
-import { env } from '../../env';
+import { env } from "../../env";
 import { LoginModal } from "./LoginModal";
 import { Menu } from "./Menu";
 
@@ -40,15 +40,11 @@ export const Header = () => {
   };
 
   const handleAboutClick = () => {
-    window.open(
-      `${env.REACT_APP_API_URL2}/about/`
-    );
+    window.open(`${env.REACT_APP_API_URL2}/about/`);
   };
 
   const handleHelpClick = () => {
-    window.open(
-      `${env.REACT_APP_API_URL2}/help/`
-    );
+    window.open(`${env.REACT_APP_API_URL2}/help/`);
   };
 
   const logOut = () => {
@@ -69,7 +65,7 @@ export const Header = () => {
             variant="h6"
             className={classes.title}
           >
-            SciCat Ingest Extension
+            SciCat Ingest Extension v{process.env.REACT_APP_VERSION}
           </Typography>
 
           <Grid item onClick={handleHelpClick}>

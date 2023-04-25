@@ -14,7 +14,6 @@ import { CreateMDSchemaKeyModal } from "../CreateMDSchemaKeyModal";
 import { Checkbox } from "../../../components/Checkbox";
 import { useModal } from "../../../components";
 
-
 export const MDSchemaForm = () => {
   const { getValues, reset } = useFormContext();
   const keys = useWatch({ name: "keys" });

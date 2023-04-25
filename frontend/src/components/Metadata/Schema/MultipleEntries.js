@@ -1,9 +1,11 @@
 import { Fragment } from "react";
 import { useFormContext, useFieldArray } from "react-hook-form";
-import { IconButton, Grid, Button, Typography } from "@material-ui/core";
+import { Grid, Button, Typography } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import AddIcon from "@material-ui/icons/Add";
+import { IconButton } from "../../IconButton";
 import { Entry } from "./Entry";
+
 
 export const MultipleEntries = ({ isVisible, schema, baseKey }) => {
   const { control, getValues } = useFormContext();
@@ -48,7 +50,7 @@ export const MultipleEntries = ({ isVisible, schema, baseKey }) => {
             </Grid>
 
             <Grid item>
-              <IconButton color="error" onClick={() => remove(index)}>
+              <IconButton onClick={() => remove(index)}>
                 <CloseIcon />
               </IconButton>
             </Grid>

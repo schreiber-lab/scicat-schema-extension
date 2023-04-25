@@ -6,9 +6,9 @@ import {
   MenuItem,
   Checkbox as MuiCheckbox,
 } from "@material-ui/core";
-import { TextField } from "../../../components/TextField";
-import { Checkbox } from "../../../components/Checkbox";
-import { Autocomplete } from "../../../components/Autocomplete";
+import { TextField } from "../../../../components/TextField";
+import { Checkbox } from "../../../../components/Checkbox";
+import { Autocomplete } from "../../../../components/Autocomplete";
 
 export const MDSchemaKeyForm = ({ fieldNamePrefix = "" }) => {
   const [checkboxes, setCheckboxes] = useState({});
@@ -24,7 +24,6 @@ export const MDSchemaKeyForm = ({ fieldNamePrefix = "" }) => {
         [name]: checked,
       }));
     };
-
 
   return (
     <>

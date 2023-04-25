@@ -1,5 +1,5 @@
 import { useState, forwardRef, useEffect, useCallback } from "react";
-import { isObject, isEqual, debounce } from "lodash";
+import { isObject, isEqual, debounce, isUndefined } from "lodash";
 import cn from "classnames";
 import {
   makeStyles,
@@ -65,10 +65,8 @@ export const Autocomplete = forwardRef(({
   const [ options, setOptions ] = useState([]);
   const [ additionalData, setAdditionalData ] = useState({});
   const [ hasMore, setHasMore ] = useState(true);
-  const [ value, setValue ] = useState(null);
   const [ isFetched, setIsFetched ] = useState(false);
   const loading = isAsync && open && !isFetched;
-  const clearButtonIsVisible = !props.disableClearable && !!(multiple ? value?.length : value);
   // React Hook Form
   const formContext = useFormContext();
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -76,6 +74,8 @@ export const Autocomplete = forwardRef(({
     name, control: formContext?.control
   })) || {};
   const errorMessage = fieldState?.error?.message;
+  const [ value, setValue ] = useState(formContext?.watch(name) || null);
+  const clearButtonIsVisible = !props.disableClearable && !!(multiple ? value?.length : value);
 
   const getOptionLabel = (option) => {
     return option?.isCreatableOption ? option.name : getOptionLabelProp(option);
@@ -84,12 +84,12 @@ export const Autocomplete = forwardRef(({
   const transformValueToInputValue = (value) => {
     const optionLabel = getOptionLabel(value);
 
-    return (isObject(value) && !isObject(optionLabel) && optionLabel ) || '';
+    return (!isObject(optionLabel) && optionLabel) || '';
   };
 
-  const valueAsInputValue = transformValueToInputValue(valueProp) || transformValueToInputValue(value);
+  const valueAsInputValue = transformValueToInputValue(value);
 
-  const handleChange = (event, selectedOption) => {    
+  const handleChange = (event, selectedOption) => {  
     if (isCreatable) {
       const creatableOption = multiple
         ? selectedOption?.find(({ isCreatableOption }) => isCreatableOption)
@@ -99,7 +99,6 @@ export const Autocomplete = forwardRef(({
         setInputValue('');
 
         onCreate(creatableOption.inputValue).then((option) => {
-          console.log(option)
           if (!multiple) {
             setInputValue(getOptionLabel(option));
           }
@@ -191,10 +190,10 @@ export const Autocomplete = forwardRef(({
   }, [ open ]);
 
   useEffect(() => {
-    if (!isEqual(valueProp, value)) {
+    if (!isUndefined(valueProp) && !isEqual(valueProp, value)) {
       setValue(valueProp);
     }
-  }, [ valueProp ]);
+  }, [ valueProp, value ]);
 
   return (
     <MuiAutocomplete
