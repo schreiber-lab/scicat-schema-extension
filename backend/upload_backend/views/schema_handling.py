@@ -11,6 +11,8 @@ from ..marshalling_schema import (
     MdSchemaName,
     MdSchemaSchema,
     TypeSchema,
+    MdSchemaKey,
+    MdSchemaKeyUpdate,
 )
 from ..md_schema import validator
 
@@ -75,6 +77,66 @@ def get_metadata_schema(schema_name=None):
     md_schemas = db.metadata_schemas.find({"schema_name": schema_name}, {"_id": False})
     dyn_schemas = [md for md in md_schemas][0]
     return flask.jsonify(dyn_schemas)
+
+
+@bp.patch("/addons/metadata_schema_key")
+@flask_apispec.use_kwargs(MdSchemaKeyUpdate, location="json")
+def update_metadata_schema_key(schema_name=None, key_name=None, new_key_details=None):
+
+    db = flask.current_app.db
+
+    # make sure that there is also a key_name in new_key_details
+    if "key_name" not in new_key_details:
+        new_key_details["key_name"] = key_name
+
+    try:
+        md_schema = db.metadata_schemas.find({"schema_name": schema_name}).next()
+        object_id = md_schema.pop("_id")
+
+        keys_names = [k["key_name"] for k in md_schema["keys"]]
+        if key_name in keys_names:
+            md_schema["keys"][keys_names.index(key_name)].update(new_key_details)
+        else:
+            md_schema["keys"].append(new_key_details)
+
+        normalized_mds = validator.validate_md_schema(md_schema)
+
+        res = db.metadata_schemas.update_one(
+            {"_id": object_id}, {"$set": {"keys": normalized_mds["keys"]}}, upsert=False
+        )
+
+        return flask.jsonify({"updatedExisting": res.raw_result["updatedExisting"]})
+
+    except (Exception, BaseException) as e:
+
+        response_code = HTTPStatus.NOT_ACCEPTABLE
+        return (
+            str(type(e)) + " :   " + str(e) + "  " + traceback.format_exc(),
+            int(response_code),
+        )
+
+
+@bp.delete("/addons/metadata_schema_key")
+@flask_apispec.use_kwargs(MdSchemaKey, location="query")
+def delete_metadata_schema_key(schema_name=None, key_name=None):
+
+    db = flask.current_app.db
+
+    md_schema = db.metadata_schemas.find({"schema_name": schema_name}).next()
+
+    # make sure that the key exists
+    keys_names = [k["key_name"] for k in md_schema["keys"]]
+    assert key_name in keys_names
+
+    md_schema["keys"].pop(keys_names.index(key_name))
+
+    res = db.metadata_schemas.update_one(
+        {"_id": md_schema["_id"]}, {"$set": {"keys": md_schema["keys"]}}, upsert=False
+    )
+
+    #    breakpoint()
+    #  dyn_schemas = [md for md in md_schemas][0]
+    return flask.jsonify({"updatedExisting": res.raw_result["updatedExisting"]})
 
 
 @bp.get("/addons/get_fixed_value_entries")

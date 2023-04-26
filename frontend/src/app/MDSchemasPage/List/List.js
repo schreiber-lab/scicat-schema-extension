@@ -18,6 +18,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { getMDSchemas } from "../../../redux/md-schemas/operations";
 import { Row } from "../../../modules/metadata-schemas/Keys/Row";
+import { CreateMDSchemaKeyButton } from "./CreateMDSchemaKeyButton";
 
 const useStyles = makeStyles(({ palette, spacing }) => ({
   root: {
@@ -40,7 +41,7 @@ export const List = () => {
   const dispatch = useDispatch();
   const [schemaType, setSchemaType] = useState("dataset");
   const { isLoaded, mdSchemas } = useSelector(({ mdSchemas }) => mdSchemas);
-
+console.log(mdSchemas)
   const handleSchemaTypeChange = ({ target: { value } }) => {
     dispatch(getMDSchemas({ object_type: value }));
     setSchemaType(value);
@@ -82,14 +83,19 @@ export const List = () => {
               Schemas of this type not found
             </Typography>
           ) : (
-            mdSchemas.map((mdSchema) => (
-              <Box mb={3}>
+            mdSchemas.map((mdSchema, index) => (
+              <Box mb={3} key={index}>
                 <Typography variant="h5">{mdSchema.schema_name}</Typography>
 
                 {!mdSchema.keys?.length ? (
-                  <Typography>Keys weren't found</Typography>
+                   <TableHead>
+                  <Typography>No keys of these schema were found. Press the button to create a new key. </Typography>
+                  <TableCell >
+                  <CreateMDSchemaKeyButton schemaName={mdSchema.schema_name}/>
+                </TableCell>
+                </TableHead>
                 ) : (
-                  <TableContainer key={mdSchema.schema_name} component={Paper}>
+                  <TableContainer component={Paper}>
                     <Table aria-label="simple table">
                       <TableHead>
                         <TableRow>
@@ -120,12 +126,16 @@ export const List = () => {
                           <TableCell className={classes.tableHeaderCell}>
                             Allowed
                           </TableCell>
+                          
+                          <TableCell className={classes.tableHeaderCell}>
+                            <CreateMDSchemaKeyButton schemaName={mdSchema.schema_name}/>
+                          </TableCell>
                         </TableRow>
                       </TableHead>
 
                       <TableBody>
-                        {mdSchema.keys?.map((key) => (
-                          <Row key={key.key_name} field={key} />
+                        {mdSchema.keys?.map((key, index) => (
+                          <Row key={index} field={key} schemaName={mdSchema.schema_name} />
                         ))}
                       </TableBody>
                     </Table>

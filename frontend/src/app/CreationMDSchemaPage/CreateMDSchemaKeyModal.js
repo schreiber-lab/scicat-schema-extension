@@ -37,6 +37,7 @@ export const CreateMDSchemaKeyModal = ({
     }
 
     delete data.withPredefinedValues;
+    delete data.withUnit
 
     handleModalResolve(data);
   };

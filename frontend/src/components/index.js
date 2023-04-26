@@ -5,3 +5,4 @@ export * from './Autocomplete';
 export * from './Radio';
 export * from './ModalsProvider';
 export * from './ErrorBoundary';
+export * from './IconButton';

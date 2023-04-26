@@ -71,3 +71,16 @@ class MdSchemaSchema(MdSchemaName):
 
 class MdEntriesSchema(Schema):
     entries = fields.List(fields.Mapping, required=True)
+
+
+class MdSchemaKey(MdSchemaName):
+    key_name = fields.String(
+        required=True,
+        description="unique key name in scope of given schema",
+    )
+
+
+class MdSchemaKeyUpdate(MdSchemaKey):
+    new_key_details = fields.Mapping(
+        required=True, description="updated details for a given or new key"
+    )

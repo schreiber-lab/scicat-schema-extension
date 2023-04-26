@@ -3,7 +3,6 @@ import { Box, Typography } from "@material-ui/core";
 import * as fixedValueEntriesApi from "../../api/fixed-value-entries";
 import { Autocomplete } from "../../components/Autocomplete";
 
-
 const fetchFixedValueEntries =
   (params) =>
   ({ loadedOptions = [] }) => {
@@ -26,7 +25,13 @@ const fetchFixedValueEntries =
       });
   };
 
-export const FixedValueEntriesAutocomplete = ({ baseKey, keyName, params = {}, onChange, ...props }) => {
+export const FixedValueEntriesAutocomplete = ({
+  baseKey,
+  keyName,
+  params = {},
+  onChange,
+  ...props
+}) => {
   const { getValues, setValue } = useFormContext();
 
   const handleChange = (entry) => {
@@ -43,11 +48,9 @@ export const FixedValueEntriesAutocomplete = ({ baseKey, keyName, params = {}, o
       placeholder="Search entry..."
       onNeedFetch={fetchFixedValueEntries(params)}
       onChange={handleChange}
-      getOptionLabel={(option) => option && option[keyName]}
+      getOptionLabel={(option) => option?.[keyName] || option || null}
       getOptionValue={(option) => option?.[keyName] || null}
-      getOptionSelected={(option, value) =>
-        option[keyName] === value[keyName]
-      }
+      getOptionSelected={(option, value) => option[keyName] === value[keyName]}
       renderOption={(option) => {
         return (
           <Box clone width="100%" overflow="hidden">

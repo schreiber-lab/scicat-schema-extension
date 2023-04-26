@@ -8,37 +8,50 @@ import {
 } from "@material-ui/core";
 import { useForm, FormProvider } from "react-hook-form";
 import { preventDefault } from "../../../../helpers/preventDefault";
-import { yupResolver } from "../../../../utils/validation";
-import * as datasetsApi from "../../../../api/datasets";
+// import { yupResolver } from "../../../../utils/validation";
+import * as mdschemasApi from "../../../../api/md-schemas";
 import {
-  DatasetForm,
-  validationSchema,
-  defaultValues,
-} from "../../../../app/CreationDatasetPage/DatasetForm";
+  MDSchemaKeyForm,
+  // validationSchema,
+  // defaultValues,
+} from "../../../../app/CreationMDSchemaPage/MDSchemaKeyForm";
 
-export const EditDatasetModal = ({
-  payload: { dataset },
+export const EditMDSchemaModal = ({
+  payload: { field, schemaName },
   DialogProps,
   handleModalResolve,
   handleModalReject,
 }) => {
-  console.log(dataset);
-
+  const fieldNamePrefix = "new_key_details.";
   const form = useForm({
-    defaultValues: { ...defaultValues, ...dataset },
-    resolver: yupResolver(validationSchema),
+    defaultValues: {
+      schema_name: schemaName,
+      key_name: field.key_name,
+      new_key_details: field,
+      withPredefinedValues: !!field.allowed?.length,
+      withUnit: !!field.unit,
+    },
+    // resolver: yupResolver(validationSchema),
   });
-  console.log(form);
+
   const handleSubmit = (data) => {
-    console.log(data);
-    return datasetsApi.editDataset(data).then((data) => {
-      handleModalResolve(data);
+    if (!data.withPredefinedValues) {
+      data.new_key_details.allowed = [];
+    }
+
+    delete data.withPredefinedValues;
+    delete data.withUnit;
+
+    return mdschemasApi.editMDSchemaKey(data).then(() => {
+      console.log(data)
+      handleModalResolve(data.new_key_details);
     });
   };
 
   return (
     <Dialog maxWidth="lg" {...DialogProps}>
       <Box
+        noValidate
         flexGrow={1}
         display="flex"
         flexDirection="column"
@@ -46,11 +59,11 @@ export const EditDatasetModal = ({
         component="form"
         onSubmit={preventDefault(form.handleSubmit(handleSubmit))}
       >
-        <DialogTitle>Edit dataset</DialogTitle>
+        <DialogTitle>Edit key</DialogTitle>
 
         <DialogContent>
           <FormProvider {...form}>
-            <DatasetForm />
+            <MDSchemaKeyForm fieldNamePrefix={fieldNamePrefix} />
           </FormProvider>
         </DialogContent>
 
