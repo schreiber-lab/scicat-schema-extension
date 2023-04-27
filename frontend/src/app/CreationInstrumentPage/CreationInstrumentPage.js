@@ -9,6 +9,7 @@ import { addInstrument } from "../../redux/instruments/actions";
 import { InstrumentForm, validationSchema } from "./InstrumentForm";
 
 const defaultValues = {
+  uniqueName: null,
   name: null,
 };
 
