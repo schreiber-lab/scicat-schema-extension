@@ -21,7 +21,7 @@ const transformInstrumentResponse = (instrument) => {
 
 export const getInstruments = (config) => {
   return api
-    .get("/Instruments", config)
+    .get("/instruments", config)
     .then(({ data }) => {
     return data.map(transformInstrumentResponse);
     })
@@ -32,7 +32,7 @@ export const getInstruments = (config) => {
 
 export const getInstrument = (id, config) => {
   return api
-    .get(`/Instruments/${id}`, config)
+    .get(`/instruments/${id}`, config)
     .then(({ data }) => {
       return data;
     })
@@ -44,7 +44,7 @@ export const getInstrument = (id, config) => {
 
 export const createInstrument = (data) => {
   return api
-    .post('/Instruments', transformInstrumentRequest(data))
+    .post('/instruments', transformInstrumentRequest(data))
     .then(({ data }) => {
       return data;
     })
@@ -53,10 +53,11 @@ export const createInstrument = (data) => {
     });
 };
 
+/////////////////////////////////////////
 export const editInstrumentWithMetadata = (instrument, config) => {
   return api
-    .put(
-      `/Instruments/${instrument.pid}`,
+    .patch(
+      `/instruments/${instrument.pid}`,
       transformInstrumentRequest(instrument),
       config
     )

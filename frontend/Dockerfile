@@ -7,7 +7,7 @@ COPY . /home/node/app
 WORKDIR /home/node/app
 RUN npm --dd install
 #for newer versions of node.js one might needs to use $(npm pkg get version) here
-RUN export REACT_APP_VERSION=$(npm info my-app version) && npm --dd run-script build
+RUN export REACT_APP_VERSION=$(npm -s run env echo '$npm_package_version') && npm --dd run-script build
 
 #
 # Build stage 2.

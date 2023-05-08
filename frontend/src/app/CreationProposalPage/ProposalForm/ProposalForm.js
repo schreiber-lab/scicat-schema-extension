@@ -82,6 +82,7 @@ export const ProposalForm = () => {
 
       <Grid item sm={2} md={4}>
         <TextField
+          required
           fullWidth
           className={classes.textField}
           margin="dense"
