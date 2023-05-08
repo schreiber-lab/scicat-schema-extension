@@ -1,6 +1,6 @@
 {
   "name": "my-app",
-  "version": "0.1.26",
+  "version": "0.2.26",
   "private": true,
   "homepage": ".",
   "dependencies": {
