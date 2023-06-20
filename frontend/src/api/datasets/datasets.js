@@ -25,7 +25,7 @@ const transformDatasetResponse = (dataset) => {
   };
 };
 
-const injectDatasetPid = ({ pid, ...dataset }) => {
+const injectDatasetPid = ({ ...dataset }) => {
   if (!dataset.proposalId) {
     return dataset;
   }
@@ -33,7 +33,7 @@ const injectDatasetPid = ({ pid, ...dataset }) => {
   return {
     ...dataset,
 
-    pid: dataset.proposalId + "/" + dataset.datasetName,
+    // pid: dataset.proposalId + "/" + dataset.datasetName,
   };
 };
 
@@ -95,9 +95,7 @@ export const validateDataset = (data) => {
     });
 };
 
-/////////////////////////////////////////
-export const editDataset = ({ pid, ...dataset }, config) => {
-  console.log(dataset);
+export const editDataset = ({ pid, _id, updatedBy,createdBy, inputDatasets, usedSoftware, history, attachments, origdatablocks, datablocks, createdAt, updatedAt, __v, id, ...dataset }, config) => {
   return api
     .patch(
       `/datasets/${encodeURIComponent(pid)}`,

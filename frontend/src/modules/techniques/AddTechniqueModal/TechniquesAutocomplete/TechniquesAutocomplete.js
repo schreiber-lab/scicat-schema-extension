@@ -58,9 +58,7 @@ export const TechniquesAutocomplete = ({
       openModal(AddTechniqueModal, {
         payload: {
           initialValues: {
-            _id: {
-              name
-            }
+            name
           }
         },
         onModalResolved: resolve,
@@ -76,10 +74,10 @@ export const TechniquesAutocomplete = ({
       placeholder="Search and add techniques..."
       onNeedFetch={fetchTechnique(params)}
       renderOption={renderOption}
-      getOptionLabel={(option) => option && option?._id?.name}
-      getOptionValue={(option) => option?._id}
+      getOptionLabel={(option) => option && option?.name}
+      getOptionValue={(option) => option}
       getOptionSelected={(option, value) =>
-        option?._id?.pid === value?._id?.pid
+        option?._id === value?._id
       }
       onCreate={handleTechniqueCreate}
       {...props}
