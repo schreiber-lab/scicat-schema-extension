@@ -1,13 +1,12 @@
 import { useState, forwardRef, useEffect, useCallback } from 'react';
 import { isObject, isEqual, debounce, isEmpty, isNil } from 'lodash';
 import cn from 'classnames';
-import { makeStyles, Box, CircularProgress, InputAdornment, Chip, IconButton } from '@material-ui/core';
+import { makeStyles, Box, CircularProgress, InputAdornment, Chip, IconButton, TextField } from '@material-ui/core';
 import { Autocomplete as MuiAutocomplete, createFilterOptions } from '@material-ui/lab';
 import CloseIcon from '@material-ui/icons/Close';
 import AddIcon from '@material-ui/icons/Add';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { useController, useFormContext, Controller } from 'react-hook-form';
-import { TextField } from '../TextField';
 import { styles } from './styles';
 
 const useStyles = makeStyles(styles);
@@ -59,18 +58,6 @@ export const Autocomplete = forwardRef(({
   const [ isFetched, setIsFetched ] = useState(false);
   const clearButtonIsVisible = !disableClearable && (multiple ? !isEmpty(field.value) : !isNil(field.value));
 
-  const getDefaultValue = () => {
-    if (isAsync) {
-      return field.value;
-    }
-
-    if (multiple && field.value !== null) {
-      return optionsProp?.filter((option) => field.value.includes(option.value)) || field.value;
-    }
-
-    return optionsProp.filter((option) => field.value === option.value)[0];
-  };
-
   const transformValueToInputValue = (value) => {
     return (isObject(value) && getOptionLabel(value)) || (freeSolo && value) || '';
   };
@@ -106,13 +93,13 @@ export const Autocomplete = forwardRef(({
         : selectedOption;
 
     const formValue = (multiple ? option?.map(getOptionValue) : getOptionValue(option)) ?? null;
-
+console.log(name, formValue, option)
     field.onChange(formValue);
 
     setValue(option);
     onChange(option);
   };
-
+console.log(name, field.value)
   const loadOptions = ({ search, loadedOptions = [], additionalData = {} } = {}) => {
     onNeedFetch({
       search,
