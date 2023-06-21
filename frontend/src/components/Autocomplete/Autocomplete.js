@@ -1,125 +1,115 @@
-import { useState, forwardRef, useEffect, useCallback } from "react";
-import { isObject, isEqual, debounce, isUndefined } from "lodash";
-import cn from "classnames";
-import {
-  makeStyles,
-  Box,
-  CircularProgress,
-  InputAdornment,
-  Chip,
-  IconButton,
-  TextField
-} from "@material-ui/core";
-import {
-  Autocomplete as MuiAutocomplete,
-  createFilterOptions
-} from "@material-ui/lab";
-import CloseIcon from "@material-ui/icons/Close";
-import AddIcon from "@material-ui/icons/Add";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import { useController, useFormContext } from "react-hook-form";
-import { Popper } from "./Popper";
-import { styles } from "./styles";
+import { useState, forwardRef, useEffect, useCallback } from 'react';
+import { isObject, isEqual, debounce, isEmpty, isNil } from 'lodash';
+import cn from 'classnames';
+import { makeStyles, Box, CircularProgress, InputAdornment, Chip, IconButton } from '@material-ui/core';
+import { Autocomplete as MuiAutocomplete, createFilterOptions } from '@material-ui/lab';
+import CloseIcon from '@material-ui/icons/Close';
+import AddIcon from '@material-ui/icons/Add';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import { useController, useFormContext, Controller } from 'react-hook-form';
+import { TextField } from '../TextField';
+import { styles } from './styles';
 
 const useStyles = makeStyles(styles);
 
 const transformFreeSoloToOption = (value) => {
-  return typeof value === "string" ? { label: value, value } : value;
+  return typeof(value) === 'string' ? { label: value, value } : value;
 };
 
 const filter = createFilterOptions();
 
-// prettier-ignore
 export const Autocomplete = forwardRef(({
-  preventManualChangeNotification = false,
+  isCreatable = false,
+  isAsync = false,
+  disableClearable = false,
   disableSearch = false,
   disabled = false,
-  isAsync = false,
-  isCreatable = false,
   multiple,
   freeSolo,
-  value: valueProp,
   options: optionsProp,
-  getOptionValue = (option) => option?.value || option,
-  getOptionLabel: getOptionLabelProp = (option) => option?.label || option,
-  getOptionSelected = (option, value) => (option?.value || option) === (value?.value || value),
+  getOptionValue = (option) => option && option?.value,
+  getOptionLabel = (option) => option?.label,
+  getOptionSelected = (option, value) => option?.value === value?.value,
   required,
   helperText,
   error: errorProp,
   name,
+  value: valueProp,
   label,
   placeholder,
   margin,
-  TextFieldProps = {},
   onChange = () => {},
   getInputProps = () => ({}),
   onNeedFetch = () => {},
-  onCreate = (value) => Promise.resolve(value),
+  onCreate = () => {},
 
   ...props
 }, ref) => {
   const classes = useStyles();
-  const [ open, setOpen ] = useState(false);
-  const [ inputValue, setInputValue ] = useState(null);
-  const inputValueIsString = typeof(inputValue) === 'string';
-  const [ options, setOptions ] = useState([]);
-  const [ additionalData, setAdditionalData ] = useState({});
-  const [ hasMore, setHasMore ] = useState(true);
-  const [ isFetched, setIsFetched ] = useState(false);
-  const loading = isAsync && open && !isFetched;
   // React Hook Form
-  const formContext = useFormContext();
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { fieldState } = (formContext && useController({
+  const formContext = name && useFormContext();
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { fieldState, field } = (formContext && useController({
     name, control: formContext?.control
   })) || {};
   const errorMessage = fieldState?.error?.message;
-  const [ value, setValue ] = useState(formContext?.watch(name) || null);
-  const clearButtonIsVisible = !props.disableClearable && !!(multiple ? value?.length : value);
+  const [ additionalData, setAdditionalData ] = useState({});
+  const [ hasMore, setHasMore ] = useState(true);
+  const [ isFetched, setIsFetched ] = useState(false);
+  const clearButtonIsVisible = !disableClearable && (multiple ? !isEmpty(field.value) : !isNil(field.value));
 
-  const getOptionLabel = (option) => {
-    return option?.isCreatableOption ? option.name : getOptionLabelProp(option);
+  const getDefaultValue = () => {
+    if (isAsync) {
+      return field.value;
+    }
+
+    if (multiple && field.value !== null) {
+      return optionsProp?.filter((option) => field.value.includes(option.value)) || field.value;
+    }
+
+    return optionsProp.filter((option) => field.value === option.value)[0];
   };
 
   const transformValueToInputValue = (value) => {
-    const optionLabel = getOptionLabel(value);
-
-    return (!isObject(optionLabel) && optionLabel) || '';
+    return (isObject(value) && getOptionLabel(value)) || (freeSolo && value) || '';
   };
 
-  const valueAsInputValue = transformValueToInputValue(value);
+  const [ open, setOpen ] = useState(false);
+  const loading = isAsync && open && !isFetched;
+  const [ options, setOptions ] = useState([]);
+  const [ value, setValue ] = useState(formContext?.watch(name) || null);
+  const [ inputValue, setInputValue ] = useState(null);
 
-  const handleChange = (event, selectedOption) => {  
-    if (isCreatable) {
-      const creatableOption = multiple
-        ? selectedOption?.find(({ isCreatableOption }) => isCreatableOption)
-        : selectedOption;
+  const handleChange = (event, selectedOption) => {
+    if (isCreatable && selectedOption?.isCreatableOption) {
+      setInputValue('');
 
-      if (creatableOption?.isCreatableOption) {
-        setInputValue('');
+      onCreate(selectedOption.inputValue).then((option) => {
+        if (!multiple) {
+          setInputValue(getOptionLabel(option));
+        }
 
-        onCreate(creatableOption.inputValue).then((option) => {
-          if (!multiple) {
-            setInputValue(getOptionLabel(option));
-          }
+        setOpen(false);
+        handleChange(null, multiple ? options.concat(option) : option);
+      }).catch(() => null);
 
-          setOpen(false);
-          handleChange(null, multiple ? (value || []).concat(option) : option);
-        }).catch(() => null);
-
-        return;
-      }
+      return;
     }
 
     const option = (multiple && !selectedOption?.length)
       ? null
       : freeSolo
-        ? multiple ? selectedOption?.map(transformFreeSoloToOption) : transformFreeSoloToOption(selectedOption)
+        ? multiple
+          ? selectedOption?.map(transformFreeSoloToOption)
+          : transformFreeSoloToOption(selectedOption)
         : selectedOption;
-    const formValue = multiple ? option?.map(getOptionValue) || [] : getOptionValue(option) || null;
+
+    const formValue = (multiple ? option?.map(getOptionValue) : getOptionValue(option)) ?? null;
+
+    field.onChange(formValue);
 
     setValue(option);
-    formContext?.setValue(name, formValue, { shouldValidate: true });
     onChange(option);
   };
 
@@ -147,13 +137,13 @@ export const Autocomplete = forwardRef(({
   }, 600), []);
 
   const handleInputChange = (event, value) => {
-    if (!event) {
+    if (!isAsync || !event || event.type !== 'change') {
       return;
     }
 
     setInputValue(value);
 
-    if (isAsync && event.type !== 'click') {
+    if (isAsync) {
       handleSearch({ search: value });
     }
   };
@@ -171,13 +161,17 @@ export const Autocomplete = forwardRef(({
   };
 
   const handleClear = () => {
-    // handleChange(null, null);
+    handleChange(null, null);
     setInputValue('');
+  };
+
+  const transformOptionToValue = (option) => {
+    return isObject(option) ? getOptionValue(option) : option;
   };
 
   useEffect(() => {
     if (loading) {
-      loadOptions();
+      loadOptions({ search: inputValue || null });
     }
   }, [ loading ]);
 
@@ -190,151 +184,182 @@ export const Autocomplete = forwardRef(({
   }, [ open ]);
 
   useEffect(() => {
-    if (!isUndefined(valueProp) && !isEqual(valueProp, value)) {
-      setValue(valueProp);
+    const fieldMultiValue = multiple && field.value?.map(transformOptionToValue);
+    const innerMultiValue = multiple && value?.map(transformOptionToValue);
+    const fieldValue = multiple ? fieldMultiValue : transformOptionToValue(field.value);
+    const innerValue = multiple ? innerMultiValue : transformOptionToValue(value);
+    const isObjectValue = multiple
+      ? field.value?.length && field.value?.every(isObject)
+      : isObject(field.value);
+
+    if (!isEqual(fieldValue, innerValue)) {
+      setValue(field.value);
+
+      if (!multiple) {
+        setInputValue(getOptionLabel(field.value));
+      }
+
+      field.onChange(fieldValue);
+    } else if (isObjectValue) {
+      field.onChange(fieldValue);
     }
-  }, [ valueProp, value ]);
+  }, [ field.value ]);
 
   return (
-    <MuiAutocomplete
-      openOnFocus
-      clearOnBlur
-      clearOnEscape
-      disableClearable
-      selectOnFocus={!disableSearch}
-      disabled={disabled}
-      inputValue={inputValueIsString ? inputValue : valueAsInputValue}
-      loading={loading}
-      forcePopupIcon={false}
-      freeSolo={freeSolo}
-      multiple={multiple}
+    <Controller
       name={name}
-      value={valueProp || value || (multiple ? [] : null)}
-      open={open}
-      options={optionsProp || options}
-      filterOptions={(options, params) => {
-        const filtered = filter(options, params);
+      control={formContext.control}
+      render={() => (
+        <MuiAutocomplete
+          openOnFocus
+          clearOnBlur
+          clearOnEscape
+          disableClearable
+          loading={loading}
+          forcePopupIcon={false}
+          selectOnFocus={!disableSearch}
+          freeSolo={freeSolo}
+          multiple={multiple}
+          disabled={disabled}
+          inputValue={inputValue || transformValueToInputValue(value)}
+          name={name}
+          value={valueProp || value || (multiple ? [] : null)}
+          open={open}
+          options={optionsProp || options}
+          onOpen={handleOpen}
+          onClose={handleClose}
+          onInputChange={handleInputChange}
+          onChange={handleChange}
+          getOptionLabel={getOptionLabel}
+          getOptionSelected={getOptionSelected}
+          renderTags={(value, getTagProps) => {
+            return value.map((option, index) => (
+              <Chip
+                {...getTagProps({ index })}
 
-        if (isCreatable) {
-          filtered.unshift({
-            isCreatableOption: true,
-            inputValue: params.inputValue,
-            name: `Add ${params.inputValue}`
-          });
-        }
+                label={getOptionLabel(option)}
+                size={props.size}
+              />
+            ));
+          }}
+          renderInput={({ inputProps, ...params }) => {
+            return (
+              <TextField
+                {...params}
 
-        return filtered;
-      }}
-      renderOption={(option) => (
-        <>
-          {!!option.isCreatableOption &&
-            <Box display="flex" mr={1}>
-              <AddIcon color="primary" />
-            </Box>
-          }
+                required={required}
+                name={name}
+                label={label}
+                placeholder={placeholder}
+                margin={margin}
+                error={!!(errorProp || errorMessage)}
+                helperText={errorMessage || helperText}
+                inputProps={{
+                  ...inputProps,
 
-          {getOptionLabel(option)}
-        </>
+                  readOnly: disableSearch
+                }}
+                InputProps={{
+                  ...params.InputProps,
+                  ...getInputProps(value),
+
+                  className: cn(
+                    params.InputProps.className,
+                    classes.input, classes.input_WithDropdownButton,
+                    {
+                      [classes.input_open]: open,
+                      [classes.input_multiple]: multiple,
+                      [classes.input_WithLoadingIndicator]: loading,
+                      [classes.input_WithClearButton]: clearButtonIsVisible
+                    }
+                  ),
+
+                  endAdornment: (
+                    <InputAdornment position="end" className={classes.endAdornment}>
+                      {params.InputProps?.endAdornment}
+                      {getInputProps(value)?.endAdornment}
+
+                      {loading &&
+                        <CircularProgress color="primary" size={20} />
+                      }
+
+                      {clearButtonIsVisible &&
+                        <IconButton
+                          disabled={disabled}
+                          size="small"
+                          className={classes.clearIndicator}
+                          onClick={handleClear}
+                        >
+                          <CloseIcon fontSize="small" />
+                        </IconButton>
+                      }
+
+                      <IconButton
+                        disabled={disabled}
+                        size="small"
+                        edge="end"
+                        className={cn(
+                          'MuiAutocomplete-popupIndicator',
+                          open && 'MuiAutocomplete-popupIndicatorOpen'
+                        )}
+                        onClick={toggleOpen}
+                      >
+                        <ArrowDropDownIcon />
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
+              />
+            );
+          }}
+          filterOptions={(options, state) => {
+            const filtered = disableSearch ? options : filter(options, state);
+
+            if (isCreatable) {
+              filtered.unshift({
+                isCreatableOption: true,
+                inputValue: state.inputValue,
+                name: `Add ${state.inputValue}`
+              });
+            }
+
+            return filtered;
+          }}
+          renderOption={(props, option) => (
+            <li {...props}>
+              {!!option.isCreatableOption &&
+                <Box display="flex" mr={1}>
+                  <AddIcon color="primary" />
+                </Box>
+              }
+
+              {getOptionLabel(option)}
+            </li>
+          )}
+          ListboxProps={{
+            onScroll: (event) => {
+              if (!isAsync || !hasMore) {
+                return;
+              }
+
+              const listBoxNode = event.currentTarget;
+              const isScrollEnd = listBoxNode.scrollTop + listBoxNode.clientHeight === listBoxNode.scrollHeight;
+
+              if (isScrollEnd) {
+                loadOptions({
+                  search: inputValue,
+                  loadedOptions: options,
+                  additionalData
+                });
+              }
+            }
+          }}
+
+          {...props}
+
+          ref={ref}
+        />
       )}
-      onOpen={handleOpen}
-      onClose={handleClose}
-      onInputChange={handleInputChange}
-      onChange={handleChange}
-      getOptionSelected={getOptionSelected}
-      getOptionLabel={getOptionLabel}
-      renderTags={(value, getTagProps) => {
-        return value.map((option, index) => (
-          <Chip {...getTagProps({ index })} label={getOptionLabel(option)} />
-        ));
-      }}
-      PopperComponent={Popper}
-      renderInput={({ inputProps: inputPropsProp, ...params }) => {
-        const { autoComplete, ...inputProps } = inputPropsProp;
-
-        return (
-          <TextField
-            {...params}
-
-            // unbindForm
-            name={name}
-            inputProps={inputProps}
-            required={required}
-            label={label}
-            placeholder={placeholder}
-            margin={margin}
-            error={!!(fieldState?.invalid) && !!(errorMessage)}
-            helperText={((fieldState?.invalid) && (errorMessage)) || helperText}
-            InputProps={{
-              ...params.InputProps,
-              ...getInputProps(value),
-
-              readOnly: disableSearch,
-              className: cn(
-                params.InputProps.className,
-                classes.input, classes.input_WithDropdownButton,
-                {
-                  [classes.input_open]: open,
-                  [classes.input_multiple]: multiple,
-                  [classes.input_WithLoadingIndicator]: loading,
-                  [classes.input_WithClearButton]: clearButtonIsVisible
-                }
-              ),
-
-              endAdornment: (
-                <InputAdornment position="end" className={classes.endAdornment}>
-                  {params.InputProps?.endAdornment}
-                  {getInputProps(value)?.endAdornment}
-
-                  {loading &&
-                    <CircularProgress color="primary" size={20} />
-                  }
-
-                  {clearButtonIsVisible &&
-                    <IconButton disabled={disabled} className={classes.clearIndicator} onClick={handleClear}>
-                      <CloseIcon fontSize="small" />
-                    </IconButton>
-                  }
-
-                  <IconButton
-                    disabled={disabled}
-                    className={cn(
-                      'MuiAutocomplete-popupIndicator',
-                      open && 'MuiAutocomplete-popupIndicatorOpen'
-                    )}
-                    onClick={toggleOpen}
-                  >
-                    <ArrowDropDownIcon />
-                  </IconButton>
-                </InputAdornment>
-              )
-            }}
-
-            {...TextFieldProps}
-          />
-        );
-      }}
-      ListboxProps={{
-        onScroll: (event) => {
-          if (!isAsync || !hasMore) {
-            return;
-          }
-
-          const listBoxNode = event.currentTarget;
-          const isScrollEnd = listBoxNode.scrollTop + listBoxNode.clientHeight === listBoxNode.scrollHeight;
-
-          if (isScrollEnd) {
-            loadOptions({
-              search: inputValue,
-              loadedOptions: options,
-              additionalData
-            });
-          }
-        }
-      }}
-
-      {...props}
-
-      ref={ref}
     />
   );
 });
