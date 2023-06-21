@@ -8,12 +8,12 @@ import { Entry } from "./Entry";
 
 
 export const MultipleEntries = ({ isVisible, schema, baseKey }) => {
-  const { control, getValues } = useFormContext();
+  const { control } = useFormContext();
   const { fields, append, remove } = useFieldArray({
     control,
     name: `${baseKey}.${schema.schema_name}`,
   });
-  console.log(getValues());
+
   const addEntry = () => {
     append({ isActive: true });
   };
