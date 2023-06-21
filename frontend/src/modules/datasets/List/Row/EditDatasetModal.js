@@ -12,6 +12,7 @@ import { preventDefault } from "../../../../helpers/preventDefault";
 import { yupResolver } from "../../../../utils/validation";
 import * as datasetsApi from "../../../../api/datasets";
 import * as instrumentsApi from "../../../../api/instruments";
+import * as proposalsApi from "../../../../api/proposals";
 import {
   DatasetForm,
   validationSchema,
@@ -46,6 +47,11 @@ export const EditDatasetModal = ({
     instrumentsApi.getInstrument(dataset.instrumentId).then((data) => {
       console.log(data)
       form.setValue("instrumentId", data);
+    });
+
+    proposalsApi.getProposal(dataset.proposalId).then((data) => {
+      console.log(data)
+      form.setValue("proposalId", data);
     });
   }, []);
 

@@ -40,8 +40,8 @@ export const InstrumentsAutocomplete = ({ params = {}, creatablePayload, ...prop
       onNeedFetch={fetchInstruments(params)}
       renderOption={renderOption}
       getOptionLabel={((option) => option && option?.name)}
-      getOptionValue={(option) => option?.pid}
-      getOptionSelected={(option, value) => option?.pid === value?.pid}
+      getOptionValue={(option) => option?.id}
+      getOptionSelected={(option, value) => option?.id === value?.id}
 
       {...props}
     />
