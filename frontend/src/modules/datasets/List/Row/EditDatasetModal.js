@@ -13,6 +13,7 @@ import { yupResolver } from "../../../../utils/validation";
 import * as datasetsApi from "../../../../api/datasets";
 import * as instrumentsApi from "../../../../api/instruments";
 import * as proposalsApi from "../../../../api/proposals";
+import * as samplesApi from "../../../../api/samples";
 import {
   DatasetForm,
   validationSchema,
@@ -52,6 +53,11 @@ export const EditDatasetModal = ({
     proposalsApi.getProposal(dataset.proposalId).then((data) => {
       console.log(data)
       form.setValue("proposalId", data);
+    });
+
+    samplesApi.getSample(dataset.sampleId).then((data) => {
+      console.log(data)
+      form.setValue("sampleId", data);
     });
   }, []);
 
