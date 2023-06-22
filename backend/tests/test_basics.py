@@ -23,7 +23,7 @@ def test_db_collection_creation(client, mongodb):
     check if the additional collection in db are created on before first request if missing
     """
     assert "prepopulated_metadata_schemas" in mongodb.list_collection_names()
-    assert len(mongodb.list_collection_names()) == 2
+    assert len(mongodb.list_collection_names()) == 3
 
     response = client.get("/addons/metadata_schemas")
 
@@ -35,11 +35,11 @@ def test_db_use_prepop_db(client, mongodb, use_prepop_db):
     check if app works with existing 'metadata_schemas' collection in db
     """
     assert "metadata_schemas" in mongodb.list_collection_names()
-    assert len(mongodb.list_collection_names()) == 2
+    assert len(mongodb.list_collection_names()) == 3
 
     response = client.get("/addons/metadata_schemas")
 
     assert "metadata_schemas" in mongodb.list_collection_names()
-    assert len(mongodb.list_collection_names()) == 2
+    assert len(mongodb.list_collection_names()) == 3
 
     assert b"changes_likely" in response.data

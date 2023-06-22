@@ -17,6 +17,90 @@ def test_get_addons_metadata_schemas(client, use_prepop_db):
     assert response.status_code == 422
 
 
+def test_patch_fixed_value_entry(client, use_prepop_db):
+    response = client.get("/addons/get_fixed_value_entries?schema_name=test schema100")
+    entries = json.loads(response.data)["entries"]
+
+    assert {"test key": "100", "test key56": "test value"} in entries
+    assert len(entries) == 2
+
+    mimetype = "application/json"
+    headers = {"Content-Type": mimetype, "Accept": mimetype}
+    data = {
+        "schema_name": "test schema100",
+        "entry_id": "test value",
+        "new_entry_details": {"test key": "150", "test key56": "test value2"},
+    }
+
+    patch_response = client.patch(
+        "/addons/fixed_value_entry", data=json.dumps(data), headers=headers
+    )
+
+    assert patch_response.status_code == 200
+
+    response2 = client.get("/addons/get_fixed_value_entries?schema_name=test schema100")
+    entries2 = json.loads(response2.data)["entries"]
+
+    assert {"test key": "100", "test key56": "test value"} not in entries2
+    assert {"test key": "150", "test key56": "test value2"} in entries2
+    assert len(entries2) == 2
+
+    data["schema_name"] = "inexistent"
+
+    patch_response = client.patch(
+        "/addons/fixed_value_entry", data=json.dumps(data), headers=headers
+    )
+
+    assert patch_response.status_code == 406
+
+    data["schema_name"] = "test schema100"
+    data["entry_id"] = "doesn't exist"
+
+    assert patch_response.status_code == 406
+
+
+def test_delete_fixed_value_entry(client, use_prepop_db):
+    response = client.get("/addons/get_fixed_value_entries?schema_name=test schema200")
+    entries = json.loads(response.data)["entries"]
+    assert len(entries) == 2
+
+    mimetype = "application/json"
+    headers = {"Content-Type": mimetype, "Accept": mimetype}
+    data = {
+        "schema_name": "test schema200",
+        "entry_id": "test value",
+    }
+
+    del_response = client.delete(
+        "/addons/fixed_value_entry", data=json.dumps(data), headers=headers
+    )
+
+    assert del_response.status_code == 200
+
+    response = client.get("/addons/get_fixed_value_entries?schema_name=test schema200")
+    entries = json.loads(response.data)["entries"]
+    assert len(entries) == 1
+
+    # see what happens with invalid schema name
+    data["schema_name"] = "inexistent"
+
+    del_response = client.delete(
+        "/addons/fixed_value_entry", data=json.dumps(data), headers=headers
+    )
+
+    assert del_response.status_code == 406
+
+    # see what happens with invalid entry id
+    data["schema_name"] = "test schema200"
+    data["entry_id"] = "doesn't exist"
+
+    del_response = client.delete(
+        "/addons/fixed_value_entry", data=json.dumps(data), headers=headers
+    )
+
+    assert del_response.status_code == 406
+
+
 def test_get_addons_metadata_schema(client, use_prepop_db):
     # check this works for a given object_type
     response = client.get("/addons/get_metadata_schema?schema_name=measurement")

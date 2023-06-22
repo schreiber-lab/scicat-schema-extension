@@ -62,3 +62,6 @@ def use_prepop_db(mongodb):
     mongodb.rename_collection(
         "prepopulated_fixed_values_test schema200", "fixed_values_test schema200"
     )
+    mongodb.rename_collection(
+        "prepopulated_fixed_values_test schema100", "fixed_values_test schema100"
+    )

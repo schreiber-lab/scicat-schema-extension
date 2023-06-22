@@ -13,6 +13,8 @@ from ..marshalling_schema import (
     TypeSchema,
     MdSchemaKey,
     MdSchemaKeyUpdate,
+    MdSchemaEntry,
+    MdSchemaEntryUpdate,
 )
 from ..md_schema import validator
 
@@ -242,3 +244,81 @@ def add_fixed_value_entries(entries=None):
         entry["schema_name"] = schema_name
 
     return json.dumps({"entries": validated_entries})
+
+
+@bp.delete("/addons/fixed_value_entry")
+@flask_apispec.use_kwargs(MdSchemaEntry, location="json")
+def delete_fixed_value_entry(
+    schema_name=None,
+    entry_id=None,
+):
+    db = flask.current_app.db
+    db_collection = "fixed_values_" + schema_name
+    resp = dict()
+
+    if not db_collection in db.list_collection_names():
+        response_code = HTTPStatus.NOT_ACCEPTABLE
+        resp["error"] = (
+            "no db collection found corresponding to '"
+            + schema_name
+            + "'. Is this an existing fixed value schema?"
+        )
+        return (json.dumps(resp), int(response_code))
+
+    else:
+        schema = db.metadata_schemas.find_one(
+            {"schema_name": schema_name}, {"_id": False}
+        )
+        id_key = schema["id_key"]
+        res = getattr(db, db_collection).delete_one({id_key: entry_id})
+        if res.deleted_count != 1:
+            response_code = HTTPStatus.NOT_ACCEPTABLE
+            resp[
+                "error"
+            ] = f"{entry_id} not found as value of {id_key} in any entry of {schema_name}"
+            return (json.dumps(resp), int(response_code))
+        else:
+            return ("", int(HTTPStatus.OK))
+
+
+@bp.patch("/addons/fixed_value_entry")
+@flask_apispec.use_kwargs(MdSchemaEntryUpdate, location="json")
+def update_fixed_value_entry(schema_name=None, entry_id=None, new_entry_details=None):
+    db = flask.current_app.db
+
+    db_collection = "fixed_values_" + schema_name
+    resp = dict()
+
+    if not db_collection in db.list_collection_names():
+        response_code = HTTPStatus.NOT_ACCEPTABLE
+        resp["error"] = (
+            "no db collection found corresponding to '"
+            + schema_name
+            + "'. Is this an existing fixed value schema?"
+        )
+        return (json.dumps(resp), int(response_code))
+
+    try:
+        e_schema = db.metadata_schemas.find(
+            {"schema_name": schema_name}, {"_id": False}
+        ).next()
+        new_entry_details["schema_name"] = schema_name
+        normalized_entry = validator.validate_fixed_entry(new_entry_details, e_schema)
+        normalized_entry.pop("schema_name")
+
+        object_id = getattr(db, db_collection).find_one({e_schema["id_key"]: entry_id})[
+            "_id"
+        ]
+
+        res = getattr(db, db_collection).update_one(
+            {"_id": object_id}, {"$set": normalized_entry}, upsert=False
+        )
+        return ("", int(HTTPStatus.OK))
+
+    except (Exception, BaseException) as e:
+
+        response_code = HTTPStatus.NOT_ACCEPTABLE
+        return (
+            str(type(e)) + " :   " + str(e) + "  " + traceback.format_exc(),
+            int(response_code),
+        )
