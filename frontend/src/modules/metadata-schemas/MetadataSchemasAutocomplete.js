@@ -1,7 +1,7 @@
 import { Box, Typography } from '@material-ui/core';
 import AddIcon from "@material-ui/icons/Add";
 import * as metadataSchemasApi from '../../api/metadata-schemas';
-import { Autocomplete } from '../../components/Autocomplete';
+import { AutocompleteFixedValues } from '../../components/Autocomplete';
 
 const fetchMetadaSchemas = (params) => ({ loadedOptions = [] }) => {
   return metadataSchemasApi.getMetadataSchemas({
@@ -40,7 +40,7 @@ const renderOption = (option) => {
 
 export const MetadataSchemasAutocomplete = ({ params = {}, creatablePayload, ...props }) => {
   return (
-    <Autocomplete
+    <AutocompleteFixedValues
       isAsync
       label="Metadata schemas"
       placeholder="Search metadata schema..."

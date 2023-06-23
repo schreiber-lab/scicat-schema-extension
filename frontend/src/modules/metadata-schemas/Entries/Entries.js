@@ -34,7 +34,6 @@ export const Entries = ({ entries }) => {
             <TableCell className={classes.tableHeaderCell}>
               Material id
             </TableCell>
-
             <TableCell className={classes.tableHeaderCell}>Formula</TableCell>
           </TableRow>
         </TableHead>

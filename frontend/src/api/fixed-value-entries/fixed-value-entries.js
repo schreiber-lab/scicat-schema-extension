@@ -21,3 +21,14 @@ export const createFixedValueEntry = (data) => {
       throw data;
     });
 };
+
+export const deleteFixedValueEntry = (config) => {
+  return api2
+    .delete(`/addons/fixed_value_entry`, config)
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((data) => {
+      throw data;
+    });
+};
