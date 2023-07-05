@@ -19,7 +19,7 @@ const useStyles = makeStyles(({ palette }) => ({
   },
 }));
 
-export const Entries = ({ entries }) => {
+export const Entries = ({ entries, schemaName }) => {
   const classes = useStyles();
 
   return !entries?.length ? (
@@ -40,7 +40,7 @@ export const Entries = ({ entries }) => {
 
         <TableBody>
           {entries?.map((entry) => (
-            <Row key={entry.full_name} field={entry} />
+            <Row key={entry.full_name} field={entry} schemaName={schemaName}/>
           ))}
         </TableBody>
       </Table>

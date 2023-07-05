@@ -30,7 +30,6 @@ export const Row = ({ field, schemaName, entriesProps }) => {
       payload: {
         field,
         schemaName
-
       },
     onModalResolved: (fixedValueEntry) => {
         dispatch(deleteFixedValueEntry({ schemaName, fixedValueEntry }));

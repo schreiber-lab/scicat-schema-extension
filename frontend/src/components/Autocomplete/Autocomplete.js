@@ -26,9 +26,11 @@ export const Autocomplete = forwardRef(({
   multiple,
   freeSolo,
   options: optionsProp,
-  getOptionValue = (option) => option && option?.value,
-  getOptionLabel = (option) => option?.label,
-  getOptionSelected = (option, value) => option?.value === value?.value,
+  getOptionValue = (option) => option?.value || option,
+  getOptionLabel = (option) => option?.label || option,
+  getOptionSelected = (option, value) => {
+    return option?.value === value?.value || option === value;
+  },
   required,
   helperText,
   error: errorProp,
@@ -59,7 +61,7 @@ export const Autocomplete = forwardRef(({
   const clearButtonIsVisible = !disableClearable && (multiple ? !isEmpty(field.value) : !isNil(field.value));
 
   const transformValueToInputValue = (value) => {
-    return (isObject(value) && getOptionLabel(value)) || (freeSolo && value) || '';
+    return (!multiple && (isObject(value) && getOptionLabel(value)) || (freeSolo && value)) || '';
   };
 
   const [ open, setOpen ] = useState(false);
