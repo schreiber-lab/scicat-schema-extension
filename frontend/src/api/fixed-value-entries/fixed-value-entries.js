@@ -23,6 +23,7 @@ export const createFixedValueEntry = (data) => {
 };
 
 export const deleteFixedValueEntry = (config) => {
+  console.log(config)
   return api2
     .delete(`/addons/fixed_value_entry`, config)
     .then(({ data }) => {

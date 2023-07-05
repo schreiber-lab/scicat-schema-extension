@@ -116,6 +116,8 @@ export const List = () => {
                           {property}
                         </TableCell>
                       ))}
+
+                      <TableCell className={classes.tableHeaderCell} />
                     </TableRow>
                   </TableHead>
 
@@ -125,6 +127,7 @@ export const List = () => {
                         key={index}
                         field={entry}
                         entriesProps={entriesProps}
+                        schemaName={schema.schema_name}
                       />
                     ))}
                   </TableBody>

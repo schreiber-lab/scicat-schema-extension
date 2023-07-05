@@ -2,17 +2,15 @@ import { Button, Dialog, DialogActions, DialogTitle } from "@material-ui/core";
 import * as fixedValueEntryApi from "../../../../api/fixed-value-entries";
 
 export const DeleteEntryModal = ({
-  payload: { field, schemaName  },
+  payload: { field, schemaName },
   DialogProps,
   handleModalResolve,
   handleModalReject,
 }) => {
   const handleEntryDelete = () => {
-
     return fixedValueEntryApi.deleteFixedValueEntry({
       params: {
         schema_name: schemaName,
-       
       }
     }).then(() => {
       handleModalResolve(field);
