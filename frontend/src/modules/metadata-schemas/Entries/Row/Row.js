@@ -2,28 +2,29 @@ import { Box, IconButton, TableCell, TableRow } from "@material-ui/core";
 import { stopPropagation } from "../../../../helpers/stopPropagation";
 import { useModal } from "../../../../components";
 import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
-// import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
+import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import { useDispatch } from "react-redux";
 import { DeleteEntryModal } from "./DeleteEntryModal";
-// import { EditEntryModal } from "./EditEntryModal";
+import { EditEntryModal } from "./EditEntryModal";
 import { deleteFixedValueEntry } from "../../../../redux/fixed-value-entries/actions";
-// import { editFixedValueEntry } from "../../../../redux/fixed-value-entries/actions";
+import { editFixedValueEntry } from "../../../../redux/fixed-value-entries/actions";
 
 export const Row = ({ field, schemaName, entriesProps }) => {
   const { openModal } = useModal();
   const dispatch = useDispatch();
 
-  // const openEditModal = () => {
-  //   openModal(EditMDSchemaModal, {
-  //     payload: {
-  //       field
+  const openEditModal = () => {
+    openModal(EditEntryModal, {
+      payload: {
+        field,
+        schemaName
 
-  //     },
-  //     onModalResolved: (updatedEntry) => {
-  //       dispatch(editFixedValueEntry({ updatedEntry }));
-  //     },
-  //   });
-  // };
+      },
+      onModalResolved: (updatedEntry) => {
+        dispatch(editFixedValueEntry({ schemaName, updatedEntry }));
+      },
+    });
+  };
   
   const openDeleteModal = () => {
     openModal(DeleteEntryModal, {
@@ -50,9 +51,9 @@ export const Row = ({ field, schemaName, entriesProps }) => {
       })}
        <TableCell >
         <Box display="flex" justifyContent="flex-end">
-        {/* <IconButton onClick={stopPropagation(openEditModal)}>
+        <IconButton onClick={stopPropagation(openEditModal)}>
           <EditOutlinedIcon />
-        </IconButton> */}
+        </IconButton>
 
         <IconButton onClick={stopPropagation(openDeleteModal)}>
           <DeleteOutlineOutlinedIcon />

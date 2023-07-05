@@ -33,3 +33,14 @@ export const deleteFixedValueEntry = (config) => {
       throw data;
     });
 };
+
+export const editFixedValueEntry = (data, config) => {
+  return api2
+    .patch(`/addons/fixed_value_entry`, data, config)
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((data) => {
+      throw data;
+    });
+};
