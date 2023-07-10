@@ -9,7 +9,7 @@ import { EditEntryModal } from "./EditEntryModal";
 import { deleteFixedValueEntry } from "../../../../redux/fixed-value-entries/actions";
 import { editFixedValueEntry } from "../../../../redux/fixed-value-entries/actions";
 
-export const Row = ({ field, schemaName, entriesProps }) => {
+export const Row = ({ field, schemaName, entriesProps, index }) => {
   const { openModal } = useModal();
   const dispatch = useDispatch();
 
@@ -18,10 +18,9 @@ export const Row = ({ field, schemaName, entriesProps }) => {
       payload: {
         field,
         schemaName
-
       },
       onModalResolved: (updatedEntry) => {
-        dispatch(editFixedValueEntry({ schemaName, updatedEntry }));
+        dispatch(editFixedValueEntry({ updatedEntry, updatedEntryIndex: index }));
       },
     });
   };
@@ -32,8 +31,8 @@ export const Row = ({ field, schemaName, entriesProps }) => {
         field,
         schemaName
       },
-    onModalResolved: (fixedValueEntry) => {
-        dispatch(deleteFixedValueEntry({ schemaName, fixedValueEntry }));
+    onModalResolved: () => {
+        dispatch(deleteFixedValueEntry(index));
       },
     });
   };
@@ -51,13 +50,13 @@ export const Row = ({ field, schemaName, entriesProps }) => {
       })}
        <TableCell >
         <Box display="flex" justifyContent="flex-end">
-        <IconButton onClick={stopPropagation(openEditModal)}>
-          <EditOutlinedIcon />
-        </IconButton>
+          <IconButton onClick={stopPropagation(openEditModal)}>
+            <EditOutlinedIcon />
+          </IconButton>
 
-        <IconButton onClick={stopPropagation(openDeleteModal)}>
-          <DeleteOutlineOutlinedIcon />
-        </IconButton>
+          <IconButton onClick={stopPropagation(openDeleteModal)}>
+            <DeleteOutlineOutlinedIcon />
+          </IconButton>
         </Box>
       </TableCell>
     </TableRow>

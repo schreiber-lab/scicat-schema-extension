@@ -21,6 +21,7 @@ export const EditEntryModal = ({
   const form = useForm({
     defaultValues: {
       schema_name: schemaName,
+      ...field
     },
     // resolver: yupResolver(validationSchema),
   });
@@ -31,7 +32,7 @@ export const EditEntryModal = ({
       handleModalResolve(field);
     });
   };
-
+console.log(field)
   return (
     <Dialog maxWidth="lg" {...DialogProps}>
       <Box

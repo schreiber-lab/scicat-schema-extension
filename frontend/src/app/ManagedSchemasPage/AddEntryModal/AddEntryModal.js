@@ -55,7 +55,7 @@ export const AddEntryModal = ({ isOpen, schemaName, onClose, onResolve }) => {
         <DialogTitle>Add new entry for {schemaName}</DialogTitle>
         <DialogContent>
           <FormProvider {...form}>
-            <EntryForm schemaName={schemaName} />
+            <EntryForm schemaName={schemaName} basePath="entries[0]" />
           </FormProvider>
         </DialogContent>
 
