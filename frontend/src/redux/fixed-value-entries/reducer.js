@@ -16,28 +16,22 @@ export const reducer = createReduxReducer(initialState, {
     };
   },
 
-  [types.DELETE_FIXED_VALUE_ENTRY]: (state, { schemaName, fixedValueEntry }) => { 
+  [types.DELETE_FIXED_VALUE_ENTRY]: (state, deletedEntryIndex) => { 
     return {
       ...state,
- 
-      mdSchemas: state.mdSchemas.map((schema) => {
-        return schemaName !== schema.schema_name ? schema : {
-          ...schema,
           
-          fixedValueEntries: (
-            schema.fixedValueEntries?.filter(({ full_name }) => full_name !== fixedValueEntry)
-          )
-        }
-      }),
+      fixedValueEntries: (
+        state.fixedValueEntries?.filter((_, index) => deletedEntryIndex !== index )
+      )
     };
   },
 
-  [types.EDIT_FIXED_VALUE_ENTRY]: (state, updatedEntry)  => {
+  [types.EDIT_FIXED_VALUE_ENTRY]: (state, { updatedEntry, updatedEntryIndex })  => {
     return {
       ...state,
 
-      fixedValueEntries: state.fixedValueEntries.map((fixedValueEntry) => {
-        return fixedValueEntry.material_id === updatedEntry.material_id ? updatedEntry : fixedValueEntry;
+      fixedValueEntries: state.fixedValueEntries.map((fixedValueEntry, index) => {
+        return index === updatedEntryIndex ? updatedEntry : fixedValueEntry;
       })
     };
   },

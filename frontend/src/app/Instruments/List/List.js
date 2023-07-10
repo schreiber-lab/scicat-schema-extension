@@ -35,7 +35,6 @@ export const List = () => {
     getInstruments,
   } = useContext(InstrumentsContext);
 
-
   useEffect(() => {
     getInstruments();
   }, []);

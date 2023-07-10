@@ -128,6 +128,7 @@ export const List = () => {
                         field={entry}
                         entriesProps={entriesProps}
                         schemaName={schema.schema_name}
+                        index={index}
                       />
                     ))}
                   </TableBody>
