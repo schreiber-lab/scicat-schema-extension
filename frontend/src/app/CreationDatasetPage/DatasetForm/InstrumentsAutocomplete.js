@@ -1,6 +1,6 @@
 import { Box, Typography } from '@material-ui/core';
 import * as instrumentsApi from '../../../api/instruments';
-import { Autocomplete } from '../../../components/Autocomplete';
+import { AutocompleteNew } from '../../../components/Autocomplete';
 
 const fetchInstruments = (params) => ({ search, loadedOptions = [], additionalData: { page = 0 } }) => {
     console.log(loadedOptions)
@@ -33,7 +33,7 @@ const renderOption = (option) => {
 
 export const InstrumentsAutocomplete = ({ params = {}, creatablePayload, ...props }) => {
   return (
-    <Autocomplete
+    <AutocompleteNew
       isAsync
       label="Instruments"
       placeholder="Search and add instrument..."

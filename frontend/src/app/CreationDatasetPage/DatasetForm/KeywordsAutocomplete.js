@@ -1,7 +1,7 @@
 import { Box, Typography } from '@material-ui/core';
 import AddIcon from "@material-ui/icons/Add";
 import * as fullfacetsApi from '../../../api/fullfacets';
-import { Autocomplete } from '../../../components/Autocomplete';
+import { AutocompleteNew } from '../../../components/Autocomplete';
 
 const fetchKeywords = (params) => ({ loadedOptions = [] }) => {
     console.log(loadedOptions)
@@ -41,7 +41,7 @@ const renderOption = (option) => {
 
 export const KeywordsAutocomplete = ({ params = {}, creatablePayload, ...props }) => {
   return (
-    <Autocomplete
+    <AutocompleteNew
       isAsync
       label="Keywords"
       placeholder="Search and add keywords..."
