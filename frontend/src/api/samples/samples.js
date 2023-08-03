@@ -1,9 +1,17 @@
+import { omit } from "lodash";
 import { api } from "../api";
 import { transformMetadataSchemaRequest, transformMetadataSchemaResponse } from "../metadata-schemas";
 
 const transformSampleRequest = (sample) => {
   return {
-    ...sample,
+    ...omit(sample, [
+      "_id",
+      "id",
+      "createdAt",
+      "createdBy",
+      "updatedAt",
+      "updatedBy"
+    ]),
 
     sampleCharacteristics: transformMetadataSchemaRequest(sample.sampleCharacteristics)
   };
@@ -42,52 +50,51 @@ export const getSample = (id, config) => {
 };
 
 export const createSample = (data) => {
-    return api
-      .post('/samples', transformSampleRequest(data))
-      .then(({ data }) => {
-        return data;
-      })
-      .catch((data) => {
-        throw data;
-      });
-  };
+  return api
+    .post('/samples', transformSampleRequest(data))
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((data) => {
+      throw data;
+    });
+};
 
-  export const deleteSample = (id, config) => {
-    return api
-      .delete(`/samples/${id}`, config)
-      .then(({ data }) => {
-        return data;
-      })
-      .catch((data) => {
-        throw data;
-      });
-  };
+export const deleteSample = (id, config) => {
+  return api
+    .delete(`/samples/${id}`, config)
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((data) => {
+      throw data;
+    });
+};
 
 ////////////////////////////////////////
-  export const editSample = (sample, config) => {
-    return api
-      .patch(`/samples/${sample.sampleId}`, transformSampleRequest(sample), config)
-      .then(({ data }) => {
-        return data;
-      })
-      .catch((data) => {
-        throw data;
-      });
-  };
+export const editSample = (sample, config) => {
+  return api
+    .patch(`/samples/${sample.sampleId}`, transformSampleRequest(sample), config)
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((data) => {
+      throw data;
+    });
+};
 
 /////////////////////////////
-  export const editSampleWithMetadata = (sample, config) => {
-    return api
-      .patch(
-        `/samples/${sample.sampleId}`,
-        transformSampleRequest(sample),
-        config
-      )
-      .then(({ data }) => {
-        return transformSampleResponse(data);
-      })
-      .catch((data) => {
-        throw data;
-      });
-  };
-  
+export const editSampleWithMetadata = (sample, config) => {
+  return api
+    .patch(
+      `/samples/${sample.sampleId}`,
+      transformSampleRequest(sample),
+      config
+    )
+    .then(({ data }) => {
+      return transformSampleResponse(data);
+    })
+    .catch((data) => {
+      throw data;
+    });
+};
