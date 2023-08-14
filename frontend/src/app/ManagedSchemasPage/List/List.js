@@ -45,7 +45,6 @@ export const List = () => {
   );
 
   const handleSchemaNameChange = (schema) => {
-    // console.log(schemaName)
     dispatch(getFixedValueEntries({ schema_name: schema.schema_name }));
     setSchema(schema);
   };
@@ -70,24 +69,9 @@ export const List = () => {
         <>
           <Box>
             <Box mb={-5} mt={4} maxWidth={300} mx="auto">
-              {/* <TextField
-              required
-              fullWidth
-              select
-              margin="dense"
-              name="schemaName"
-              label="Schema name"
-              value={schemaName}
-              onChange={handleSchemaNameChange}
-            >
-              <MenuItem value="material">material</MenuItem>
-            </TextField> */}
               <MetadataSchemasAutocomplete
                 disableClearable
                 value={schema}
-                // params={{
-                //   object_type: "sample",
-                // }}
                 onChange={handleSchemaNameChange}
               />
             </Box>

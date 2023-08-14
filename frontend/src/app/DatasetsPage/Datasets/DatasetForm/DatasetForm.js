@@ -1,6 +1,4 @@
 import { TextField } from "../../../../components/TextField";
-// import { Metadata } from "../../Datasets/DatasetForm/Metadata";
-// import { Metadata } from "../../../../components/Metadata"
 
 export const DatasetForm = () => {
   return (
@@ -12,6 +10,7 @@ export const DatasetForm = () => {
         label="Name"
         placeholder="Enter name..."
       />
+
       <TextField
         required
         fullWidth
@@ -20,6 +19,7 @@ export const DatasetForm = () => {
         label="Source folder"
         placeholder="Enter source folder..."
       />
+
       <TextField
         fullWidth
         margin="dense"
@@ -27,6 +27,7 @@ export const DatasetForm = () => {
         label="Size"
         placeholder="Enter size..."
       />
+
       <TextField
         required
         fullWidth
@@ -78,8 +79,6 @@ export const DatasetForm = () => {
         label="Group"
         placeholder="Enter group..."
       />
-      
-      {/* <Metadata/> */}
     </>
   );
 };

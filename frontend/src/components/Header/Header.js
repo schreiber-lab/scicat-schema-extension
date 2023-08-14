@@ -7,7 +7,6 @@ import { actions } from "../../redux/auth";
 import { env } from "../../env";
 import { LoginModal } from "./LoginModal";
 import { Menu } from "./Menu";
-
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({

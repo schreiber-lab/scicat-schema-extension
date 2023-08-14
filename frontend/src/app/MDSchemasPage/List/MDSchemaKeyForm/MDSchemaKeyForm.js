@@ -77,8 +77,6 @@ export const MDSchemaKeyForm = ({ fieldNamePrefix = "" }) => {
             control={
               <Checkbox
                 name="withPredefinedValues"
-                // checked={withPredefinedValues}
-                // onChange={handleCheckboxChange("withPredefinedValues")}
               />
             }
             label="Use predefined values"

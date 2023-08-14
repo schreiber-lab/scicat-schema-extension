@@ -9,7 +9,6 @@ export const SecondRow= ({ field }) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const isFixedValueEntries = !!(formContext && useWatch({ name: "fixed_value_entries" }));
   
-
   return (
     <TableRow>
       {isFixedValueEntries && (

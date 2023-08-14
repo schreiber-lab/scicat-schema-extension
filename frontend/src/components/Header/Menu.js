@@ -58,21 +58,18 @@ export const Menu = () => {
             </Box>
               <ListItemText primary={ <Typography style={{ marginLeft: 30 }}>Proposals</Typography>} />
             </ListItem>
-            {/* <Divider /> */}
             <ListItem button component={Link} to="/instruments">
             <Box color="primary.main">
               <SettingsIcon />
             </Box>
               <ListItemText primary={ <Typography style={{ marginLeft: 30 }}>Instruments</Typography>}/>
             </ListItem>
-            {/* <Divider /> */}
             <ListItem button component={Link} to="/samples">
             <Box color="primary.main">
             <CenterFocusWeakIcon/>
             </Box>
               <ListItemText primary={ <Typography style={{ marginLeft: 30 }}>Samples</Typography>} />
             </ListItem>
-            {/* <Divider /> */}
             <ListItem button component={Link} to="/datasets">
             <Box color="primary.main">
               <FolderIcon />
@@ -83,36 +80,23 @@ export const Menu = () => {
             </ListItem>
             <Divider />
             <ListItem button component={Link} to="/proposal-creation">
-            {/* <Box color="primary.main"> */}
            <CreateNewFolderIcon/>
-            {/* </Box> */}
               <ListItemText primary={ <Typography style={{ marginLeft: 2 }}>Create Proposal</Typography>}/>
             </ListItem>
-            {/* <Divider /> */}
             <ListItem button component={Link} to="/instrument-creation">
-            {/* <Box color="primary.main"> */}
             <CreateNewFolderIcon/>
-            {/* </Box> */}
               <ListItemText primary={ <Typography style={{ marginLeft: 2 }}>Create Instrument</Typography>}/>
             </ListItem>
-            {/* <Divider /> */}
             <ListItem button component={Link} to="/sample-creation">
-            {/* <Box color="primary.main"> */}
             <CreateNewFolderIcon/>
-            {/* </Box> */}
               <ListItemText primary={ <Typography style={{ marginLeft: 2 }}>Create Sample</Typography>}/>
             </ListItem>
-            {/* <Divider /> */}
             <ListItem button component={Link} to="/dataset-creation">
-            {/* <Box color="primary.main"> */}
             <CreateNewFolderIcon/>
-            {/* </Box> */}
               <ListItemText primary={ <Typography style={{ marginLeft: 2 }}>Create Dataset</Typography>}/>
             </ListItem>
             <ListItem button component={Link} to="/dataset-and-sample-creation">
-            {/* <Box color="primary.main"> */}
             <CreateNewFolderIcon/>
-            {/* </Box> */}
               <ListItemText primary={ <Typography style={{ marginLeft: 2 }}>Create Dataset&Sample</Typography>}/>
             </ListItem>
             <Divider />
@@ -122,17 +106,12 @@ export const Menu = () => {
             </Box>
               <ListItemText primary="Show MD Schemas" />
             </ListItem>
-            {/* <Divider /> */}
             <ListItem button component={Link} to="/md-schema-creation">
-            {/* <Box color="primary.main"> */}
             <LibraryAddIcon/>
-            {/* </Box> */}
               <ListItemText primary="Create new MD Schema" />
             </ListItem>
             <ListItem button component={Link} to="/autocomplete-schemas">
-            {/* <Box color="primary.main"> */}
             <SettingsApplicationsIcon/>
-            {/* </Box> */}
               <ListItemText primary="Autocomplete schemas" />
             </ListItem>
           </List>

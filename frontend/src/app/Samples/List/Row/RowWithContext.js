@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { IconButton, TableCell, TableRow, Typography } from "@material-ui/core";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
-// import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
 import { stopPropagation } from "../../../../helpers/stopPropagation";
 import { useModal } from "../../../../components";
 import { SamplesContext } from "../../../../modules/samples/SamplesProvider";

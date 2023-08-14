@@ -83,7 +83,6 @@ export const DatasetsProvider = ({ children }) => {
    }
   }, [ filter, prevFilter ]);
 
-
   return (
     <DatasetsContext.Provider value={providerValue}>
       {children}

@@ -57,16 +57,15 @@ export const List = ({ onDatasetSelect }) => {
             <TableCell align="right" className={classes.tableHeaderCell}>
               Source Folder
             </TableCell>
-            {/* <TableCell align="right" className={classes.tableHeaderCell}>
-              Size
-            </TableCell> */}
+           
             <TableCell align="right" className={classes.tableHeaderCell}>
               Creation Time
             </TableCell>
+            
             <TableCell align="right" className={classes.tableHeaderCell}>
               Type
             </TableCell>
-            {/* <TableCell align="right" className={classes.tableHeaderCell}>Proposal ID</TableCell> */}
+
             <TableCell align="right" className={classes.tableHeaderCell}>
               Group
             </TableCell>

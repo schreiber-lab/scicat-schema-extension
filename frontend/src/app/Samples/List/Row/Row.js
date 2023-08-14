@@ -12,7 +12,6 @@ import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined"
 import { DeleteModal } from "../../../../components/DeleteModal";
 import * as samplesApi from "../../../../api/samples";
 import { deleteSample } from "../../../../redux/samples/actions";
-// import { EditModal } from "./EditModal";
 import { EditSampleModal } from "./EditSampleModal";
 
 export const Row = ({ sample }) => {

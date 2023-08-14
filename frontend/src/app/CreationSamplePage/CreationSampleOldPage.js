@@ -8,7 +8,6 @@ import * as samplesApi from "../../api/samples";
 import { addSample } from "../../redux/samples/actions";
 import { SampleForm, validationSchema, defaultValues } from "./SampleForm";
 
-
 const useStyles = makeStyles(({spacing}) => ({
   root:{
     paddingTop: spacing(2),

@@ -65,7 +65,6 @@ console.log(mdSchemas)
               margin="dense"
               name="schemaType"
               label="Schema type"
-              // variant="standard"
               value={schemaType}
               onChange={handleSchemaTypeChange}
             >

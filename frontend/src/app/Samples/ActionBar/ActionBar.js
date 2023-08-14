@@ -1,10 +1,6 @@
 import { useState } from "react";
 import { Container, Toolbar, Button, Grid } from "@material-ui/core";
-// import { Autocomplete } from "@material-ui/lab";
-// import Autocomplete from '@material-ui/lab/Autocomplete';
-// import { Autocomplete } from "../../../components/Autocomplete";
 import { FormModal } from "../FormModal";
-// import { SamplesAutocomplete } from "./SamplesAutocomplete";
 
 export const ActionBar = () => {
   const [open, setOpen] = useState(false);
@@ -22,7 +18,6 @@ export const ActionBar = () => {
       <Toolbar disableGutters>
         <Grid container>
           <Grid item xs>
-            {/* <SamplesAutocomplete style={{ width: 300 }} /> */}
           </Grid>
 
           <Grid item>

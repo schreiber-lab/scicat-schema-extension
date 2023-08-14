@@ -12,17 +12,6 @@ export const InstrumentForm = () => {
       <Grid item sm={6} md={7}>
         <TextField required fullWidth margin="dense" name="name" label="Name" />
       </Grid>
-
-      {/* <Grid item sm={6} md={7}>
-        <TextField
-          required
-          fullWidth
-          margin="dense"
-          name="customMetadata"
-          label="Custom Metadata"
-        />
-      </Grid> */}
-
       <Grid item xs={12}>
         <Box py={2}>
           <Metadata

@@ -10,7 +10,6 @@ export const Row = ({ instrument }) => {
           {instrument.name}
         </Typography>
       </TableCell>
-      {/* <TableCell>facility:{instrument.name} :</TableCell> */}
       <TableCell>{facility?.value || "-"}</TableCell>
     </TableRow>
   );

@@ -22,16 +22,6 @@ export const ModalsProvider = ({ children }) => {
     }));
   };
 
-//   useEffect(() => {
-//     const removeListener = navigate.listen(() => {
-//       setModals((modals) => modals.map((modal) => ({ ...modal, open: false })));
-//     });
-
-//     return () => {
-//       removeListener();
-//     };
-//   }, []);
-
   return (
     <ModalsContext.Provider value={{ addModal }}>
       {children}

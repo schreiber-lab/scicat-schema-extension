@@ -22,11 +22,11 @@ export const SampleForm = () => {
         label="Owner Group"
         placeholder="Use a group you have access to"
       />
-        <Metadata
-          baseKey="sampleCharacteristics"
-          objectType="sample"
-          title="Sample Characteristics"
-        />
+      <Metadata
+        baseKey="sampleCharacteristics"
+        objectType="sample"
+        title="Sample Characteristics"
+      />
     </>
   );
 };

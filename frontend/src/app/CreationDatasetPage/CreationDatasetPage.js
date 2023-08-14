@@ -34,7 +34,6 @@ const useStyles = makeStyles(({ spacing }) => ({
 }));
 
 export const CreationDatasetPage = () => {
-  // const [open, setOpen] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -68,19 +67,6 @@ export const CreationDatasetPage = () => {
     console.log(data.scientificMetadata)
   };
 
-  // const openSelectDatasetModal = () => {
-  //   setOpen(true);
-  // };
-
-  // const closeSelectDatasetModal = () => {
-  //   setOpen(false);
-  // };
-
-  // const handleDatasetSelect = ({ pid, ...dataset }) => {
-  //   closeSelectDatasetModal();
-  //   form.reset(dataset);
-  // };
-
   const openSelectDatasetModal = () => {
     openModal(SelectDatasetModal, {
       onModalResolved: (dataset) => {
@@ -107,12 +93,6 @@ export const CreationDatasetPage = () => {
           >
             Apply template
           </Button>
-
-          {/* <SelectDatasetModal
-            isOpen={open}
-            onClose={closeSelectDatasetModal}
-            onDatasetSelect={handleDatasetSelect}
-          /> */}
         </Grid>
       </Grid>
 

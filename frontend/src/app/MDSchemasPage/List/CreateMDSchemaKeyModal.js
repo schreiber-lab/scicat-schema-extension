@@ -7,7 +7,6 @@ import {
 } from "@material-ui/core";
 import { useForm, FormProvider } from "react-hook-form";
 import { preventDefault } from "../../../helpers/preventDefault";
-// import { yupResolver } from "../../../utils/validation";
 import * as mdschemasApi from "../../../api/md-schemas";
 import { MDSchemaKeyForm } from "./MDSchemaKeyForm";
 
@@ -26,14 +25,9 @@ export const CreateMDSchemaKeyModal = ({
       withPredefinedValues: false,
       withUnit: false,
     },
-    // resolver: yupResolver(validationSchema),
   });
 
   const handleSubmit = (values) => {
-    // if (!values.withPredefinedValues) {
-    //   values.new_key_details.allowed = [];
-    // }
-
     delete values.withPredefinedValues;
     delete values.withUnit;
   

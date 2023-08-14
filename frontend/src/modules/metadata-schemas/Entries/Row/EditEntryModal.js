@@ -8,7 +8,6 @@ import {
 } from "@material-ui/core";
 import { useForm, FormProvider } from "react-hook-form";
 import { preventDefault } from "../../../../helpers/preventDefault";
-// import { yupResolver } from "../../../../utils/validation";
 import * as fixedValueEntryApi from "../../../../api/fixed-value-entries";
 import { EntryForm } from "../../../../app/ManagedSchemasPage/AddEntryModal/EntryForm"
 
@@ -23,16 +22,14 @@ export const EditEntryModal = ({
       schema_name: schemaName,
       ...field
     },
-    // resolver: yupResolver(validationSchema),
   });
 
   const handleSubmit = (data) => {
     return fixedValueEntryApi.editFixedValueEntry(data).then(() => {
-      console.log(data)
       handleModalResolve(field);
     });
   };
-console.log(field)
+
   return (
     <Dialog maxWidth="lg" {...DialogProps}>
       <Box
