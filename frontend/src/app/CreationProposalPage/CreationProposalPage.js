@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom"
 import { Button, Typography, Container, makeStyles } from "@material-ui/core";
+import { useSnackbar } from "notistack";
 import { useForm, FormProvider } from "react-hook-form";
 import { preventDefault } from "../../helpers/preventDefault";
 import { yupResolver } from "../../utils/validation";
@@ -38,6 +39,7 @@ const useStyles = makeStyles(({spacing}) => ({
 }));
 
 export const CreationProposalPage = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -54,6 +56,14 @@ export const CreationProposalPage = () => {
         dispatch(addProposal(data));
         navigate("/proposals")
       })
+      .catch(() => {
+      enqueueSnackbar(
+        "This proposal wasn't created. This Proposal id already exists. Enter a unique Proposal id!",
+        {
+          variant: "error",
+        }
+      );
+    });
   };
 
   return (

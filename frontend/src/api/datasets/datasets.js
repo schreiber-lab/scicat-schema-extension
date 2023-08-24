@@ -1,3 +1,4 @@
+import { omit } from "lodash";
 import { api } from "../api";
 import {
   transformMetadataSchemaRequest,
@@ -7,7 +8,24 @@ import {
 const transformDatasetRequest = (dataset) => {
   console.log(dataset.scientificMetadata);
   return {
-    ...dataset,
+    ...omit(dataset, [
+      "_id",
+      "createdBy",
+      "updatedBy",
+      "inputDatasets",
+      "usedSoftware",
+      "pid",
+      "history",
+      "attachments",
+      "origdatablocks",
+      "datablocks",
+      "createdAt",
+      "updatedAt",
+      "__v",
+      "id"
+
+    ]),
+    
 
     scientificMetadata: transformMetadataSchemaRequest(
       dataset.scientificMetadata
