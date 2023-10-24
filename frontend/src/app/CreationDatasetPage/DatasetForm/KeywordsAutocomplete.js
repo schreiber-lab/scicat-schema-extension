@@ -1,21 +1,22 @@
 import { Box, Typography } from '@material-ui/core';
-import AddIcon from "@material-ui/icons/Add";
+import AddIcon from '@material-ui/icons/Add';
 import * as fullfacetsApi from '../../../api/fullfacets';
-import { AutocompleteNew } from '../../../components/Autocomplete';
+import { Autocomplete } from '../../../components/Autocomplete';
 
 const fetchKeywords = (params) => ({ loadedOptions = [] }) => {
-    console.log(loadedOptions)
   return fullfacetsApi.getFullfacets({
     params: {
-      facets: "keywords",
+      facets: [ 'keywords' ],
+      fields: {},
     //   page: page + 1,
 
       ...params
     }
   }).then((data) => {
+    console.log(data)
     return {
     //   hasMore: pagination.page < pagination.last_page && pagination.total > 0,
-      options: loadedOptions.concat(data[0].keywords),
+      options: loadedOptions.concat(data[0].keywords || []),
     //   additionalData: {
     //     page: pagination.page
     //   }
@@ -26,7 +27,7 @@ const fetchKeywords = (params) => ({ loadedOptions = [] }) => {
 const renderOption = (option) => {
   return !option?.isCreatableOption ? (
     <Box clone width="100%" overflow="hidden">
-      <Typography>{option?._id}</Typography>
+      <Typography>{option}</Typography>
     </Box>
   ) : !option?.inputValue ? null : (
     <>
@@ -41,15 +42,15 @@ const renderOption = (option) => {
 
 export const KeywordsAutocomplete = ({ params = {}, creatablePayload, ...props }) => {
   return (
-    <AutocompleteNew
+    <Autocomplete
       isAsync
       label="Keywords"
       placeholder="Search and add keywords..."
       onNeedFetch={fetchKeywords(params)}
       renderOption={renderOption}
-      getOptionLabel={((option) => option && option?._id)}
-      getOptionValue={(option) => option?._id}
-      getOptionSelected={(option, value) => option?._id === value?._id}
+      getOptionLabel={((option) => option)}
+      getOptionValue={(option) => option}
+      getOptionSelected={(option, value) => option === value}
       onCreate={(value) => Promise.resolve({ _id: value })}
 
       {...props}

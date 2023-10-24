@@ -5,16 +5,17 @@ import { Autocomplete } from "../../../../components/Autocomplete";
 import { useModal } from "../../../../components";
 import { AddTechniqueModal } from "../AddTechniqueModal";
 
+const transformTechniqueResponse = ({ _id }) => _id;
+
 const fetchTechnique =
   (params) =>
   ({ loadedOptions = [] }) => {
-    console.log(loadedOptions);
-
     return fullfacetsApi
       .getFullfacets({
         params: {
-          facets: "techniques",
+          facets: [ "techniques" ],
           //   page: page + 1,
+          fields: {},
 
           ...params,
         },
@@ -22,7 +23,7 @@ const fetchTechnique =
       .then((data) => {
         return {
           //   hasMore: pagination.page < pagination.last_page && pagination.total > 0,
-          options: loadedOptions.concat(data[0].techniques),
+          options: loadedOptions.concat(data[0].techniques?.map(transformTechniqueResponse)),
           //   additionalData: {
           //     page: pagination.page
           //   }
@@ -33,7 +34,7 @@ const fetchTechnique =
 const renderOption = (option) => {
   return !option?.isCreatableOption ? (
     <Box clone width="100%" overflow="hidden">
-      <Typography>{option?._id?.name}</Typography>
+      <Typography>{option?.name}</Typography>
     </Box>
   ) : (
     <>
@@ -75,9 +76,11 @@ export const TechniquesAutocomplete = ({
       onNeedFetch={fetchTechnique(params)}
       renderOption={renderOption}
       getOptionLabel={(option) => option && option?.name}
-      getOptionValue={(option) => option}
+      getOptionValue={(option) => {
+        return option || null;
+      }}
       getOptionSelected={(option, value) =>
-        option?._id === value?._id
+        option?.pid === value?.pid
       }
       onCreate={handleTechniqueCreate}
       {...props}

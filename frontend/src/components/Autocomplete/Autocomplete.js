@@ -70,12 +70,28 @@ export const Autocomplete = forwardRef(({
   // React Hook Form
   const formContext = useFormContext();
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { fieldState } = (formContext && useController({
+  const { fieldState, field } = (formContext && useController({
     name, control: formContext?.control
   })) || {};
   const errorMessage = fieldState?.error?.message;
   const [ value, setValue ] = useState(formContext?.watch(name) || null);
   const clearButtonIsVisible = !props.disableClearable && !!(multiple ? value?.length : value);
+
+  const getDefaultValue = () => {
+    if (valueProp !== undefined) {
+      return valueProp;
+    }
+
+    if (isAsync) {
+      return field.value;
+    }
+
+    if (multiple && field.value !== null) {
+      return field.value.map((value) => optionsProp.find((option) => option.value === value));
+    }
+
+    return optionsProp.filter((option) => field.value === option.value)[0];
+  };
 
   const getOptionLabel = (option) => {
     return option?.isCreatableOption ? option.name : getOptionLabelProp(option);
@@ -175,6 +191,10 @@ export const Autocomplete = forwardRef(({
     setInputValue('');
   };
 
+  const transformOptionToValue = (option) => {
+    return isObject(option) ? getOptionValue(option) : option;
+  };
+
   useEffect(() => {
     if (loading) {
       loadOptions();
@@ -194,6 +214,25 @@ export const Autocomplete = forwardRef(({
       setValue(valueProp);
     }
   }, [ valueProp, value ]);
+
+  // useEffect(() => {
+  //   const fieldMultiValue = multiple && field.value?.map(transformOptionToValue);
+  //   const innerMultiValue = multiple && value?.map(transformOptionToValue);
+  //   const fieldValue = multiple ? fieldMultiValue : transformOptionToValue(field.value);
+  //   const innerValue = multiple ? innerMultiValue : transformOptionToValue(value);
+
+  //   if (!isEqual(fieldValue, innerValue)) {
+  //     setValue(getDefaultValue());
+
+  //     if (!multiple) {
+  //       setInputValue(getOptionLabel(field.value));
+  //     }
+
+  //     field.onChange(fieldValue);
+  //   } else if (multiple ? field.value?.every(isObject) : isObject(field.value)) {
+  //     field.onChange(fieldValue);
+  //   }
+  // }, [ field.value ]);
 
   return (
     <MuiAutocomplete
@@ -243,6 +282,7 @@ export const Autocomplete = forwardRef(({
       getOptionSelected={getOptionSelected}
       getOptionLabel={getOptionLabel}
       renderTags={(value, getTagProps) => {
+        console.log(value)
         return value.map((option, index) => (
           <Chip {...getTagProps({ index })} label={getOptionLabel(option)} />
         ));

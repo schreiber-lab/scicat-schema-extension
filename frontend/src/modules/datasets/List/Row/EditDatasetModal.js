@@ -45,20 +45,23 @@ export const EditDatasetModal = ({
   };
 
   useEffect(() => {
-    instrumentsApi.getInstrument(dataset.instrumentId).then((data) => {
-      console.log(data)
-      form.setValue("instrumentId", data);
-    });
+    if (dataset.instrumentId) {
+      instrumentsApi.getInstrument(dataset.instrumentId).then((data) => {
+        form.setValue("instrumentId", data);
+      });
+    }
 
-    proposalsApi.getProposal(dataset.proposalId).then((data) => {
-      console.log(data)
-      form.setValue("proposalId", data);
-    });
+    if (dataset.proposalId) {
+      proposalsApi.getProposal(dataset.proposalId).then((data) => {
+        form.setValue("proposalId", data);
+      });
+    }
 
-    samplesApi.getSample(dataset.sampleId).then((data) => {
-      console.log(data)
-      form.setValue("sampleId", data);
-    });
+    if (dataset.sampleId) {
+      samplesApi.getSample(dataset.sampleId).then((data) => {
+        form.setValue("sampleId", data);
+      });
+    }
   }, []);
 
   return (

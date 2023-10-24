@@ -33,6 +33,9 @@ const transformDatasetRequest = (dataset) => {
   };
 };
 
+const transformTechniqueResponse = ({ _id, ...technique }) => technique;
+const transformKeywordResponse = ({ _id, ...keyword }) => keyword;
+
 const transformDatasetResponse = (dataset) => {
   return {
     ...dataset,
@@ -40,6 +43,8 @@ const transformDatasetResponse = (dataset) => {
     scientificMetadata: transformMetadataSchemaResponse(
       dataset.scientificMetadata
     ),
+    techniques: dataset?.techniques?.map(transformTechniqueResponse),
+    keywords: dataset?.keywords?.map(transformKeywordResponse)
   };
 };
 
