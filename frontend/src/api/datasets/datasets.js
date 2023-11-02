@@ -44,7 +44,7 @@ const transformDatasetResponse = (dataset) => {
       dataset.scientificMetadata
     ),
     techniques: dataset?.techniques?.map(transformTechniqueResponse),
-    keywords: dataset?.keywords?.map(transformKeywordResponse)
+    // keywords: dataset?.keywords?.map(transformKeywordResponse)
   };
 };
 

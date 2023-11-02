@@ -3,6 +3,8 @@ import AddIcon from '@material-ui/icons/Add';
 import * as fullfacetsApi from '../../../api/fullfacets';
 import { Autocomplete } from '../../../components/Autocomplete';
 
+const transformKeywordResponse = ({ _id }) => _id;
+
 const fetchKeywords = (params) => ({ loadedOptions = [] }) => {
   return fullfacetsApi.getFullfacets({
     params: {
@@ -16,7 +18,7 @@ const fetchKeywords = (params) => ({ loadedOptions = [] }) => {
     console.log(data)
     return {
     //   hasMore: pagination.page < pagination.last_page && pagination.total > 0,
-      options: loadedOptions.concat(data[0].keywords || []),
+      options: loadedOptions.concat(data[0].keywords?.map(transformKeywordResponse) || []),
     //   additionalData: {
     //     page: pagination.page
     //   }

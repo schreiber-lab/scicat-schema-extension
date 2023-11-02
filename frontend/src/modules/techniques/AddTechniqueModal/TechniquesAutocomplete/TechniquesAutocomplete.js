@@ -5,7 +5,7 @@ import { Autocomplete } from "../../../../components/Autocomplete";
 import { useModal } from "../../../../components";
 import { AddTechniqueModal } from "../AddTechniqueModal";
 
-const transformTechniqueResponse = ({ _id }) => _id;
+const transformTechniqueResponse = ({ _id: { _id, ...technique } }) => technique;
 
 const fetchTechnique =
   (params) =>
