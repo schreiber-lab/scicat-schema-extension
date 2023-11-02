@@ -10,7 +10,8 @@ const transformInstrumentRequest = (instrument) => {
       "createdAt",
       "createdBy",
       "updatedAt",
-      "pid"
+      "pid",
+      "__v"
     ]),
 
     customMetadata: transformMetadataSchemaRequest(instrument.customMetadata)
