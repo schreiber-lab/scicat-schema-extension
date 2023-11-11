@@ -63,7 +63,7 @@ export const CreationDatasetAndSamplePage = () => {
       dispatch(addDataset(data));
       enqueueSnackbar("Dataset was successfully created");
       navigate("/datasets");
-    });
+    })
   };
 
   const handleSampleCreate = () => {

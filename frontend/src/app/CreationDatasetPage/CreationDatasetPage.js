@@ -54,9 +54,8 @@ export const CreationDatasetPage = () => {
         datasetsApi.createDataset(data).then((data) => {
           dispatch(addDataset(data));
           navigate("/datasets");
-        });
-      })
-      .catch(() => {
+        })
+        .catch(() => {
         enqueueSnackbar(
           "Your dataset wasn't created. Check the data you entered and make sure that all required fields are filled",
           {
@@ -64,6 +63,7 @@ export const CreationDatasetPage = () => {
           }
         );
       });
+    })
     console.log(data.scientificMetadata)
   };
 
