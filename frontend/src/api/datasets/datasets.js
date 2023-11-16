@@ -6,7 +6,6 @@ import {
 } from "../metadata-schemas";
 
 const transformDatasetRequest = (dataset) => {
-  console.log(dataset.scientificMetadata);
   return {
     ...omit(dataset, [
       "_id",

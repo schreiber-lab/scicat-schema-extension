@@ -64,7 +64,6 @@ export const CreationDatasetPage = () => {
         );
       });
     })
-    console.log(data.scientificMetadata)
   };
 
   const openSelectDatasetModal = () => {

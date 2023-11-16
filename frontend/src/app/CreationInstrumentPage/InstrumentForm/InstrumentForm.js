@@ -5,10 +5,6 @@ import { Metadata } from "../../../components/Metadata";
 export const InstrumentForm = () => {
   return (
     <Grid container>
-      {/* <Grid item sm={6} md={7}>
-        <TextField required fullWidth margin="dense" name="uniqueName" label="Unique name" />
-      </Grid> */}
-
       <Grid item sm={6} md={7}>
         <TextField required fullWidth margin="dense" name="name" label="Name" />
       </Grid>

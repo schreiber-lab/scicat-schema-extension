@@ -47,15 +47,15 @@ export const CreationDatasetAndSamplePage = () => {
   const { openModal } = useModal();
 
   const submitForms = () => {
-    datasetsApi.validateDataset(form.getValues()).then(({ valid }) => {
-      if (!valid) {
-        return;
-      }
+    // datasetsApi.validateDataset(form.getValues()).then(({ valid }) => {
+    //   if (!valid) {
+    //     return;
+    //   }
 
       sampleFormRef.current.dispatchEvent(
         new Event("submit", { cancelable: true, bubbles: true })
       );
-    });
+    // });
   };
 
   const handleSubmit = (values) => {
@@ -64,6 +64,14 @@ export const CreationDatasetAndSamplePage = () => {
       enqueueSnackbar("Dataset was successfully created");
       navigate("/datasets");
     })
+    .catch(() => {
+      enqueueSnackbar(
+        "Your dataset with sample wasn't created. Check the data you entered and make sure that all required fields are filled",
+        {
+          variant: "error",
+        }
+      );
+    });
   };
 
   const handleSampleCreate = () => {
