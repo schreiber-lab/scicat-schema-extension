@@ -54,6 +54,11 @@ export const Sample = ({ formRef, onCreate }) => {
         >
           <FormProvider {...form}>
             <SampleForm />
+
+            <button
+              type="submit"
+              style={{ display: "none" }}
+             />
           </FormProvider>
         </form>
       </Grid>

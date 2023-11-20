@@ -34,7 +34,7 @@ export const reducer = createReduxReducer(initialState, {
       mdSchemas: [],
     };
   },
-
+  
   [types.DELETE_SCHEMA_KEY]: (state, { schemaName, keyName }) => { 
     console.log(schemaName, keyName)
     return {
