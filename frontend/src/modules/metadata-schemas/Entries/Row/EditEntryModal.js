@@ -20,7 +20,8 @@ export const EditEntryModal = ({
   const form = useForm({
     defaultValues: {
       schema_name: schemaName,
-      ...field
+      entry_id: field.entry_id,
+      new_entry_details: field,
     },
   });
 
@@ -45,7 +46,7 @@ export const EditEntryModal = ({
 
         <DialogContent>
           <FormProvider {...form}>
-            <EntryForm schemaName={schemaName}/>
+            <EntryForm schemaName={schemaName} basePath="new_entry_details" />
           </FormProvider>
         </DialogContent>
 

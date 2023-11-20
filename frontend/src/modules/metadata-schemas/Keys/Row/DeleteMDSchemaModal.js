@@ -8,7 +8,6 @@ export const DeleteMDSchemaModal = ({
   handleModalReject,
 }) => {
   const handleKeyDelete = () => {
-
     return mdschemasApi.deleteMDSchemaKey({
       params: {
         schema_name: schemaName,

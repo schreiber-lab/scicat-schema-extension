@@ -4,6 +4,7 @@ import * as types from "./types";
 const initialState = {
   isLoaded: false,
   fixedValueEntries: [],
+  mdSchemas: [],
   filter: {},
 };
 
@@ -16,23 +17,58 @@ export const reducer = createReduxReducer(initialState, {
     };
   },
 
-  [types.DELETE_FIXED_VALUE_ENTRY]: (state, deletedEntryIndex) => { 
+  // [types.DELETE_FIXED_VALUE_ENTRY]: (state, deletedEntryIndex) => { 
+  //   return {
+  //     ...state,
+          
+  //     fixedValueEntries: (
+  //       state.fixedValueEntries?.filter((_, index) => deletedEntryIndex !== index )
+  //     )
+  //   };
+  // },
+
+  [types.DELETE_FIXED_VALUE_ENTRY]: (state, { schemaName, entryId }) => { 
+    console.log(schemaName, entryId)
     return {
       ...state,
+ 
+      mdSchemas: state.mdSchemas.map((schema) => {
+        return schemaName !== schema.schema_name ? schema : {
+          ...schema,
           
-      fixedValueEntries: (
-        state.fixedValueEntries?.filter((_, index) => deletedEntryIndex !== index )
-      )
+          fixedValueEntries: (
+            schema.fixedValueEntries?.filter(({ entry_id }) => entry_id !== entryId)
+          )
+        }
+      }),
     };
   },
 
-  [types.EDIT_FIXED_VALUE_ENTRY]: (state, { updatedEntry, updatedEntryIndex })  => {
+  // [types.EDIT_FIXED_VALUE_ENTRY]: (state, { updatedEntry, updatedEntryIndex })  => {
+  //   return {
+  //     ...state,
+
+  //     fixedValueEntries: state.fixedValueEntries.map((fixedValueEntry, index) => {
+  //       return index === updatedEntryIndex ? updatedEntry : fixedValueEntry;
+  //     })
+  //   };
+  // },
+
+  [types.EDIT_FIXED_VALUE_ENTRY]: (state, { schemaName, updatedEntry }) => {
+    console.log(schemaName, updatedEntry)
     return {
       ...state,
 
-      fixedValueEntries: state.fixedValueEntries.map((fixedValueEntry, index) => {
-        return index === updatedEntryIndex ? updatedEntry : fixedValueEntry;
-      })
+      mdSchemas: state.mdSchemas.map((schema) => {
+        return schemaName !== schema.schema_name ? schema : {
+          ...schema,
+
+          entries: schema.entries.map((entry) => {
+            console.log(entry.entry_id, updatedEntry.entry_id)
+            return entry.entry_id === updatedEntry.entry_id ? updatedEntry : entry
+          })
+        }
+      }),
     };
   },
 

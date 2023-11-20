@@ -11,6 +11,7 @@ export const DeleteEntryModal = ({
     return fixedValueEntryApi.deleteFixedValueEntry({
       params: {
         schema_name: schemaName,
+        entry_id: field.entry_id,
       }
     }).then(() => {
       handleModalResolve(field);
