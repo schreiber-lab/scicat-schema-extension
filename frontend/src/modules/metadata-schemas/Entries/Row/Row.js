@@ -9,18 +9,20 @@ import { EditEntryModal } from "./EditEntryModal";
 import { deleteFixedValueEntry } from "../../../../redux/fixed-value-entries/actions";
 import { editFixedValueEntry } from "../../../../redux/fixed-value-entries/actions";
 
-export const Row = ({ field, schemaName, entriesProps}) => {
+export const Row = ({ field, schema, entriesProps}) => {
   const { openModal } = useModal();
   const dispatch = useDispatch();
+  const schemaName = schema.schema_name;
+  const entryId = field[schema.id_key];
 
   const openEditModal = () => {
     openModal(EditEntryModal, {
       payload: {
         field,
-        schemaName
+        schema
       },
       onModalResolved: (updatedEntry) => {
-        dispatch(editFixedValueEntry({ schemaName, entryId: field.entry_id, updatedEntry }));
+        dispatch(editFixedValueEntry({ schemaName, entryId, updatedEntry }));
       },
     });
   };
@@ -30,9 +32,10 @@ export const Row = ({ field, schemaName, entriesProps}) => {
       payload: {
         field,
         schemaName,
+        entryId
       },
-    onModalResolved: (field) => {
-        dispatch(deleteFixedValueEntry({ schemaName, entryId: field.entry_id }));
+      onModalResolved: () => {
+        dispatch(deleteFixedValueEntry({ schema, entryId }));
       },
     });
   };

@@ -38,7 +38,10 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
 export const List = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [schema, setSchema] = useState({ schema_name: "material" });
+  const [schema, setSchema] = useState({
+    schema_name: "material",
+    id_key: "material_id"
+  });
   const [entriesProps, setEntriesProps] = useState([]);
   const { isLoaded, fixedValueEntries } = useSelector(
     ({ fixedValueEntries }) => fixedValueEntries
@@ -111,7 +114,7 @@ export const List = () => {
                         key={index}
                         field={entry}
                         entriesProps={entriesProps}
-                        schemaName={schema.schema_name}
+                        schema={schema}
                         index={index}
                       />
                     ))}
