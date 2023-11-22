@@ -27,31 +27,16 @@ export const reducer = createReduxReducer(initialState, {
     };
   },
 
-  // [types.EDIT_FIXED_VALUE_ENTRY]: (state, { updatedEntry, updatedEntryIndex })  => {
-  //   return {
-  //     ...state,
-
-  //     fixedValueEntries: state.fixedValueEntries.map((fixedValueEntry, index) => {
-  //       return index === updatedEntryIndex ? updatedEntry : fixedValueEntry;
-  //     })
-  //   };
-  // },
-
-  [types.EDIT_FIXED_VALUE_ENTRY]: (state, { schemaName, updatedEntry }) => {
-    console.log(schemaName, updatedEntry)
+  [types.EDIT_FIXED_VALUE_ENTRY]: (state, { schema, updatedEntry }) => {
+    console.log(schema, state, updatedEntry)
     return {
       ...state,
 
-      mdSchemas: state.mdSchemas.map((schema) => {
-        return schemaName !== schema.schema_name ? schema : {
-          ...schema,
-
-          entries: schema.entries.map((entry) => {
-            console.log(entry.entry_id, updatedEntry.entry_id)
-            return entry.entry_id === updatedEntry.entry_id ? updatedEntry : entry
-          })
-        }
-      }),
+      fixedValueEntries: state.fixedValueEntries.map((entry) => {
+        return entry[schema.id_key] === updatedEntry.entry_id
+          ? updatedEntry.new_entry_details
+          : entry;
+      })
     };
   },
 

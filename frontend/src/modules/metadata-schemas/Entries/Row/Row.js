@@ -19,10 +19,11 @@ export const Row = ({ field, schema, entriesProps}) => {
     openModal(EditEntryModal, {
       payload: {
         field,
-        schema
+        schemaName,
+        entryId
       },
       onModalResolved: (updatedEntry) => {
-        dispatch(editFixedValueEntry({ schemaName, entryId, updatedEntry }));
+        dispatch(editFixedValueEntry({ schema, updatedEntry }));
       },
     });
   };

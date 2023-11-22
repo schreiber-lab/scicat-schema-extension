@@ -12,7 +12,7 @@ import * as fixedValueEntryApi from "../../../../api/fixed-value-entries";
 import { EntryForm } from "../../../../app/ManagedSchemasPage/AddEntryModal/EntryForm"
 
 export const EditEntryModal = ({
-  payload: { field, schemaName },
+  payload: { field, schemaName, entryId },
   DialogProps,
   handleModalResolve,
   handleModalReject,
@@ -20,14 +20,14 @@ export const EditEntryModal = ({
   const form = useForm({
     defaultValues: {
       schema_name: schemaName,
-      entry_id: field.entry_id,
+      entry_id: entryId,
       new_entry_details: field,
     },
   });
 
   const handleSubmit = (data) => {
     return fixedValueEntryApi.editFixedValueEntry(data).then(() => {
-      handleModalResolve(field);
+      handleModalResolve(data);
     });
   };
 
