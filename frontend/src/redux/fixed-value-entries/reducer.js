@@ -4,7 +4,6 @@ import * as types from "./types";
 const initialState = {
   isLoaded: false,
   fixedValueEntries: [],
-  mdSchemas: [],
   filter: {},
 };
 
@@ -28,7 +27,6 @@ export const reducer = createReduxReducer(initialState, {
   },
 
   [types.EDIT_FIXED_VALUE_ENTRY]: (state, { schema, updatedEntry }) => {
-    console.log(schema, state, updatedEntry)
     return {
       ...state,
 
