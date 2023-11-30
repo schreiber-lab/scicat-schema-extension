@@ -181,6 +181,30 @@
     "schema_type": "dataset"
   },
   {
+    "keys": [
+      {
+        "key_name": "test key",
+        "type": "string",
+        "unit": null,
+        "required": true,
+        "scan_ref": false,
+        "changes_likely": true
+      },
+      {
+        "key_name": "test key56",
+        "type": "string",
+        "required": true,
+        "scan_ref": false,
+        "changes_likely": true,
+        "unit": null
+      }
+    ],
+    "id_key": "test key56",
+    "schema_name": "test schema100",
+    "fixed_value_entries": true,
+    "schema_type": "dataset"
+  },
+  {
     "schema_name": "material",
     "schema_type": "sample",
     "fixed_value_entries": true,

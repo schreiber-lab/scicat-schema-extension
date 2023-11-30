@@ -84,3 +84,16 @@ class MdSchemaKeyUpdate(MdSchemaKey):
     new_key_details = fields.Mapping(
         required=True, description="updated details for a given or new key"
     )
+
+
+class MdSchemaEntry(MdSchemaName):
+    entry_id = fields.Raw(
+        required=True,
+        description="id key value fo the concerned schema",
+    )
+
+
+class MdSchemaEntryUpdate(MdSchemaEntry):
+    new_entry_details = fields.Mapping(
+        required=True, description="updated details for a given or new key"
+    )

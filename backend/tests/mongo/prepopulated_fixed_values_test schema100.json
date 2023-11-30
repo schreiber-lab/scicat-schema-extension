@@ -1,10 +1,10 @@
 [
   {
-    "test key": 100,
+    "test key": "100",
     "test key56": "test value"
   },
   {
-    "test key": 200,
+    "test key": "200",
     "test key56": "test value 2"
   }
 ]
