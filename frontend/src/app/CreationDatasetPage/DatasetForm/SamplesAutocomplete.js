@@ -1,6 +1,6 @@
 import { Box, Typography } from '@material-ui/core';
 import * as samplesApi from '../../../api/samples';
-import { Autocomplete } from '../../../components/Autocomplete';
+import { AutocompleteNew } from '../../../components/Autocomplete';
 
 const fetchSamples = (params) => ({ search, loadedOptions = [], additionalData: { page = 0 } }) => {
     console.log(loadedOptions)
@@ -33,7 +33,7 @@ const renderOption = (option) => {
 
 export const SamplesAutocomplete = ({ params = {}, creatablePayload, ...props }) => {
   return (
-    <Autocomplete
+    <AutocompleteNew
       isAsync
       label="Sample"
       placeholder="Search and add sample..."

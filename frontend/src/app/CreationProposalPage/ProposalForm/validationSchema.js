@@ -7,7 +7,7 @@ export const validationSchema = Yup.object({
   email: Yup.string().nullable().required(),
   firstname: Yup.string().nullable(),
   lastname: Yup.string().nullable(),
-  title: Yup.string().nullable(),
+  title: Yup.string().nullable().required(),
   abstract: Yup.string().nullable(),
   ownerGroup: Yup.string().nullable().required(),
 });

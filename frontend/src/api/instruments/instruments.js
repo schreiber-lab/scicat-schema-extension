@@ -1,9 +1,18 @@
+import { omit } from "lodash";
 import { api } from "../api";
 import { transformMetadataSchemaRequest, transformMetadataSchemaResponse } from "../metadata-schemas";
 
 const transformInstrumentRequest = (instrument) => {
   return {
-    ...instrument,
+    ...omit(instrument, [
+      "_id",
+      "id",
+      "createdAt",
+      "createdBy",
+      "updatedAt",
+      "pid",
+      "__v"
+    ]),
 
     customMetadata: transformMetadataSchemaRequest(instrument.customMetadata)
   };

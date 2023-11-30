@@ -19,7 +19,6 @@ const defaultValues = {
   contactEmail: null,
   creationTime: null,
   ownerGroup: null,
-  // startTime: null,
   type: null,
   proposalId: null,
   group: null,

@@ -67,8 +67,8 @@ export const DatasetForm = () => {
       </Grid>
 
       <Grid item sm={2} md={4}>
-        <InstrumentsAutocomplete name="instruments" />
-        {/* <InstrumentsAutocomplete name="instrumentId" /> */}
+        {/* <InstrumentsAutocomplete name="instruments" /> */}
+        <InstrumentsAutocomplete name="instrumentId" />
       </Grid>
 
       <Grid item sm={2} md={4}>

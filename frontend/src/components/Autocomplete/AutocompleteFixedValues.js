@@ -1,5 +1,5 @@
 import { useState, forwardRef, useEffect, useCallback } from "react";
-import { isObject, isEqual, debounce, isUndefined } from "lodash";
+import { isObject, isEqual, debounce } from "lodash";
 import cn from "classnames";
 import {
   makeStyles,
@@ -30,7 +30,7 @@ const transformFreeSoloToOption = (value) => {
 const filter = createFilterOptions();
 
 // prettier-ignore
-export const Autocomplete = forwardRef(({
+export const AutocompleteFixedValues = forwardRef(({
   preventManualChangeNotification = false,
   disableSearch = false,
   disabled = false,
@@ -70,28 +70,13 @@ export const Autocomplete = forwardRef(({
   // React Hook Form
   const formContext = useFormContext();
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { fieldState, field } = (formContext && useController({
+  const { fieldState } = (formContext && useController({
     name, control: formContext?.control
   })) || {};
   const errorMessage = fieldState?.error?.message;
-  const [ value, setValue ] = useState(formContext?.watch(name) || null);
+  const [ value, setValue ] = useState(formContext?.getValues?.()?.[name] ?? null);
   const clearButtonIsVisible = !props.disableClearable && !!(multiple ? value?.length : value);
-
-  const getDefaultValue = () => {
-    if (valueProp !== undefined) {
-      return valueProp;
-    }
-
-    if (isAsync) {
-      return field.value;
-    }
-
-    if (multiple && field.value !== null) {
-      return field.value.map((value) => optionsProp.find((option) => option.value === value));
-    }
-
-    return optionsProp.filter((option) => field.value === option.value)[0];
-  };
+  console.log(name, value, formContext?.getValues?.())
 
   const getOptionLabel = (option) => {
     return option?.isCreatableOption ? option.name : getOptionLabelProp(option);
@@ -100,12 +85,12 @@ export const Autocomplete = forwardRef(({
   const transformValueToInputValue = (value) => {
     const optionLabel = getOptionLabel(value);
 
-    return (!isObject(optionLabel) && optionLabel) || '';
+    return (isObject(value) && !isObject(optionLabel) && optionLabel ) || '';
   };
 
-  const valueAsInputValue = transformValueToInputValue(value);
+  const valueAsInputValue = transformValueToInputValue(valueProp) || transformValueToInputValue(value);
 
-  const handleChange = (event, selectedOption) => {  
+  const handleChange = (event, selectedOption) => {    
     if (isCreatable) {
       const creatableOption = multiple
         ? selectedOption?.find(({ isCreatableOption }) => isCreatableOption)
@@ -115,6 +100,7 @@ export const Autocomplete = forwardRef(({
         setInputValue('');
 
         onCreate(creatableOption.inputValue).then((option) => {
+          console.log(option)
           if (!multiple) {
             setInputValue(getOptionLabel(option));
           }
@@ -191,10 +177,6 @@ export const Autocomplete = forwardRef(({
     setInputValue('');
   };
 
-  const transformOptionToValue = (option) => {
-    return isObject(option) ? getOptionValue(option) : option;
-  };
-
   useEffect(() => {
     if (loading) {
       loadOptions();
@@ -208,31 +190,6 @@ export const Autocomplete = forwardRef(({
       setIsFetched(false);
     }
   }, [ open ]);
-
-  useEffect(() => {
-    if (!isUndefined(valueProp) && !isEqual(valueProp, value)) {
-      setValue(valueProp);
-    }
-  }, [ valueProp, value ]);
-
-  // useEffect(() => {
-  //   const fieldMultiValue = multiple && field.value?.map(transformOptionToValue);
-  //   const innerMultiValue = multiple && value?.map(transformOptionToValue);
-  //   const fieldValue = multiple ? fieldMultiValue : transformOptionToValue(field.value);
-  //   const innerValue = multiple ? innerMultiValue : transformOptionToValue(value);
-
-  //   if (!isEqual(fieldValue, innerValue)) {
-  //     setValue(getDefaultValue());
-
-  //     if (!multiple) {
-  //       setInputValue(getOptionLabel(field.value));
-  //     }
-
-  //     field.onChange(fieldValue);
-  //   } else if (multiple ? field.value?.every(isObject) : isObject(field.value)) {
-  //     field.onChange(fieldValue);
-  //   }
-  // }, [ field.value ]);
 
   return (
     <MuiAutocomplete
@@ -282,7 +239,6 @@ export const Autocomplete = forwardRef(({
       getOptionSelected={getOptionSelected}
       getOptionLabel={getOptionLabel}
       renderTags={(value, getTagProps) => {
-        console.log(value)
         return value.map((option, index) => (
           <Chip {...getTagProps({ index })} label={getOptionLabel(option)} />
         ));

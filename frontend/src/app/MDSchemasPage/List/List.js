@@ -65,7 +65,6 @@ console.log(mdSchemas)
               margin="dense"
               name="schemaType"
               label="Schema type"
-              // variant="standard"
               value={schemaType}
               onChange={handleSchemaTypeChange}
             >
@@ -83,64 +82,55 @@ console.log(mdSchemas)
               Schemas of this type not found
             </Typography>
           ) : (
-            mdSchemas.map((mdSchema, index) => (
+            mdSchemas.map((mdSchema, index) => !!mdSchema.keys?.length && (
               <Box mb={3} key={index}>
                 <Typography variant="h5">{mdSchema.schema_name}</Typography>
+                  
+                <TableContainer component={Paper}>
+                  <Table aria-label="simple table">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell className={classes.tableHeaderCell}>
+                          Key name
+                        </TableCell>
 
-                {!mdSchema.keys?.length ? (
-                   <TableHead>
-                  <Typography>No keys of these schema were found. Press the button to create a new key. </Typography>
-                  <TableCell >
-                  <CreateMDSchemaKeyButton schemaName={mdSchema.schema_name}/>
-                </TableCell>
-                </TableHead>
-                ) : (
-                  <TableContainer component={Paper}>
-                    <Table aria-label="simple table">
-                      <TableHead>
-                        <TableRow>
-                          <TableCell className={classes.tableHeaderCell}>
-                            Key name
-                          </TableCell>
+                        <TableCell className={classes.tableHeaderCell}>
+                          Type
+                        </TableCell>
 
-                          <TableCell className={classes.tableHeaderCell}>
-                            Type
-                          </TableCell>
+                        <TableCell className={classes.tableHeaderCell}>
+                          Unit
+                        </TableCell>
 
-                          <TableCell className={classes.tableHeaderCell}>
-                            Unit
-                          </TableCell>
+                        <TableCell className={classes.tableHeaderCell}>
+                          Required
+                        </TableCell>
 
-                          <TableCell className={classes.tableHeaderCell}>
-                            Required
-                          </TableCell>
+                        <TableCell className={classes.tableHeaderCell}>
+                          Scan ref
+                        </TableCell>
 
-                          <TableCell className={classes.tableHeaderCell}>
-                            Scan ref
-                          </TableCell>
+                        <TableCell className={classes.tableHeaderCell}>
+                          Changes likely
+                        </TableCell>
 
-                          <TableCell className={classes.tableHeaderCell}>
-                            Changes likely
-                          </TableCell>
+                        <TableCell className={classes.tableHeaderCell}>
+                          Allowed
+                        </TableCell>
+                        
+                        <TableCell className={classes.tableHeaderCell}>
+                          <CreateMDSchemaKeyButton schemaName={mdSchema.schema_name}/>
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
 
-                          <TableCell className={classes.tableHeaderCell}>
-                            Allowed
-                          </TableCell>
-                          
-                          <TableCell className={classes.tableHeaderCell}>
-                            <CreateMDSchemaKeyButton schemaName={mdSchema.schema_name}/>
-                          </TableCell>
-                        </TableRow>
-                      </TableHead>
-
-                      <TableBody>
-                        {mdSchema.keys?.map((key, index) => (
-                          <Row key={index} field={key} schemaName={mdSchema.schema_name} />
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                )}
+                    <TableBody>
+                      {mdSchema.keys?.map((key, index) => (
+                        <Row key={index} field={key} schemaName={mdSchema.schema_name} />
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
               </Box>
             ))
           )}

@@ -1,6 +1,6 @@
 import { Box, Typography } from '@material-ui/core';
 import * as proposalsApi from '../../../api/proposals';
-import { Autocomplete } from '../../../components/Autocomplete';
+import { AutocompleteNew } from '../../../components/Autocomplete';
 
 const fetchProposals = (params) => ({ search, loadedOptions = [], additionalData: { page = 0 } }) => {
     console.log(loadedOptions)
@@ -33,7 +33,7 @@ const renderOption = (option) => {
 
 export const ProposalsAutocomplete = ({ params = {}, creatablePayload, ...props }) => {
   return (
-    <Autocomplete
+    <AutocompleteNew
       isAsync
       label="Proposal"
       placeholder="Search and add proposal..."

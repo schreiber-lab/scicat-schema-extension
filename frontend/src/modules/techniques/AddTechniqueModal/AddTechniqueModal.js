@@ -12,10 +12,8 @@ import { TextField } from "../../../components";
 import { validationSchema } from "./validationSchema";
 
 const defaultValues = {
-  _id: {
-    pid: null,
-    name: null,
-  },
+  pid: null,
+  name: null,
 };
 
 export const AddTechniqueModal = ({
@@ -33,7 +31,6 @@ export const AddTechniqueModal = ({
   });
 
   const handleSubmit = (data) => {
-    console.log(data);
     handleModalResolve(data);
   };
 
@@ -48,7 +45,7 @@ export const AddTechniqueModal = ({
             <TextField
               required
               fullWidth
-              name="_id.pid"
+              name="pid"
               label="PID"
               placeholder="Enter PID..."
               margin="dense"
@@ -57,7 +54,7 @@ export const AddTechniqueModal = ({
             <TextField
               required
               fullWidth
-              name="_id.name"
+              name="name"
               label="Name"
               placeholder="Enter name..."
               margin="dense"

@@ -20,7 +20,6 @@ export const EditModal = ({ sample, isOpen, onClose }) => {
     resolver: yupResolver(validationSchema),
   });
 
-
   const handleSubmit = (data) => {
     samplesApi
       .editSample(data)

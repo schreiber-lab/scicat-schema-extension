@@ -24,7 +24,6 @@ export const ActionAlert = () =>  {
   return (
     <div className={classes.root}>
       <Alert severity="error" onClose={closeAlertWindow}>
-      {/* <Alert severity="error"  onClose={() => closeAlertWindow()}> */}
         <AlertTitle>Error</AlertTitle>
         This is an error alert — <strong>check it out!</strong>
       </Alert>

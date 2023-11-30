@@ -1,6 +1,6 @@
 {
   "name": "my-app",
-  "version": "0.2.26",
+  "version": "0.3.1",
   "private": true,
   "homepage": ".",
   "dependencies": {
@@ -16,6 +16,7 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.3",
     "notistack": "^1.0.10",
+    "qs": "^6.11.2",
     "react": "^17.0.2",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^17.0.2",

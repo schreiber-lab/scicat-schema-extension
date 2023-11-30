@@ -1,7 +1,6 @@
 import { makeStyles, Container } from "@material-ui/core";
 import { DatasetsProvider, List } from "../../../modules/datasets";
 import { CreateDatasetButton } from "./CreateDatasetButton";
-// import { SearchDatasetBox } from "./SearchDatasetBox";
 
 const useStyles = makeStyles(({ spacing }) => ({
   root: {
@@ -15,7 +14,6 @@ export const Datasets = () => {
   return (
     <Container className={classes.root}>
       <DatasetsProvider>
-        {/* <SearchDatasetBox /> */}
         <List/>
         <CreateDatasetButton />
       </DatasetsProvider>

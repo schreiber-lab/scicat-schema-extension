@@ -1,3 +1,4 @@
+import { omit } from "lodash";
 import { api } from "../api";
 import {
   transformMetadataSchemaRequest,
@@ -5,15 +6,34 @@ import {
 } from "../metadata-schemas";
 
 const transformDatasetRequest = (dataset) => {
-  console.log(dataset.scientificMetadata);
   return {
-    ...dataset,
+    ...omit(dataset, [
+      "_id",
+      "createdBy",
+      "updatedBy",
+      "inputDatasets",
+      "usedSoftware",
+      "pid",
+      "history",
+      "attachments",
+      "origdatablocks",
+      "datablocks",
+      "createdAt",
+      "updatedAt",
+      "__v",
+      "id"
+
+    ]),
+    
 
     scientificMetadata: transformMetadataSchemaRequest(
       dataset.scientificMetadata
     ),
   };
 };
+
+const transformTechniqueResponse = ({ _id, ...technique }) => technique;
+const transformKeywordResponse = ({ _id, ...keyword }) => keyword;
 
 const transformDatasetResponse = (dataset) => {
   return {
@@ -22,10 +42,12 @@ const transformDatasetResponse = (dataset) => {
     scientificMetadata: transformMetadataSchemaResponse(
       dataset.scientificMetadata
     ),
+    techniques: dataset?.techniques?.map(transformTechniqueResponse),
+    // keywords: dataset?.keywords?.map(transformKeywordResponse)
   };
 };
 
-const injectDatasetPid = ({ pid, ...dataset }) => {
+const injectDatasetPid = ({ ...dataset }) => {
   if (!dataset.proposalId) {
     return dataset;
   }
@@ -33,7 +55,7 @@ const injectDatasetPid = ({ pid, ...dataset }) => {
   return {
     ...dataset,
 
-    pid: dataset.proposalId + "/" + dataset.datasetName,
+    // pid: dataset.proposalId + "/" + dataset.datasetName,
   };
 };
 
@@ -95,9 +117,7 @@ export const validateDataset = (data) => {
     });
 };
 
-/////////////////////////////////////////
-export const editDataset = ({ pid, ...dataset }, config) => {
-  console.log(dataset);
+export const editDataset = ({ pid, _id, updatedBy,createdBy, inputDatasets, usedSoftware, history, attachments, origdatablocks, datablocks, createdAt, updatedAt, __v, id, ...dataset }, config) => {
   return api
     .patch(
       `/datasets/${encodeURIComponent(pid)}`,

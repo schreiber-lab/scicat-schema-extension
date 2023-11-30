@@ -48,7 +48,7 @@ export const FixedValueEntriesAutocomplete = ({
       placeholder="Search entry..."
       onNeedFetch={fetchFixedValueEntries(params)}
       onChange={handleChange}
-      getOptionLabel={(option) => option?.[keyName] || option || null}
+      getOptionLabel={(option) => option?.[keyName] ?? option ?? "-"}
       getOptionValue={(option) => option?.[keyName] || null}
       getOptionSelected={(option, value) => option[keyName] === value[keyName]}
       renderOption={(option) => {

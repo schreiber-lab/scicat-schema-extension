@@ -49,7 +49,6 @@ export const LoginModal = ({ isOpen, onClose }) => {
         dispatch(loginSuccess(data));
         navigate("/datasets");
         onClose();
-        //redirect to the datasets
       })
       .catch((error) => {
         setError("Could not log in. Check your username and password");

@@ -12,9 +12,6 @@ export const fieldsByTypesMap = {
 
     if (field.unit) {
       formContext.setValue(name + ".unit", field.unit);
-      //{"entries": [{qq: { unit:"mm"} }]}
-      //{"entries": [{qq: { unit:"mm", value: 5} }]}
-      //{"entries": [{qq: "value"]}
     }
 
     const textFieldProps = !field.allowed?.length

@@ -34,7 +34,6 @@ const useStyles = makeStyles(({ spacing }) => ({
 }));
 
 export const CreationDatasetPage = () => {
-  // const [open, setOpen] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -55,9 +54,8 @@ export const CreationDatasetPage = () => {
         datasetsApi.createDataset(data).then((data) => {
           dispatch(addDataset(data));
           navigate("/datasets");
-        });
-      })
-      .catch(() => {
+        })
+        .catch(() => {
         enqueueSnackbar(
           "Your dataset wasn't created. Check the data you entered and make sure that all required fields are filled",
           {
@@ -65,21 +63,8 @@ export const CreationDatasetPage = () => {
           }
         );
       });
-    console.log(data.scientificMetadata)
+    })
   };
-
-  // const openSelectDatasetModal = () => {
-  //   setOpen(true);
-  // };
-
-  // const closeSelectDatasetModal = () => {
-  //   setOpen(false);
-  // };
-
-  // const handleDatasetSelect = ({ pid, ...dataset }) => {
-  //   closeSelectDatasetModal();
-  //   form.reset(dataset);
-  // };
 
   const openSelectDatasetModal = () => {
     openModal(SelectDatasetModal, {
@@ -107,12 +92,6 @@ export const CreationDatasetPage = () => {
           >
             Apply template
           </Button>
-
-          {/* <SelectDatasetModal
-            isOpen={open}
-            onClose={closeSelectDatasetModal}
-            onDatasetSelect={handleDatasetSelect}
-          /> */}
         </Grid>
       </Grid>
 

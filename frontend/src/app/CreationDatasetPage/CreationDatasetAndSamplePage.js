@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
@@ -13,7 +13,6 @@ import { useForm, FormProvider } from "react-hook-form";
 import { preventDefault } from "../../helpers/preventDefault";
 import { yupResolver } from "../../utils/validation";
 import * as datasetsApi from "../../api/datasets";
-// import { validateMetadataSchema } from "../../api/metadata-schemas";
 import { useModal } from "../../components";
 import { addDataset } from "../../redux/datasets/actions";
 import { DatasetForm, validationSchema, defaultValues } from "./DatasetForm";
@@ -35,7 +34,6 @@ const useStyles = makeStyles(({ spacing }) => ({
 }));
 
 export const CreationDatasetAndSamplePage = () => {
-  // const [openDataset, setOpenDataset] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -49,40 +47,31 @@ export const CreationDatasetAndSamplePage = () => {
   const { openModal } = useModal();
 
   const submitForms = () => {
-    datasetsApi.validateDataset(form.getValues()).then(({ valid }) => {
-      if (!valid) {
-        return;
-      }
+    // datasetsApi.validateDataset(form.getValues()).then(({ valid }) => {
+    //   if (!valid) {
+    //     return;
+    //   }
 
       sampleFormRef.current.dispatchEvent(
         new Event("submit", { cancelable: true, bubbles: true })
       );
-    });
+    // });
   };
 
   const handleSubmit = (values) => {
-    console.log(values);
-    // validateMetadataSchema({
-    //   object_type: "dataset",
-    //   metadata: data.scientificMetadata,
-    // })
-    //   .then(() => {
-
     datasetsApi.createDataset(values).then((data) => {
       dispatch(addDataset(data));
       enqueueSnackbar("Dataset was successfully created");
       navigate("/datasets");
+    })
+    .catch(() => {
+      enqueueSnackbar(
+        "Your dataset with sample wasn't created. Check the data you entered and make sure that all required fields are filled",
+        {
+          variant: "error",
+        }
+      );
     });
-
-    // })
-    // .catch(() => {
-    //   enqueueSnackbar(
-    //     "Your dataset wasn't created. Check the data you entered.",
-    //     {
-    //       variant: "error",
-    //     }
-    //   );
-    // });
   };
 
   const handleSampleCreate = () => {
@@ -90,19 +79,6 @@ export const CreationDatasetAndSamplePage = () => {
       new Event("submit", { cancelable: true, bubbles: true })
     );
   };
-
-  // const openSelectDatasetModal = () => {
-  //   setOpenDataset(true);
-  // };
-
-  // const closeSelectDatasetModal = () => {
-  //   setOpenDataset(false);
-  // };
-
-  // const handleDatasetSelect = ({ pid, ...dataset }) => {
-  //   closeSelectDatasetModal();
-  //   form.reset(dataset);
-  // };
 
   const openSelectDatasetModal = () => {
     openModal(SelectDatasetModal, {
@@ -129,12 +105,6 @@ export const CreationDatasetAndSamplePage = () => {
           >
             Apply template
           </Button>
-
-          {/* <SelectDatasetModal
-            // isOpen={openDataset}
-            // onClose={closeSelectDatasetModal}
-            onDatasetSelect={handleDatasetSelect}
-          /> */}
         </Grid>
       </Grid>
 

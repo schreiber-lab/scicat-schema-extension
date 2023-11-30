@@ -19,7 +19,6 @@ export const DatePicker = ({ name, ...props }) => {
       control={formContext?.control}
       render={({ field: { ref, ...field } }) => (
         <MuiDatePicker
-          // defaultChecked={false}
           animateYearScrolling
           error={!!errorMessage}
           helperText={errorMessage}

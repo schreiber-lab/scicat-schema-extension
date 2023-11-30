@@ -8,38 +8,26 @@ import {
 } from "@material-ui/core";
 import { useForm, FormProvider } from "react-hook-form";
 import { preventDefault } from "../../../../helpers/preventDefault";
-import * as mdschemasApi from "../../../../api/md-schemas";
-import {
-  MDSchemaKeyForm,
-} from "../../../../app/CreationMDSchemaPage/MDSchemaKeyForm";
+import * as fixedValueEntryApi from "../../../../api/fixed-value-entries";
+import { EntryForm } from "../../../../app/ManagedSchemasPage/AddEntryModal/EntryForm"
 
-export const EditMDSchemaModal = ({
-  payload: { field, schemaName },
+export const EditEntryModal = ({
+  payload: { field, schemaName, entryId },
   DialogProps,
   handleModalResolve,
   handleModalReject,
 }) => {
-  const fieldNamePrefix = "new_key_details.";
   const form = useForm({
     defaultValues: {
       schema_name: schemaName,
-      key_name: field.key_name,
-      new_key_details: field,
-      withPredefinedValues: !!field.allowed?.length,
-      withUnit: !!field.unit,
+      entry_id: entryId,
+      new_entry_details: field,
     },
   });
 
   const handleSubmit = (data) => {
-    if (!data.withPredefinedValues) {
-      data.new_key_details.allowed = [];
-    }
-
-    delete data.withPredefinedValues;
-    delete data.withUnit;
-
-    return mdschemasApi.editMDSchemaKey(data).then(() => {
-      handleModalResolve(data.new_key_details);
+    return fixedValueEntryApi.editFixedValueEntry(data).then(() => {
+      handleModalResolve(data);
     });
   };
 
@@ -54,11 +42,11 @@ export const EditMDSchemaModal = ({
         component="form"
         onSubmit={preventDefault(form.handleSubmit(handleSubmit))}
       >
-        <DialogTitle>Edit key</DialogTitle>
+        <DialogTitle>Edit entry for {schemaName}</DialogTitle>
 
         <DialogContent>
           <FormProvider {...form}>
-            <MDSchemaKeyForm fieldNamePrefix={fieldNamePrefix} />
+            <EntryForm schemaName={schemaName} basePath="new_entry_details" />
           </FormProvider>
         </DialogContent>
 

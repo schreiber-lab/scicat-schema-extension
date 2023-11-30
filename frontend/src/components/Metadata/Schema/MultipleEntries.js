@@ -8,12 +8,12 @@ import { Entry } from "./Entry";
 
 
 export const MultipleEntries = ({ isVisible, schema, baseKey }) => {
-  const { control, getValues } = useFormContext();
+  const { control } = useFormContext();
   const { fields, append, remove } = useFieldArray({
     control,
     name: `${baseKey}.${schema.schema_name}`,
   });
-  console.log(getValues());
+
   const addEntry = () => {
     append({ isActive: true });
   };
@@ -31,31 +31,39 @@ export const MultipleEntries = ({ isVisible, schema, baseKey }) => {
         </Button>
       </Grid>
 
-      {fields.map((_, index) => (
-        <Fragment key={index}>
-          <Grid item container spacing={2} alignItems="center">
-            <Grid item>
-              <Typography>{index + 1}.</Typography>
-            </Grid>
-            
-            <Grid item xs>
-              <Grid container spacing={2}>
-                <Entry
-                  isVisible={isVisible}
-                  schema={schema}
-                  baseKey={baseKey}
-                  index={index}
-                />
-              </Grid>
-            </Grid>
-
-            <Grid item>
-              <IconButton onClick={() => remove(index)}>
-                <CloseIcon />
-              </IconButton>
+      {fields.map((field, index) => (
+        <Grid
+          item
+          container
+          spacing={2}
+          alignItems="center"
+          key={field.id}
+        >
+          <Grid item>
+            <Typography>{index + 1}.</Typography>
+          </Grid>
+          
+          <Grid item xs>
+            <Grid container spacing={2}>
+              <Entry
+                isVisible={isVisible}
+                schema={schema}
+                baseKey={baseKey}
+                index={index}
+              />
             </Grid>
           </Grid>
-        </Fragment>
+
+          <Grid item>
+            <IconButton onClick={() => {
+            console.log(index, field)
+            remove(index)}
+            }
+            >
+              <CloseIcon />
+            </IconButton>
+          </Grid>
+        </Grid>
       ))}
     </>
   );

@@ -1,17 +1,17 @@
 import { Button, Dialog, DialogActions, DialogTitle } from "@material-ui/core";
-import * as mdschemasApi from "../../../../api/md-schemas";
+import * as fixedValueEntryApi from "../../../../api/fixed-value-entries";
 
-export const DeleteMDSchemaModal = ({
-  payload: { field, schemaName },
+export const DeleteEntryModal = ({
+  payload: { field, schemaName, entryId },
   DialogProps,
   handleModalResolve,
   handleModalReject,
 }) => {
-  const handleKeyDelete = () => {
-    return mdschemasApi.deleteMDSchemaKey({
-      params: {
+  const handleEntryDelete = () => {
+    return fixedValueEntryApi.deleteFixedValueEntry({
+      data: {
         schema_name: schemaName,
-        key_name: field.key_name,
+        entry_id: entryId,
       }
     }).then(() => {
       handleModalResolve(field);
@@ -20,7 +20,7 @@ export const DeleteMDSchemaModal = ({
 
   return (
     <Dialog {...DialogProps}>
-      <DialogTitle>Are you sure you want to delete this key?</DialogTitle>
+      <DialogTitle>Are you sure you want to delete this entry?</DialogTitle>
       <DialogActions>
         <Button onClick={handleModalReject} variant="outlined" color="primary">
           Cancel
@@ -30,7 +30,7 @@ export const DeleteMDSchemaModal = ({
           type="submit"
           color="primary"
           variant="contained"
-          onClick={handleKeyDelete}
+          onClick={handleEntryDelete}
         >
           Delete
         </Button>

@@ -5,16 +5,17 @@ import { Autocomplete } from "../../../../components/Autocomplete";
 import { useModal } from "../../../../components";
 import { AddTechniqueModal } from "../AddTechniqueModal";
 
+const transformTechniqueResponse = ({ _id: { _id, ...technique } }) => technique;
+
 const fetchTechnique =
   (params) =>
   ({ loadedOptions = [] }) => {
-    console.log(loadedOptions);
-
     return fullfacetsApi
       .getFullfacets({
         params: {
-          facets: "techniques",
+          facets: [ "techniques" ],
           //   page: page + 1,
+          fields: {},
 
           ...params,
         },
@@ -22,7 +23,7 @@ const fetchTechnique =
       .then((data) => {
         return {
           //   hasMore: pagination.page < pagination.last_page && pagination.total > 0,
-          options: loadedOptions.concat(data[0].techniques),
+          options: loadedOptions.concat(data[0].techniques?.map(transformTechniqueResponse)),
           //   additionalData: {
           //     page: pagination.page
           //   }
@@ -33,7 +34,7 @@ const fetchTechnique =
 const renderOption = (option) => {
   return !option?.isCreatableOption ? (
     <Box clone width="100%" overflow="hidden">
-      <Typography>{option?._id?.name}</Typography>
+      <Typography>{option?.name}</Typography>
     </Box>
   ) : (
     <>
@@ -58,9 +59,7 @@ export const TechniquesAutocomplete = ({
       openModal(AddTechniqueModal, {
         payload: {
           initialValues: {
-            _id: {
-              name
-            }
+            name
           }
         },
         onModalResolved: resolve,
@@ -76,10 +75,12 @@ export const TechniquesAutocomplete = ({
       placeholder="Search and add techniques..."
       onNeedFetch={fetchTechnique(params)}
       renderOption={renderOption}
-      getOptionLabel={(option) => option && option?._id?.name}
-      getOptionValue={(option) => option?._id}
+      getOptionLabel={(option) => option && option?.name}
+      getOptionValue={(option) => {
+        return option || null;
+      }}
       getOptionSelected={(option, value) =>
-        option?._id?.pid === value?._id?.pid
+        option?.pid === value?.pid
       }
       onCreate={handleTechniqueCreate}
       {...props}

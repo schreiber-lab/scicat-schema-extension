@@ -41,7 +41,7 @@ export const FormModal = ({ isOpen, onClose }) => {
       <form onSubmit={preventDefault(form.handleSubmit(handleSubmit))}>
         <DialogTitle>Sample Entry</DialogTitle>
 
-        <DialogContent>
+        <DialogContent maxWidth="lg">
           <FormProvider {...form}>
             <SampleForm/>
           </FormProvider>

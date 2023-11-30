@@ -11,11 +11,12 @@ export const InstrumentForm = () => {
         name="name"
         label="Name"
       />
-        <Metadata
-          baseKey="customMetadata"
-          objectType="instrument"
-          title="Custom Metadata"
-        />
+      
+      <Metadata
+        baseKey="customMetadata"
+        objectType="instrument"
+        title="Custom Metadata"
+      />
     </>
   );
 };

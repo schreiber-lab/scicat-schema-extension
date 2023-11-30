@@ -9,7 +9,6 @@ import { EditInstrumentModal } from "./EditInstrumentModal";
 export const RowWithContext = ({ instrument, ...props }) => {
   const { openModal } = useModal();
   const { editInstrument } = useContext(InstrumentsContext);
-  // const facility = instrument.customMetadata?.facility;
 
   const openEditModal = () => {
     openModal(EditInstrumentModal, {

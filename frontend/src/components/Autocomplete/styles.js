@@ -5,9 +5,7 @@ export const styles = ({ spacing }) => ({
       right: 0
     },
   
-    clearIndicator: {
-      // paddingLeft: spacing(1),
-      // paddingRight: spacing(1), 
+    clearIndicator: { 
       marginRight: spacing(-0.25)
     },
   

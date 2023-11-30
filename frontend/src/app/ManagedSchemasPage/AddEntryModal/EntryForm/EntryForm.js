@@ -3,7 +3,7 @@ import { LinearProgress } from "@material-ui/core";
 import { getMetadataSchema } from "../../../../api/metadata-schemas";
 import { Field } from "./Field";
 
-export const EntryForm = ({ schemaName }) => {
+export const EntryForm = ({ schemaName, basePath }) => {
   const [metadataSchema, setMetadataSchema] = useState(null);
 
   useEffect(() => {
@@ -19,6 +19,12 @@ export const EntryForm = ({ schemaName }) => {
   return !metadataSchema ? (
     <LinearProgress />
   ) : (
-    metadataSchema.keys.map((field) => <Field key={field.key_name} field={field}/>)
+    metadataSchema.keys.map((field) => (
+      <Field
+        key={field.key_name}
+        field={field}
+        basePath={basePath}
+      />
+    ))
   );
 };

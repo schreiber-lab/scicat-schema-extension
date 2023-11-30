@@ -22,7 +22,7 @@ export const TextField = forwardRef(({
   })) || {};
   const errorMessage = fieldState?.error?.message;
   const value = formContext?.watch(name) || "";
-
+ console.log(name, errorMessage, fieldState)
   const handleChange = (event) => {
     console.log(name, formRegister)
     onChange?.(event);

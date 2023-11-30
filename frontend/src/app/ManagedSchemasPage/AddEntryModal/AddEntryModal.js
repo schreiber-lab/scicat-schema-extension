@@ -15,7 +15,6 @@ import { EntryForm } from "./EntryForm";
 export const AddEntryModal = ({ isOpen, schemaName, onClose, onResolve }) => {
   const dispatch = useDispatch();
 
-
   const form = useForm({
     defaultValues: {
       entries: [
@@ -35,16 +34,6 @@ export const AddEntryModal = ({ isOpen, schemaName, onClose, onResolve }) => {
       console.log(data)
     })
   };
-  // const handleSubmit = (data) => {
-  //   onResolve(data);
-  //   onClose();
-  // };
-
-  // const handleSubmit = (data) => {
-  //   fixedValueEntriesApi.createFixedValueEntry(data).then(() => {
-  //     onClose();
-  //   });
-  // };
 
   return (
     <Dialog open={isOpen} onClose={onClose}>
@@ -55,7 +44,7 @@ export const AddEntryModal = ({ isOpen, schemaName, onClose, onResolve }) => {
         <DialogTitle>Add new entry for {schemaName}</DialogTitle>
         <DialogContent>
           <FormProvider {...form}>
-            <EntryForm schemaName={schemaName} />
+            <EntryForm schemaName={schemaName} basePath="entries[0]" />
           </FormProvider>
         </DialogContent>
 

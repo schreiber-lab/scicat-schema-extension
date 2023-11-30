@@ -38,14 +38,16 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
 export const List = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [schema, setSchema] = useState({ schema_name: "material" });
+  const [schema, setSchema] = useState({
+    schema_name: "material",
+    id_key: "material_id"
+  });
   const [entriesProps, setEntriesProps] = useState([]);
   const { isLoaded, fixedValueEntries } = useSelector(
     ({ fixedValueEntries }) => fixedValueEntries
   );
 
   const handleSchemaNameChange = (schema) => {
-    // console.log(schemaName)
     dispatch(getFixedValueEntries({ schema_name: schema.schema_name }));
     setSchema(schema);
   };
@@ -70,24 +72,9 @@ export const List = () => {
         <>
           <Box>
             <Box mb={-5} mt={4} maxWidth={300} mx="auto">
-              {/* <TextField
-              required
-              fullWidth
-              select
-              margin="dense"
-              name="schemaName"
-              label="Schema name"
-              value={schemaName}
-              onChange={handleSchemaNameChange}
-            >
-              <MenuItem value="material">material</MenuItem>
-            </TextField> */}
               <MetadataSchemasAutocomplete
                 disableClearable
                 value={schema}
-                // params={{
-                //   object_type: "sample",
-                // }}
                 onChange={handleSchemaNameChange}
               />
             </Box>
@@ -116,6 +103,8 @@ export const List = () => {
                           {property}
                         </TableCell>
                       ))}
+
+                      <TableCell className={classes.tableHeaderCell} />
                     </TableRow>
                   </TableHead>
 
@@ -125,6 +114,8 @@ export const List = () => {
                         key={index}
                         field={entry}
                         entriesProps={entriesProps}
+                        schema={schema}
+                        index={index}
                       />
                     ))}
                   </TableBody>
