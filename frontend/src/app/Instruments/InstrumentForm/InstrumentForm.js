@@ -8,6 +8,13 @@ export const InstrumentForm = () => {
         required
         fullWidth
         margin="dense"
+        name="uniqueName"
+        label="Unique name"
+      />
+      <TextField
+        required
+        fullWidth
+        margin="dense"
         name="name"
         label="Name"
       />
